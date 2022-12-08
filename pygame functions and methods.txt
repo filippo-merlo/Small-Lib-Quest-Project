@@ -1,0 +1,11 @@
+pygame 
+
+pygame.init()   initiation of pygame
+
+Display
+pygame.display.set_mode((tuple with w and h of the screen)) # set the display object size
+pygame.display.set_caption('')  # set the window's name 
+pygame.display.update()    # this method will update the screen at each iteration of the while loop
+
+
+pygame.time.Clock() # create a clock object to set a celing for the frame rate on which the update of the screen will be performed
