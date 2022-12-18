@@ -1,0 +1,199 @@
+{
+    "activeFile": "tmx/map.tmx",
+    "expandedProjectPaths": [
+        "tsx",
+        "tmx",
+        "data"
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "data/tmx/map.tmx": {
+            "scale": 1,
+            "selectedLayer": 11,
+            "viewCenter": {
+                "x": 562,
+                "y": 534.5
+            }
+        },
+        "data/tsx/Floor.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/Genius.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/King_bamboo.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/Librarian.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/Raccoon.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/Spirit.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/Squid.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/carpet.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/decor_16x16.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/decor_8x8.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/grass.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "data/tsx/grass_decoration_16x16.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/interior.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/objects.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/plains.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/rock_in_water_a-sheet.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/skeleton.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/walls.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/water.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/water1.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/water2.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/water_decorations.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/wooden.tsx": {
+            "scaleInDock": 1
+        },
+        "data/tsx/wooden_door.tsx": {
+            "scaleInDock": 1
+        },
+        "tmx/map.tmx": {
+            "scale": 5.5,
+            "selectedLayer": 12,
+            "viewCenter": {
+                "x": 1192,
+                "y": 74.54545454545455
+            }
+        },
+        "tsx/Floor.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/Genius.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/King_bamboo.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tsx/Librarian.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/Raccoon.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tsx/Spirit.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/Squid.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tsx/carpet.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/decor_16x16.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/decor_8x8.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/grass.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/grass_decoration_16x16.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/interior.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/objects.tsx": {
+            "scaleInDock": 3
+        },
+        "tsx/plains.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/rock_in_water_a-sheet.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/skeleton.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 2,
+            "scaleInEditor": 1.5
+        },
+        "tsx/walls.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/water.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/water1.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/water2.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/water_decorations.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/wooden.tsx": {
+            "scaleInDock": 1
+        },
+        "tsx/wooden_door.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "frame.defaultDuration": 1000,
+    "last.exportedFilePath": "C:/Users/Filippo/Desktop/Small Lib Quest Project/data/tsx",
+    "lastUsedTilesetExportFilter": "All Files (*)",
+    "openFiles": [
+        "tmx/map.tmx",
+        "tsx/skeleton.tsx",
+        "tsx/King_bamboo.tsx",
+        "tsx/Squid.tsx",
+        "tsx/Raccoon.tsx"
+    ],
+    "project": "SLQ.tiled-project",
+    "recentFiles": [
+        "tsx/Raccoon.tsx",
+        "tsx/Squid.tsx",
+        "tsx/King_bamboo.tsx",
+        "tsx/skeleton.tsx",
+        "tmx/map.tmx",
+        "data/tmx/map.tmx"
+    ]
+}

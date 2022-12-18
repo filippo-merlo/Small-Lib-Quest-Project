@@ -1,0 +1,16 @@
+{
+    "automappingRulesFile": "",
+    "commands": [
+    ],
+    "compatibilityVersion": 1080,
+    "extensionsPath": "extensions",
+    "folders": [
+        ".",
+        "data",
+        "data",
+        "tmx",
+        "tsx"
+    ],
+    "propertyTypes": [
+    ]
+}
