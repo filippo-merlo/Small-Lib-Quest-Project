@@ -1,9 +1,9 @@
 {
     "activeFile": "tmx/map.tmx",
     "expandedProjectPaths": [
-        "tsx",
+        "data",
         "tmx",
-        "data"
+        "tsx"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -89,11 +89,11 @@
             "scaleInDock": 1
         },
         "tmx/map.tmx": {
-            "scale": 5.5,
-            "selectedLayer": 12,
+            "scale": 2,
+            "selectedLayer": 13,
             "viewCenter": {
-                "x": 1192,
-                "y": 74.54545454545455
+                "x": 565.5,
+                "y": 402
             }
         },
         "tsx/Floor.tsx": {
@@ -105,7 +105,7 @@
         "tsx/King_bamboo.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInEditor": 1.5
         },
         "tsx/Librarian.tsx": {
             "scaleInDock": 1
@@ -113,7 +113,7 @@
         "tsx/Raccoon.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInEditor": 1.5
         },
         "tsx/Spirit.tsx": {
             "scaleInDock": 1
@@ -121,7 +121,7 @@
         "tsx/Squid.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInEditor": 1.5
         },
         "tsx/carpet.tsx": {
             "scaleInDock": 1

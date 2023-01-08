@@ -1,4 +1,4 @@
-import pygame
+import pygame, os
 from settings import *
 import debug
 
@@ -7,16 +7,23 @@ import debug
 class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
     def __init__(self,pos,groups,obstacle_sprites):
         super().__init__(groups) # Call the __init__ method of the Inherited class
-        self.image = pygame.image.load("C:/Users/Filippo/Desktop/Small Lib Quest Project/graphics/link.png").convert_alpha() # load image 
-        self.image = pygame.transform.scale(self.image, (PLAYERSIZE, PLAYERSIZE)) # scale image
+        self.image = pygame.image.load("C:/Users/Filippo/Desktop/Small Lib Quest Project/sprites/characters/player_still_1.png").convert_alpha() # load image 
+        self.image = pygame.transform.scale(self.image, (PLAYERSIZE_W, PLAYERSIZE_H)) # scale image
         self.rect = self.image.get_rect(topleft = pos) # create the rect to blit on the screen surf. of the same size of the image and pos given by pos. pos is extracted from the WORLD_MAP in the level class
         self.hitbox = self.rect.inflate(0,-26)
         self.direction = pygame.math.Vector2() # will give as a 2d vector to define the player movement
                                                # now x,y = 0, then we want to modify them such as when you pres right x += 1 * player_speed
         self.speed = SPEED # set pix/sec speed of moovement of the player
-
         self.obstacle_sprites = obstacle_sprites # instantiate the obstacle_sprites =  pygame.sprite.Group() to use it in this class
-        
+
+    #def import_player_assets(self):
+    #    character_path =  "C:/Users/Filippo/Desktop/Small Lib Quest Project/sprites/characters"
+    #    self.animations = {}
+    #    for animation in self.animations.keys():
+    #       full_path =  character_path + animation 
+    #       self.animations[animation] = import_folder(full_path)
+    #    print(self.animations)
+
     ### Connect the user input with variations in the direction 2D  vector
     def input(self):
         keys = pygame.key.get_pressed() # get input
@@ -26,7 +33,7 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
             self.direction.y = 1
         else:
             self.direction.y = 0
-
+            
         if keys[pygame.K_LEFT]:
             self.direction.x = -1
         elif keys[pygame.K_RIGHT]:

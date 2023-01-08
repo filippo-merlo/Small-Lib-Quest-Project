@@ -1855,7 +1855,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="14" name="Mobs" width="96" height="64" visible="0" locked="1">
+ <layer id="14" name="Mobs" width="96" height="64" locked="1">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1923,11 +1923,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="17" name="NPC" class="NPC" visible="0" locked="1">
+ <objectgroup id="17" name="NPC" class="NPC" locked="1">
   <object id="3204" name="Librarian" type="NPC" gid="2786" x="491.667" y="474" width="21.6667" height="23.6667"/>
   <object id="3142" name="Calsifer" type="NPC" gid="2782" x="610.545" y="424.364" width="26.1818" height="24.1818"/>
  </objectgroup>
- <objectgroup id="8" name="Legendary_creatures" class="Legendary_creatures" visible="0" locked="1">
+ <objectgroup id="8" name="Legendary_creatures" class="Legendary_creatures" locked="1">
   <object id="17" name="King_squid" type="Legendary_creature" gid="811" x="169" y="936.5" width="64" height="64"/>
   <object id="19" name="King_raccoon" type="Legendary_creature" gid="996" x="485" y="106.667" width="72.6667" height="80.6667"/>
   <object id="26" name="King_skeleton" type="Legendary_creature" gid="1076" x="1376" y="704.063" width="16" height="16"/>

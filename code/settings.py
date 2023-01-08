@@ -13,8 +13,9 @@ HEIGHT = int(screen_height-screen_height*0.1) # to reduce it of 10%
 FPS = 60 # set frame rate
 ZOOM = 3
 TILESIZE = 16*ZOOM # size of tiles
-PLAYERSIZE = TILESIZE*2 # set the player size
-SPEED = 20
+PLAYERSIZE_W = TILESIZE*1.5 # set the player size
+PLAYERSIZE_H = TILESIZE*2
+SPEED = 8
 
 
 

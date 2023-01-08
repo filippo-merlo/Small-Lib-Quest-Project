@@ -29,15 +29,15 @@ class Level:
         self.map = pygame.image.load("C:/Users/Filippo/Desktop/Small Lib Quest Project/data/tmx/map.png").convert_alpha() # load map image 
         self.map = pygame.transform.scale(self.map,(self.map.get_width()*ZOOM,self.map.get_height()*ZOOM))
         # Sprite set up
-        #self.create_map()
+        self.create_map()
+        self.player = Player((1600,2300),[self.visible_sprites], self.obstacle_sprites) # use class player
         self.animations_list = self.get_animated_tiles()
         self.animations_list_objects = self.get_animated_objects()
-        self.player = Player((1000,700),[self.visible_sprites], self.obstacle_sprites) # use class player
 
     
     def create_map(self):
          for layer in self.tmx_data.visible_layers:
-             if layer.name in ["Ground and sea", "Mountain", "Mountain_2", "Decorations", "Carpets", "Buildings", "Library"] and hasattr(layer,'data'):
+             if layer.name in ["Buildings", "Library"] and hasattr(layer,'data'):
                  for x,y,surf in layer.tiles():
                      pos = (x*TILESIZE, y*TILESIZE)
                      surf = pygame.transform.scale(surf, (round(surf.get_width()*ZOOM),round(surf.get_height()*ZOOM)))
@@ -249,4 +249,3 @@ class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work
     # how the camera works:
     # We draw the image in the rect of the sprite, but
     # we can usa a vectror2 to offset the rect and thus blit the image somewere else
-    

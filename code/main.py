@@ -18,7 +18,7 @@ class Game:
     ### Create the while loop that will update the screen each frame
     def run(self):
         while True:
-            ## Set the Quit button
+            ## Set the Quit  button
             for event in pygame.event.get(): # Get the vector with all the events (input from the user) 
                 if event.type == pygame.QUIT: # the QUIT event is clicking on the red cross at the top right of the window
                     pygame.quit() # quit pygame
