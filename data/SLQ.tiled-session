@@ -89,11 +89,11 @@
             "scaleInDock": 1
         },
         "tmx/map.tmx": {
-            "scale": 2,
-            "selectedLayer": 13,
+            "scale": 1.5,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 565.5,
-                "y": 402
+                "x": 592.6666666666666,
+                "y": 515.6666666666666
             }
         },
         "tsx/Floor.tsx": {
@@ -108,6 +108,7 @@
             "scaleInEditor": 1.5
         },
         "tsx/Librarian.tsx": {
+            "dynamicWrapping": true,
             "scaleInDock": 1
         },
         "tsx/Raccoon.tsx": {
@@ -139,6 +140,7 @@
             "scaleInDock": 1
         },
         "tsx/interior.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "tsx/objects.tsx": {

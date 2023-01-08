@@ -10,7 +10,7 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
         self.image = pygame.image.load("./sprites/characters/player_still_1.png").convert_alpha() # load image 
         self.image = pygame.transform.scale(self.image, (PLAYERSIZE_W, PLAYERSIZE_H)) # scale image
         self.rect = self.image.get_rect(topleft = pos) # create the rect to blit on the screen surf. of the same size of the image and pos given by pos. pos is extracted from the WORLD_MAP in the level class
-        self.hitbox = self.rect.inflate(0,-26)
+        self.hitbox = self.rect.inflate(0,-90)
         self.direction = pygame.math.Vector2() # will give as a 2d vector to define the player movement
                                                # now x,y = 0, then we want to modify them such as when you pres right x += 1 * player_speed
         self.speed = SPEED # set pix/sec speed of moovement of the player
