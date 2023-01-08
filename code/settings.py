@@ -16,5 +16,3 @@ TILESIZE = 16*ZOOM # size of tiles
 PLAYERSIZE_W = TILESIZE*1.5 # set the player size
 PLAYERSIZE_H = TILESIZE*2
 SPEED = 8
-
-#prova

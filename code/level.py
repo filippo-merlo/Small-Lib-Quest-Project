@@ -25,8 +25,8 @@ class Level:
         self.obstacle_sprites = pygame.sprite.Group()
         # What the sprite.Group() does:
         # it stores different sprites, if i call
-        self.tmx_data = load_pygame('C:/Users/Filippo/Desktop/Small Lib Quest Project/data/tmx/map.tmx')
-        self.map = pygame.image.load("C:/Users/Filippo/Desktop/Small Lib Quest Project/data/tmx/map.png").convert_alpha() # load map image 
+        self.tmx_data = load_pygame('./data/tmx/map.tmx')
+        self.map = pygame.image.load("./data/tmx/map.png").convert_alpha() # load map image 
         self.map = pygame.transform.scale(self.map,(self.map.get_width()*ZOOM,self.map.get_height()*ZOOM))
         # Sprite set up
         self.create_map()

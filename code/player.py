@@ -7,7 +7,7 @@ import debug
 class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
     def __init__(self,pos,groups,obstacle_sprites):
         super().__init__(groups) # Call the __init__ method of the Inherited class
-        self.image = pygame.image.load("C:/Users/Filippo/Desktop/Small Lib Quest Project/sprites/characters/player_still_1.png").convert_alpha() # load image 
+        self.image = pygame.image.load("./sprites/characters/player_still_1.png").convert_alpha() # load image 
         self.image = pygame.transform.scale(self.image, (PLAYERSIZE_W, PLAYERSIZE_H)) # scale image
         self.rect = self.image.get_rect(topleft = pos) # create the rect to blit on the screen surf. of the same size of the image and pos given by pos. pos is extracted from the WORLD_MAP in the level class
         self.hitbox = self.rect.inflate(0,-26)
