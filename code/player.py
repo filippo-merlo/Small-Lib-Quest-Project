@@ -1,7 +1,7 @@
 import pygame, os
 from settings import *
 import debug
-#ciao
+#ciaoo
 
 ### This is the class defining the vary objects to print in the game
 
