@@ -43,7 +43,7 @@ class Level:
                      surf = pygame.transform.scale(surf, (round(surf.get_width()*ZOOM),round(surf.get_height()*ZOOM)))
                      Tile(pos = pos, surf = surf, groups = self.visible_sprites)
          for layer in self.tmx_data.objectgroups:
-             if layer.name in ["Objects_no_interactions", "Forrest_trees"]:
+             if layer.name in ["Forrest_trees"]:
                  for obj in self.tmx_data.get_layer_by_name(layer.name):
                      if obj.image:
                          pos = (obj.x*ZOOM, obj.y*ZOOM)
