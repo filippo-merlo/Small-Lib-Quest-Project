@@ -1,12 +1,16 @@
 import pygame
 from text import testi
+from settings import*
 
 
 class MyWindow:
     def __init__(self, text, font_size=10):
         # Create the main window
-        self.x = 100
-        self.y = 700
+        #self.x = 100
+        #self.y = 700
+        self.x = int(WIDTH-WIDTH*0.9)
+        #self.y = 700
+        self.y = int(HEIGHT -HEIGHT*0.1)
         self.width = 1150
         self.height = 75
         self.text = text
