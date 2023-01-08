@@ -49,14 +49,14 @@ class Level:
                      if obj.image:
                          pos = (obj.x*ZOOM, obj.y*ZOOM)
                          surf = pygame.transform.scale(obj.image, (round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                         Object_Tile(pos = pos, surf = surf, groups = self.visible_sprites)
+                         Object_Tile(pos = pos, surf = surf, groups = [self.visible_sprites, self.obstacle_sprites])
     
          for layer in self.tmx_data.visible_layers:
              if layer.name in ["Vegetation", "Mobs"] and hasattr(layer,'data'):
                  for x,y,surf in layer.tiles():
                      pos = (x*TILESIZE, y*TILESIZE)
                      surf = pygame.transform.scale(surf, (round(surf.get_width()*ZOOM),round(surf.get_height()*ZOOM)))
-                     Tile(pos = pos, surf = surf, groups = self.visible_sprites)
+                     Tile(pos = pos, surf = surf, groups = [self.visible_sprites, self.obstacle_sprites])
     
          for layer in self.tmx_data.objectgroups:
              if layer.name in ["Key_objects"]:
@@ -65,7 +65,7 @@ class Level:
                          pos = (obj.x*ZOOM, obj.y*ZOOM)
                          surf = obj.image
                          surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                         Object_Tile(pos = pos, surf = surf, groups = self.visible_sprites)
+                         Object_Tile(pos = pos, surf = surf, groups = [self.visible_sprites, self.obstacle_sprites])
 
     def get_upper_tiles(self):
         upper_tiles_list = []
