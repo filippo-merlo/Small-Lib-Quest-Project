@@ -21,7 +21,7 @@ class Level:
         # Sprites are all the objects printed on the screen in videogames 
         # in pygame the sprite class allows to combines a surface(an image) and a rectangle (needed to moove the surfaces on the main one) + other features in the same object
         # Sprite Group, allows to target (es update), a determined category of sprites.
-        self.visible_sprites = YSortCameraGroup() 
+        self.visible_sprites = YSortCameraGroup()  
         self.obstacle_sprites = pygame.sprite.Group()
         # What the sprite.Group() does:
         # it stores different sprites, if i call
@@ -29,8 +29,9 @@ class Level:
         self.map = pygame.image.load("./data/tmx/map.png").convert_alpha() # load map image 
         self.map = pygame.transform.scale(self.map,(self.map.get_width()*ZOOM,self.map.get_height()*ZOOM))
         # Sprite set up
-        self.create_map()
         self.player = Player((1600,2300),[self.visible_sprites], self.obstacle_sprites) # use class player
+        self.create_map()
+        self.upper_tiles_list = self.get_upper_tiles()
         self.animations_list = self.get_animated_tiles()
         self.animations_list_objects = self.get_animated_objects()
 
@@ -41,7 +42,7 @@ class Level:
                  for x,y,surf in layer.tiles():
                      pos = (x*TILESIZE, y*TILESIZE)
                      surf = pygame.transform.scale(surf, (round(surf.get_width()*ZOOM),round(surf.get_height()*ZOOM)))
-                     Tile(pos = pos, surf = surf, groups = self.visible_sprites)
+                     Tile(pos = pos, surf = surf, groups = [self.visible_sprites, self.obstacle_sprites])
          for layer in self.tmx_data.objectgroups:
              if layer.name in ["Forrest_trees"]:
                  for obj in self.tmx_data.get_layer_by_name(layer.name):
@@ -65,7 +66,34 @@ class Level:
                          surf = obj.image
                          surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
                          Object_Tile(pos = pos, surf = surf, groups = self.visible_sprites)
+
+    def get_upper_tiles(self):
+        upper_tiles_list = []
+        for layer in self.tmx_data.visible_layers:
+            if layer.name in ["Upper_parts"] and hasattr(layer,'data'):
+                for x,y,surf in layer.tiles():
+                    tile_pos = (x*TILESIZE, y*TILESIZE)
+                    surf = pygame.transform.scale(surf, (round(surf.get_width()*ZOOM),round(surf.get_height()*ZOOM)))
+                    upper_tiles_list.append([tile_pos,surf])
+        return upper_tiles_list
     
+    def update_upper_tiles(self, upper_tiles_list, player):
+        self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
+        self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
+
+        for tile_pos,surf in upper_tiles_list:
+            offset_pos = tile_pos - self.offset # in his position - the offset given by the position of the player
+            if self.offset.x >= self.map.get_width() - self.width:
+                offset_pos.x = tile_pos[0] - (self.map.get_width() - self.width)
+            if self.offset.y >= self.map.get_height() - self.height:
+                offset_pos.y = tile_pos[1] - (self.map.get_height() - self.height)
+            if self.offset.x <= 0:
+                offset_pos.x = tile_pos[0] 
+            if self.offset.y <= 0:
+                offset_pos.y = tile_pos[1]
+            self.display_surface.blit(surf, offset_pos)
+
+
     def create_map_from_img(self, player):
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
         self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
@@ -208,6 +236,7 @@ class Level:
         # draw and update the game
         self.create_map_from_img(self.player)
         self.visible_sprites.custom_draw(self.player)
+        self.update_upper_tiles(self.upper_tiles_list,self.player)
         self.update_animated_tiles(self.animations_list, self.player)
         self.update_animated_objects(self.animations_list_objects, self.player)
         self.visible_sprites.update()
