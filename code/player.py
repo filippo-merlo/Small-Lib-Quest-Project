@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
         self.obstacle_sprites = obstacle_sprites # instantiate the obstacle_sprites =  pygame.sprite.Group() to use it in this class
 
     #def import_player_assets(self):
-    #    character_path =  "C:/Users/Filippo/Desktop/Small Lib Quest Project/sprites/characters"
+    #    character_path =  "./sprites/characters"
     #    self.animations = {}
     #    for animation in self.animations.keys():
     #       full_path =  character_path + animation 
