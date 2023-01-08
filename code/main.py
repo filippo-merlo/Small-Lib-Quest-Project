@@ -34,8 +34,10 @@ class Game:
             ### Run the level object and update
             self.screen.fill('green') # fill the screen object
             self.level.run() # run the Level Object
+
             if self.window.show_dialog_box: #if the text box has to be shown (is True)
                 self.window.run_window(self.screen) #then shown it
+                
             self.clock.tick(FPS) # set the maximum frame rate
             pygame.display.update() # this method will update the screen at each iteration of the while loop
            
