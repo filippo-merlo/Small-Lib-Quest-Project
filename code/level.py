@@ -224,7 +224,7 @@ class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work
         self.width = self.display_surface.get_size()[0]
         self.height = self.display_surface.get_size()[1]
         self.offset = pygame.math.Vector2()
-        self.map = pygame.image.load("C:/Users/Filippo/Desktop/Small Lib Quest Project/data/tmx/map.png").convert_alpha() # load map image 
+        self.map = pygame.image.load("./data/tmx/map.png").convert_alpha() # load map image 
         self.map = pygame.transform.scale(self.map,(self.map.get_width()*ZOOM,self.map.get_height()*ZOOM))
 
 

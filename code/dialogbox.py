@@ -10,7 +10,7 @@ class MyWindow:
         self.width = 1150
         self.height = 75
         self.text = text
-        self.font = pygame.font.Font("../graphics/font.ttf", font_size)
+        self.font = pygame.font.Font("./graphics/font/font.ttf", font_size)
         self.text_surface = self.font.render(self.text, True, (255, 255, 255))
         self.testi = testi()
         self.show_dialog_box = False #init dialogbox at False don't show
