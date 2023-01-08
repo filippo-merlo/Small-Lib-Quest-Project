@@ -246,6 +246,7 @@ class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work
                 offset_pos.y = sprite.rect.y
                 
             self.display_surface.blit(sprite.image,offset_pos)
+            
     # how the camera works:
     # We draw the image in the rect of the sprite, but
     # we can usa a vectror2 to offset the rect and thus blit the image somewere else
