@@ -25,6 +25,7 @@ class testi:
         elif self.squirrel == True and self.who_is_talking == 1 and self.statue_check == True: #if you already talk with squirrel and you are talking with squirrel and you have interacted with the statute (so you have the book)
             self.missions_check += 1 #then the mission is complete
             return "SQUIRREL: Thank you! Now i can finally eat those noisy bamboo" #and print this
+            
 #Kraken dialogues
         if self.kraken == False and self.who_is_talking == 2: 
             self.kraken_check = True
@@ -32,6 +33,7 @@ class testi:
         elif self.kraken == True and self.who_is_talking == 2 and self.statue_check == True:
             self.missions_check += 1
             return "KRAKEN: Thank you! Finally I can read something about the royal family... What?! The Queen died?!?"
+
 #Skeleton dialogues
         if self.skeleton == False and self.who_is_talking == 3: 
             self.skeleton_check = True
@@ -39,6 +41,7 @@ class testi:
         elif self.skeleton == True and self.who_is_talking == 3 and self.statue_check == True:
             self.missions_check += 1
             return "SKELETON: Oh thank you, he just said he needed an holiday"
+
 #Bamboo dialogues
         if self.bamboo == False and self.who_is_talking == 4: 
             self.bambu_check = True
@@ -46,6 +49,7 @@ class testi:
         elif self.bamboo == True and self.who_is_talking == 4 and self.statue_check == True:
             self.missions_check += 1
             return "BAMBOO: Oh my God, Thank you! I could finally hug my children again!"
+
 #Statue dialogues
         if self.statue == False and self.who_is_talking == 5: 
             return "That's a nice statue"
@@ -56,6 +60,7 @@ class testi:
             self.bamboo = True
             self.skeleton = True
             return "THE FLOOR SHAKES! 3 books appear on the floor"
+
 #Librarian Dialogues
         if self.librarian == False and self.who_is_talking == 6:
             return "LIBRARIAN: You!!! You are the hero the king sent! Go talk with the four magic beasts in the corner of the map"
