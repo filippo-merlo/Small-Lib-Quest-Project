@@ -2,7 +2,6 @@ import pygame, os
 from settings import *
 import debug
 
-#ciao ciao
 ### This is the class defining the vary objects to print in the game
 
 class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
