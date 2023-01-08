@@ -4,24 +4,27 @@ from settings import*
 
 
 class MyWindow:
-    def __init__(self, text, font_size=10):
+    def __init__(self, text, font_size=10, offset = 10):
         # Create the main window
+        self.screen_size = pygame.display.get_surface().get_size()
         #self.x = 100
         #self.y = 700
-        self.x = int(WIDTH-WIDTH*0.9)
-        #self.y = 700
-        self.y = int(HEIGHT -HEIGHT*0.1)
-        self.width = 1150
+        #self.width = 1150
+        #self.height = 75
+
+        self.x = offset
+        self.y = self.screen_size[1] - 75 - offset
+        self.width = self.screen_size[0] - (offset * 2)
         self.height = 75
+
         self.text = text
         self.font = pygame.font.Font("./graphics/font/font.ttf", font_size)
         self.text_surface = self.font.render(self.text, True, (255, 255, 255))
         self.testi = testi()
         self.show_dialog_box = False #init dialogbox at False don't show
-        #self.dialog_box = DialogBox(100, 100, 200, 50, self.testo_out)
+    
        
         
-
     def draw(self, screen):
         # Draw the rectangle
         rect = pygame.draw.rect(screen, (0, 0, 0), (self.x, self.y, self.width, self.height))
