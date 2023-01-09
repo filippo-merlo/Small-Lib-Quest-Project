@@ -2,8 +2,8 @@
     "activeFile": "tmx/map.tmx",
     "expandedProjectPaths": [
         "data",
-        "tmx",
-        "tsx"
+        "tsx",
+        "tmx"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -89,11 +89,11 @@
             "scaleInDock": 1
         },
         "tmx/map.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 8,
+            "scale": 2,
+            "selectedLayer": 11,
             "viewCenter": {
-                "x": 592.6666666666666,
-                "y": 515.6666666666666
+                "x": 1091,
+                "y": 870.25
             }
         },
         "tsx/Floor.tsx": {
@@ -144,7 +144,7 @@
             "scaleInDock": 1
         },
         "tsx/objects.tsx": {
-            "scaleInDock": 3
+            "scaleInDock": 2
         },
         "tsx/plains.tsx": {
             "scaleInDock": 1

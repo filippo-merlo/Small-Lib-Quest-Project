@@ -26,11 +26,12 @@ class Level:
         # What the sprite.Group() does:
         # it stores different sprites, if i call
         self.tmx_data = load_pygame('./data/tmx/map.tmx')
-        self.map = pygame.image.load("./data/tmx/map.png").convert_alpha() # load map image 
+        self.map = pygame.image.load('./data/tmx/map.png').convert_alpha() # load map image 
         self.map = pygame.transform.scale(self.map,(self.map.get_width()*ZOOM,self.map.get_height()*ZOOM))
         # Sprite set up
         self.player = Player((1600,2300),[self.visible_sprites], self.obstacle_sprites) # use class player
         self.create_map()
+        self.get_objects_pos()
         self.upper_tiles_list = self.get_upper_tiles()
         self.animations_list = self.get_animated_tiles()
         self.animations_list_objects = self.get_animated_objects()
@@ -92,7 +93,6 @@ class Level:
             if self.offset.y <= 0:
                 offset_pos.y = tile_pos[1]
             self.display_surface.blit(surf, offset_pos)
-
 
     def create_map_from_img(self, player):
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
@@ -230,7 +230,36 @@ class Level:
                 # Blit the image to the screen
                 self.display_surface.blit(tile_image, offset_pos)
 
+### Functions to get object of interest offsetted position
+    def get_objects_pos(self):
+        self.obj_pos_list = []
+        for layer in self.tmx_data.objectgroups:
+                    if layer.name in ["Key_objects","NPC","Legendary_creatures"]:
+                        for obj in self.tmx_data.get_layer_by_name(layer.name):
+                            if obj.image:
+                                name = obj.name
+                                pos = (obj.x*ZOOM, obj.y*ZOOM)
+                                surf = obj.image
+                                surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
+                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_skeleton','King_skeleton','King_skeleton','King_bamboo',"The deadman's letter",'Genius']:
+                                    self.obj_pos_list.append([name,pos,surf])
 
+
+    def get_objects_offset_pos(self,player):
+        self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
+        self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
+        self.correct_obj_pos_list = []
+        for name,pos,surf in self.obj_pos_list:
+            offset_pos = pos - self.offset # in his position - the offset given by the position of the player
+            if self.offset.x >= self.map.get_width() - self.width:
+                offset_pos.x = 0 - (self.map.get_width() - self.width)
+            if self.offset.y >= self.map.get_height() - self.height:
+                offset_pos.y = 0 - (self.map.get_height() - self.height)
+            if self.offset.x <= 0:
+                offset_pos.x = 0 
+            if self.offset.y <= 0:
+                offset_pos.y = 0
+            self.correct_obj_pos_list.append([name,offset_pos,surf])
 
     def run(self):
         # draw and update the game
@@ -239,9 +268,8 @@ class Level:
         self.update_upper_tiles(self.upper_tiles_list,self.player)
         self.update_animated_tiles(self.animations_list, self.player)
         self.update_animated_objects(self.animations_list_objects, self.player)
+        self.get_objects_offset_pos(self.player)
         self.visible_sprites.update()
-
-
 
 class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate
     def __init__(self):
