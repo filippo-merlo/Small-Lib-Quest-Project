@@ -89,18 +89,18 @@
             "scaleInDock": 1
         },
         "tmx/map.tmx": {
-            "scale": 2,
-            "selectedLayer": 11,
+            "scale": 8,
+            "selectedLayer": 16,
             "viewCenter": {
-                "x": 1091,
-                "y": 870.25
+                "x": 565.5,
+                "y": 402.1875
             }
         },
         "tsx/Floor.tsx": {
             "scaleInDock": 1
         },
         "tsx/Genius.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 0.5
         },
         "tsx/King_bamboo.tsx": {
             "dynamicWrapping": true,
@@ -141,7 +141,7 @@
         },
         "tsx/interior.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1
+            "scaleInDock": 1.5
         },
         "tsx/objects.tsx": {
             "scaleInDock": 2
@@ -158,7 +158,7 @@
             "scaleInEditor": 1.5
         },
         "tsx/walls.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 3
         },
         "tsx/water.tsx": {
             "scaleInDock": 1

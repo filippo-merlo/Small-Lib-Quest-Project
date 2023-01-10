@@ -19,30 +19,19 @@ def get_objects_rect(tmx_data):
                  if layer.name in ["Key_objects","NPC","Legendary_creatures"]:
                     for obj in tmx_data.get_layer_by_name(layer.name):
                          if obj.image:
-                            name = obj.name
-                            pos = (obj.x*ZOOM, obj.y*ZOOM)
-                            surf = obj.image
-                            surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                            if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_skeleton','King_skeleton','King_skeleton','King_bamboo',"The deadman's letter",'Genius']:
-                                obj_pos_list.append([name,pos,surf])
+                            prop = obj.properties
+                            if "colliders" in prop.keys():
+                                o = prop["colliders"]
+                                print(dir(o))
+                            #name = obj.name
+                            #pos = (obj.x*ZOOM, obj.y*ZOOM)
+                            #surf = obj.image
+                            #surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
+                            #if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_skeleton','King_skeleton','King_skeleton','King_bamboo',"The deadman's letter",'Genius']:
+                            #    obj_pos_list.append([name,pos,surf])
     return obj_pos_list
 
 print(get_objects_rect(tmx_data))
 
-def get_objects_pos(obj_pos_list, player):
-    self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
-    self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
-    correct_obj_pos_list = []
-    for name,pos,surf in obj_pos_list:
-        offset_pos = pos - self.offset # in his position - the offset given by the position of the player
-        if self.offset.x >= self.map.get_width() - self.width:
-            offset_pos.x = 0 - (self.map.get_width() - self.width)
-        if self.offset.y >= self.map.get_height() - self.height:
-            offset_pos.y = 0 - (self.map.get_height() - self.height)
-        if self.offset.x <= 0:
-            offset_pos.x = 0 
-        if self.offset.y <= 0:
-            offset_pos.y = 0
-        correct_obj_pos_list.append([name,offset_pos,surf])
-    return correct_obj_pos_list
+
         

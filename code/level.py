@@ -29,12 +29,12 @@ class Level:
         self.map = pygame.image.load('./data/tmx/map.png').convert_alpha() # load map image 
         self.map = pygame.transform.scale(self.map,(self.map.get_width()*ZOOM,self.map.get_height()*ZOOM))
         # Sprite set up
-        self.player = Player((1600,2300),[self.visible_sprites], self.obstacle_sprites) # use class player
         self.create_map()
         self.get_objects_pos()
-        self.upper_tiles_list = self.get_upper_tiles()
         self.animations_list = self.get_animated_tiles()
         self.animations_list_objects = self.get_animated_objects()
+        self.player = Player((1600,2300),[self.visible_sprites], self.obstacle_sprites) # use class player
+        self.upper_tiles_list = self.get_upper_tiles()
 
     
     def create_map(self):
@@ -43,22 +43,29 @@ class Level:
                  for x,y,surf in layer.tiles():
                      pos = (x*TILESIZE, y*TILESIZE)
                      surf = pygame.transform.scale(surf, (round(surf.get_width()*ZOOM),round(surf.get_height()*ZOOM)))
-                     Tile(pos = pos, surf = surf, groups = [self.visible_sprites, self.obstacle_sprites])
+                     Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
          for layer in self.tmx_data.objectgroups:
              if layer.name in ["Forrest_trees"]:
                  for obj in self.tmx_data.get_layer_by_name(layer.name):
                      if obj.image:
                          pos = (obj.x*ZOOM, obj.y*ZOOM)
                          surf = pygame.transform.scale(obj.image, (round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                         Object_Tile(pos = pos, surf = surf, groups = [self.visible_sprites, self.obstacle_sprites])
+                         Object_Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
     
          for layer in self.tmx_data.visible_layers:
-             if layer.name in ["Vegetation", "Mobs"] and hasattr(layer,'data'):
+             if layer.name in ["Vegetation"] and hasattr(layer,'data'):
                  for x,y,surf in layer.tiles():
                      pos = (x*TILESIZE, y*TILESIZE)
                      surf = pygame.transform.scale(surf, (round(surf.get_width()*ZOOM),round(surf.get_height()*ZOOM)))
-                     Tile(pos = pos, surf = surf, groups = [self.visible_sprites, self.obstacle_sprites])
-    
+                     Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
+         
+         for layer in self.tmx_data.layers:
+             if layer.name in ["Invisible_borders"]:
+                 for x,y,surf in layer.tiles():
+                     pos = (x*TILESIZE, y*TILESIZE)
+                     surf = pygame.transform.scale(surf, (round(surf.get_width()*ZOOM),round(surf.get_height()*ZOOM)))
+                     Tile(pos = pos, surf = surf, groups = [self.obstacle_sprites])
+        
          for layer in self.tmx_data.objectgroups:
              if layer.name in ["Key_objects"]:
                  for obj in self.tmx_data.get_layer_by_name(layer.name):
@@ -66,16 +73,24 @@ class Level:
                          pos = (obj.x*ZOOM, obj.y*ZOOM)
                          surf = obj.image
                          surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                         Object_Tile(pos = pos, surf = surf, groups = [self.visible_sprites, self.obstacle_sprites])
+                         Object_Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
 
     def get_upper_tiles(self):
         upper_tiles_list = []
         for layer in self.tmx_data.visible_layers:
-            if layer.name in ["Upper_parts"] and hasattr(layer,'data'):
+            if layer.name in ["Upper_parts","Lower_upper_parts"] and hasattr(layer,'data'):
                 for x,y,surf in layer.tiles():
                     tile_pos = (x*TILESIZE, y*TILESIZE)
                     surf = pygame.transform.scale(surf, (round(surf.get_width()*ZOOM),round(surf.get_height()*ZOOM)))
                     upper_tiles_list.append([tile_pos,surf])
+        for layer in self.tmx_data.objectgroups:
+             if layer.name in ["Key_objects","Objects_no_interactions"]:
+                 for obj in self.tmx_data.get_layer_by_name(layer.name):
+                     if obj.image and obj.name in ['Genius','Table_up']:
+                         tile_pos = (obj.x*ZOOM, obj.y*ZOOM)
+                         surf = obj.image
+                         surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
+                         upper_tiles_list.append([tile_pos,surf])
         return upper_tiles_list
     
     def update_upper_tiles(self, upper_tiles_list, player):
