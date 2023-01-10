@@ -1,5 +1,9 @@
+import pygame
+from level import Level
+
 class testi:
     def __init__(self):
+        self.level = Level() #instance of the level class
          #check dialogue line
         self.squirrel = False
         self.kraken = False
@@ -16,6 +20,11 @@ class testi:
         self.statue_check = False
         self.missions_check = 0
         self.who_is_talking = 6
+
+    def get_pos():
+        
+        
+        pass
     
     def dialogues (self):  #methods with all the text interaction of the game
 #Squirrel dialoguse    
