@@ -1,9 +1,9 @@
 {
     "activeFile": "tmx/map.tmx",
     "expandedProjectPaths": [
-        "data",
         "tsx",
-        "tmx"
+        "tmx",
+        "data"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -89,11 +89,11 @@
             "scaleInDock": 1
         },
         "tmx/map.tmx": {
-            "scale": 8,
-            "selectedLayer": 16,
+            "scale": 1,
+            "selectedLayer": 13,
             "viewCenter": {
-                "x": 565.5,
-                "y": 402.1875
+                "x": 729,
+                "y": 410.5
             }
         },
         "tsx/Floor.tsx": {

@@ -10,7 +10,8 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
         self.image = pygame.image.load("./sprites/characters/player_still_1.png").convert_alpha() # load image 
         self.image = pygame.transform.scale(self.image, (PLAYERSIZE_W, PLAYERSIZE_H)) # scale image
         self.rect = self.image.get_rect(topleft = pos) # create the rect to blit on the screen surf. of the same size of the image and pos given by pos. pos is extracted from the WORLD_MAP in the level class
-        self.hitbox = self.rect.inflate(-10,-60)
+        self.hitbox = self.rect.inflate(-10,-40)
+        #self.hitbox = pygame.Rect(self.rect.x, self.rect.y, self.rect.w, self.rect.h)
         self.direction = pygame.math.Vector2() # will give as a 2d vector to define the player movement
                                                # now x,y = 0, then we want to modify them such as when you pres right x += 1 * player_speed
         self.speed = SPEED # set pix/sec speed of moovement of the player
@@ -49,7 +50,7 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
         self.collision('horizontal') # add the collision in x direction
         self.hitbox.y += self.direction.y * speed # modify the self.rect.x position accordingly with the user input 
         self.collision('vertical') # add the collision in y direction
-        self.rect.center = self.hitbox.center
+        self.rect.center = (self.hitbox.centerx, self.hitbox.centery-10)
         
     ### Define collisions
     def collision(self,direction):

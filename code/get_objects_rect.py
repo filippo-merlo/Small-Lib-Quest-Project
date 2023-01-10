@@ -1,37 +1,36 @@
 #%%
-import pygame
+import pygame, sys
 from settings import *
 from tile import Tile, Object_Tile
 from player import Player
 from debug import debug
 from pytmx.util_pygame import load_pygame # module of tmxpy that works for pygame
+from pygame.locals import *
 
-pygame.init() 
-screen = pygame.display.set_mode((WIDTH,HEIGHT)) 
+SIZE = 800, 500
+RED = (255, 0, 0)
+GRAY = (150, 150, 150)
 
-tmx_data = load_pygame('C:/Users/Filippo/Desktop/Small Lib Quest Project/data/tmx/map.tmx')
+pygame.init()
+screen = pygame.display.set_mode(SIZE)
 
-#%%
+rect = Rect(50, 60, 200, 80)
+print(f'x={rect.x}, y={rect.y}, w={rect.w}, h={rect.h}')
+print(f'left={rect.left}, top={rect.top}, right={rect.right}, bottom={rect.bottom}')
+print(f'center={rect.center}')
 
-def get_objects_rect(tmx_data):
-    obj_pos_list = []
-    for layer in tmx_data.objectgroups:
-                 if layer.name in ["Key_objects","NPC","Legendary_creatures"]:
-                    for obj in tmx_data.get_layer_by_name(layer.name):
-                         if obj.image:
-                            prop = obj.properties
-                            if "colliders" in prop.keys():
-                                o = prop["colliders"]
-                                print(dir(o))
-                            #name = obj.name
-                            #pos = (obj.x*ZOOM, obj.y*ZOOM)
-                            #surf = obj.image
-                            #surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                            #if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_skeleton','King_skeleton','King_skeleton','King_bamboo',"The deadman's letter",'Genius']:
-                            #    obj_pos_list.append([name,pos,surf])
-    return obj_pos_list
-
-print(get_objects_rect(tmx_data))
-
-
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            running = False
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                rect = Rect(rect.x, rect.y+50, rect.w, rect.h-50)
         
+
+    screen.fill(GRAY)
+    pygame.draw.rect(screen, RED, rect)
+    pygame.display.flip()
+
+pygame.quit()
+

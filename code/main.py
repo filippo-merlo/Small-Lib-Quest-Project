@@ -32,7 +32,6 @@ class Game:
                     self.window.toggle_dialog_box() #change from False to True or viceversa
         
             ### Run the level object and update
-            self.screen.fill('green') # fill the screen object
             self.level.run() # run the Level Object
 
             if self.window.show_dialog_box: #if the text box has to be shown (is True)
