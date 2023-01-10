@@ -89,11 +89,11 @@
             "scaleInDock": 1
         },
         "tmx/map.tmx": {
-            "scale": 1,
-            "selectedLayer": 13,
+            "scale": 11,
+            "selectedLayer": 12,
             "viewCenter": {
-                "x": 729,
-                "y": 410.5
+                "x": 768,
+                "y": 511.9545454545455
             }
         },
         "tsx/Floor.tsx": {

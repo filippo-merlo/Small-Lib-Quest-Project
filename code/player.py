@@ -11,7 +11,7 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
         self.image = pygame.transform.scale(self.image, (PLAYERSIZE_W, PLAYERSIZE_H)) # scale image
         self.rect = self.image.get_rect(topleft = pos) # create the rect to blit on the screen surf. of the same size of the image and pos given by pos. pos is extracted from the WORLD_MAP in the level class
         self.hitbox = self.rect.inflate(-10,-40)
-        self.animation_speed = 0.20
+        self.animation_speed = 0.15
         self.frame_index = 0
         self.import_player_assets()
         self.status = 'right_still'
