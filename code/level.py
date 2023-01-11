@@ -314,15 +314,14 @@ class Level:
             area_rect = pygame.Rect(p[0],p[1],s.get_width()+80,s.get_height()+80)
             if pygame.Rect.colliderect(our_personal_player_rect, area_rect):
                 debug('yes')
-        #debug(our_personal_player_rect)
+                width = s.get_width()+50
+                height = s.get_height()+70
+                pos = (p[0]-width/2,p[1]-height/2)
+                surf = pygame.Surface((width,height))  # the size of your rect
+                surf.set_alpha(128)                # alpha level
+                surf.fill((255,255,255))           # this fills the entire surface
+                self.display_surface.blit(surf,pos) 
 
-        
-        #for n,p,s in pos_list:
-        #    rect = pygame.Surface(p[0],p[1], s.get_width()+80,s.get_height()+80)
-        #    rect = rect.set_aplha(128)
-        #    rect.fill((125,255,125))
-        #    pygame.draw.rect(self.display_surface,rect)
-           
         for event in pygame.event.get():       
             if event.type == pygame.KEYDOWN and self.interact.output == True:
                 if event.key == pygame.K_SPACE:
