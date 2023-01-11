@@ -15,7 +15,6 @@ class Game:
         pygame.mixer.music.load('./data/sound/zelda_theme_8_bit.mp3') # import music file
         self.clock = pygame.time.Clock() # create a clock object to set a celing for the frame rate on which the update of the screen will be performed
         self.level = Level() # Create the Level object imported from level.
-       
 
     ### Create the while loop that will update the screen each frame
     def run(self):
@@ -26,6 +25,7 @@ class Game:
                 if event.type == pygame.QUIT: # the QUIT event is clicking on the red cross at the top right of the window
                     pygame.quit() # quit pygame
                     sys.exit() # quit the while loop
+                
     
             ### Run the level object and update
             self.level.run() # run the Level Object        
