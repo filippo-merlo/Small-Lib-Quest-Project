@@ -264,7 +264,6 @@ class Level:
                                 if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_skeleton','King_skeleton','King_skeleton','King_bamboo',"The deadman's letter",'Genius']:
                                     self.obj_pos_list.append([name,pos,surf])
 
-
     def get_objects_offset_pos(self,player):
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
         self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
@@ -282,14 +281,13 @@ class Level:
             self.correct_obj_pos_list.append([name,offset_pos,surf])
         return self.correct_obj_pos_list ## so it gives in output the list, and we can use it in text.position.get_the_pos
 
-
     def player_coord(self):
         pos_list = self.get_objects_offset_pos(self.player)
         self.interact.touch(pos_list, self.player.rect)
         
         ### PLAYER COORDINATES FOR INTERACTION (so it's in the center of the screen)
-        self.offset.x = self.player.rect.centerx - self.half_width # get the player rectangle center position on x and subtract half of the dislay w
-        self.offset.y = self.player.rect.centery - self.half_height # get the player rectangle center position on y and subtract half of the dislay h
+        self.offset.x = self.player.rect.x+PLAYERSIZE_W - self.half_width # get the player rectangle center position on x and subtract half of the dislay w
+        self.offset.y = self.player.rect.y+PLAYERSIZE_H - self.half_height # get the player rectangle center position on y and subtract half of the display h
     
         offset_pos = self.player.rect.center - self.offset # in his position - the offset given by the position of the player
         if self.offset.x >= self.map.get_width() - self.width:
@@ -302,27 +300,25 @@ class Level:
             offset_pos.y = self.player.rect.y
        
         our_personal_player_rect = pygame.Rect(offset_pos,(PLAYERSIZE_W,PLAYERSIZE_H))
-        for n,p,s in pos_list:
-            area_rect = pygame.Rect(p[0],p[1],s.get_width()+50,s.get_height()+80)
-            return our_personal_player_rect
-           
-            #if pygame.Rect.colliderect(our_personal_player_rect, area_rect):
-            #    debug('yes')
-
-        
+        return our_personal_player_rect
+                   
     def check_interaction(self):
         objects_offset_pos= self.get_objects_offset_pos(self.player) #function to get the pos of the npc scaled on the player
         player_area = self.player_coord() #function to get the player coord based on the center of its rect
-        for event in pygame.event.get():       
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    for n,p,s in objects_offset_pos:
-                        area_rect = pygame.Rect(p[0], p[1], s.get_width() +80, s.get_height()+ 80)
+        dialogue_icon = pygame.image.load('./sprites/icons/dialogue_icon.png').convert_alpha()
+        dialogue_icon = pygame.transform.scale(dialogue_icon, (TILESIZE,TILESIZE))
+        for n,p,s in objects_offset_pos:
+                        width = s.get_width()+20
+                        height = s.get_height()+80
+                        pos = (p[0]-s.get_width()/5, p[1]-s.get_height()/5)
+                        area_rect = pygame.Rect(pos, (width, height))
                         if pygame.Rect.colliderect(player_area, area_rect):
+                            self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
                             debug('yes')
-
-
-
+            #for event in pygame.event.get():       
+            #if event.type == pygame.KEYDOWN:
+            #    if event.key == pygame.K_SPACE:
+                    
 
     def run(self):
         # draw and update the game
@@ -332,20 +328,8 @@ class Level:
         self.update_animated_tiles(self.animations_list, self.player)
         self.update_animated_objects(self.animations_list_objects, self.player)
         self.visible_sprites.update()
-        self.player_coord()# get player coord for interaction
-        self.check_interaction()
         
-        # SET DIALOGUES AND INTERACTIONS
-        
-                width = s.get_width()+50
-                height = s.get_height()+70
-                pos = (p[0]-width/2,p[1]-height/2)
-                surf = pygame.Surface((width,height))  # the size of your rect
-                surf.set_alpha(128)                # alpha level
-                surf.fill((255,255,255))           # this fills the entire surface
-                self.display_surface.blit(surf,pos) 
-
-       
+        self.check_interaction()    
                  
 
 class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate
