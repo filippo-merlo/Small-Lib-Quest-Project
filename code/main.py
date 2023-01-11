@@ -3,8 +3,6 @@ import pygame, sys
 from settings import *
 from debug import debug
 from level import Level
-from dialogbox import MyWindow
-from text import testi
 
 ### Create the Game class
 class Game:
@@ -17,8 +15,7 @@ class Game:
         pygame.mixer.music.load('./data/sound/zelda_theme_8_bit.mp3') # import music file
         self.clock = pygame.time.Clock() # create a clock object to set a celing for the frame rate on which the update of the screen will be performed
         self.level = Level() # Create the Level object imported from level.
-        self.testo = testi() #instance of text class+
-        self.window = MyWindow(self.testo.dialogues()) #instance of the text method
+       
 
     ### Create the while loop that will update the screen each frame
     def run(self):
@@ -29,15 +26,11 @@ class Game:
                 if event.type == pygame.QUIT: # the QUIT event is clicking on the red cross at the top right of the window
                     pygame.quit() # quit pygame
                     sys.exit() # quit the while loop
-                 # Check if the left mouse button is pressed
-                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                    self.window.toggle_dialog_box() #change from False to True or viceversa
-        
+    
             ### Run the level object and update
             self.level.run() # run the Level Object
 
-            if self.window.show_dialog_box: #if the text box has to be shown (is True)
-                self.window.run_window(self.screen) #then shown it
+        
 
             if pygame.mixer.music.get_pos() >= 2.37*60000:
                 pygame.mixer.music.fadeout(6000)
