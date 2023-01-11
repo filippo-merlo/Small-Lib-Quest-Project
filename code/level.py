@@ -5,6 +5,8 @@ from player import Player
 from debug import debug
 from pytmx.util_pygame import load_pygame # module of tmxpy that works for pygame
 
+from text import interaction
+
 
 # The Level class will contain every visible object in the game 
 class Level:
@@ -17,7 +19,7 @@ class Level:
         self.width = self.display_surface.get_size()[0]
         self.height = self.display_surface.get_size()[1]
         self.offset = pygame.math.Vector2()
-
+        
         # Sprites are all the objects printed on the screen in videogames 
         # in pygame the sprite class allows to combines a surface(an image) and a rectangle (needed to moove the surfaces on the main one) + other features in the same object
         # Sprite Group, allows to target (es update), a determined category of sprites.
@@ -35,6 +37,9 @@ class Level:
         self.animations_list_objects = self.get_animated_objects()
         self.player = Player((1600,2300),[self.visible_sprites], self.obstacle_sprites) # use class player
         self.upper_tiles_list = self.get_upper_tiles()
+
+        # SET DIALOGUES AND INTERACTIONS
+        self.interact = interaction()
 
     
     def create_map(self):
@@ -267,14 +272,15 @@ class Level:
         for name,pos,surf in self.obj_pos_list:
             offset_pos = pos - self.offset # in his position - the offset given by the position of the player
             if self.offset.x >= self.map.get_width() - self.width:
-                offset_pos.x = 0 - (self.map.get_width() - self.width)
+                offset_pos.x = pos[0] - (self.map.get_width() - self.width)
             if self.offset.y >= self.map.get_height() - self.height:
-                offset_pos.y = 0 - (self.map.get_height() - self.height)
+                offset_pos.y = pos[1] - (self.map.get_height() - self.height)
             if self.offset.x <= 0:
-                offset_pos.x = 0 
+                offset_pos.x = pos[0] 
             if self.offset.y <= 0:
-                offset_pos.y = 0
+                offset_pos.y = pos[1]
             self.correct_obj_pos_list.append([name,offset_pos,surf])
+        return self.correct_obj_pos_list ## so it gives in output the list, and we can use it in text.position.get_the_pos
 
     def run(self):
         # draw and update the game
@@ -283,8 +289,45 @@ class Level:
         self.update_upper_tiles(self.upper_tiles_list,self.player)
         self.update_animated_tiles(self.animations_list, self.player)
         self.update_animated_objects(self.animations_list_objects, self.player)
-        self.get_objects_offset_pos(self.player)
         self.visible_sprites.update()
+        
+        # SET DIALOGUES AND INTERACTIONS
+        pos_list = self.get_objects_offset_pos(self.player)
+        self.interact.touch(pos_list, self.player.rect)
+        
+        ### PLAYER COORDINATES
+        self.offset.x = self.player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
+        self.offset.y = self.player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
+    
+        offset_pos = self.player.rect.center - self.offset # in his position - the offset given by the position of the player
+        if self.offset.x >= self.map.get_width() - self.width:
+            offset_pos.x = self.player.rect.x - (self.map.get_width() - self.width)
+        if self.offset.y >= self.map.get_height() - self.height:
+            offset_pos.y = self.player.rect.y - (self.map.get_height() - self.height)
+        if self.offset.x <= 0:
+            offset_pos.x = self.player.rect.x 
+        if self.offset.y <= 0:
+            offset_pos.y = self.player.rect.y
+       
+        our_personal_player_rect = pygame.Rect(offset_pos,(PLAYERSIZE_W,PLAYERSIZE_H))
+        for n,p,s in pos_list:
+            area_rect = pygame.Rect(p[0],p[1],s.get_width()+80,s.get_height()+80)
+            if pygame.Rect.colliderect(our_personal_player_rect, area_rect):
+                debug('yes')
+        #debug(our_personal_player_rect)
+
+        
+        #for n,p,s in pos_list:
+        #    rect = pygame.Surface(p[0],p[1], s.get_width()+80,s.get_height()+80)
+        #    rect = rect.set_aplha(128)
+        #    rect.fill((125,255,125))
+        #    pygame.draw.rect(self.display_surface,rect)
+           
+        for event in pygame.event.get():       
+            if event.type == pygame.KEYDOWN and self.interact.output == True:
+                if event.key == pygame.K_SPACE:
+                    print("SI")
+                 
 
 class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate
     def __init__(self):
