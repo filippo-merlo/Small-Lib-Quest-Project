@@ -30,8 +30,7 @@ class Game:
             ### Run the level object and update
             self.level.run() # run the Level Object
 
-            if self.window.show_dialog_box: #if the text box has to be shown (is True)
-                self.window.run_window(self.screen) #then shown it
+        
 
             if pygame.mixer.music.get_pos() >= 2.37*60000:
                 pygame.mixer.music.fadeout(6000)
