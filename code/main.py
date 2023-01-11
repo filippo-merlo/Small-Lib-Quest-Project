@@ -14,13 +14,15 @@ class Game:
         ## Create the display surface, the window where the game will run 
         self.screen = pygame.display.set_mode((WIDTH,HEIGHT)) 
         pygame.display.set_caption('Small Lib Quest') # Set the window's name
+        pygame.mixer.music.load('./data/sound/zelda_theme_8_bit.mp3') # import music file
         self.clock = pygame.time.Clock() # create a clock object to set a celing for the frame rate on which the update of the screen will be performed
         self.level = Level() # Create the Level object imported from level.
-        self.testo = testi() #instance of text class
+        self.testo = testi() #instance of text class+
         self.window = MyWindow(self.testo.dialogues()) #instance of the text method
 
     ### Create the while loop that will update the screen each frame
     def run(self):
+        pygame.mixer.music.play() #Play the music
         while True:
             ## Set the Quit  button
             for event in pygame.event.get(): # Get the vector with all the events (input from the user) 
@@ -36,7 +38,13 @@ class Game:
 
             if self.window.show_dialog_box: #if the text box has to be shown (is True)
                 self.window.run_window(self.screen) #then shown it
-                
+
+            if pygame.mixer.music.get_pos() >= 2.37*60000:
+                pygame.mixer.music.fadeout(6000)
+
+            if pygame.mixer.music.get_pos() == -1:
+                pygame.mixer.music.play()
+
             self.clock.tick(FPS) # set the maximum frame rate
             pygame.display.update() # this method will update the screen at each iteration of the while loop
            
