@@ -1,9 +1,9 @@
 {
-    "activeFile": "tmx/map.tmx",
+    "activeFile": "tsx/Squid.tsx",
     "expandedProjectPaths": [
-        "tsx",
+        "data",
         "tmx",
-        "data"
+        "tsx"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -191,11 +191,11 @@
     ],
     "project": "SLQ.tiled-project",
     "recentFiles": [
+        "tmx/map.tmx",
+        "tsx/skeleton.tsx",
+        "tsx/King_bamboo.tsx",
         "tsx/Raccoon.tsx",
         "tsx/Squid.tsx",
-        "tsx/King_bamboo.tsx",
-        "tsx/skeleton.tsx",
-        "tmx/map.tmx",
         "data/tmx/map.tmx"
     ]
 }
