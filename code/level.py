@@ -42,9 +42,10 @@ class Level:
         self.who_is_talking = None
         self.speech = ""
         self.dialgue_printed = False #keep track if something has to be printed or no
-        self.dialogbox = MyWindow(self.speech)
-        self.testi = testi()
+        self.dialogbox = MyWindow(self.speech) #instance of the class Mywindow
+        self.testi = testi() #instance of the class testi
         
+    
 
     def create_map(self):
          for layer in self.tmx_data.visible_layers:
