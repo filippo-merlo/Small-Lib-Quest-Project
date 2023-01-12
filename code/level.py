@@ -39,8 +39,10 @@ class Level:
         self.upper_tiles_list = self.get_upper_tiles()
 
         ## SET DIALOGUES AND INTERACTIONS
-        self.who_is_talking = None
-        self.speech = ""
+    
+        
+        self.who_is_talking = None #output of check interaction function
+        self.speech = "" #gets in input the current line of text for the dialgue
         self.dialgue_printed = False #keep track if something has to be printed or no
         self.dialogbox = MyWindow(self.speech) #instance of the class Mywindow
         self.testi = testi() #instance of the class testi
@@ -318,22 +320,26 @@ class Level:
                             height = surf.get_height()+80
                             position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
                             area_rect = pygame.Rect(position, (width, height))
-                            intercative_entities.append([name,area_rect])
-        for name, rect in intercative_entities:
-            if pygame.Rect.colliderect(player_area, rect):
-                self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
-            for event in pygame.event.get():     
-                #sia qui che main, temporaneo? bho vedremo amici
-                if event.type == pygame.QUIT: # the QUIT event is clicking on the red cross at the top right of the window
-                    pygame.quit() # quit pygame
-                    sys.exit() # quit the while loop  
-                #check event click
-                if pygame.Rect.colliderect(player_area, rect) and event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE: #if you click a key and the key is spacebar
-                    self.dialogbox.toggle_dialog_box() #change from False to True or viceversa
-                    self.dialgue_printed = False #says that something has not been printed yet
-                    self.who_is_talking = name                                     
-                            
-                        
+                            if pygame.Rect.colliderect(player_area, area_rect):
+                                self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
+        for event in pygame.event.get():     
+            #sia qui che main, temporaneo? bho vedremo amici
+            if event.type == pygame.QUIT: # the QUIT event is clicking on the red cross at the top right of the window
+                pygame.quit() # quit pygame
+                sys.exit() # quit the while loop  
+            #check event click
+            if event.type == pygame.KEYDOWN: #if you click a key
+                if event.key == pygame.K_SPACE:  #and the key is spacebar
+                        for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
+                            width = surf.get_width()+20
+                            height = surf.get_height()+80
+                            position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
+                            area_rect = pygame.Rect(position, (width, height))
+                            if pygame.Rect.colliderect(player_area, area_rect):
+                                self.dialogbox.toggle_dialog_box() #change from False to True or viceversa
+                                self.dialgue_printed = False #says that something has not been printed yet
+                                self.who_is_talking = name             
+                                           
     def run(self):
         # draw and update the game
         self.create_map_from_img(self.player)
@@ -346,6 +352,7 @@ class Level:
         self.check_interaction() #run the events interaction function
         self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)
         if self.dialogbox.show_dialog_box: #if the text box has to be shown (is True)
+            self.dialogbox.run_window(self.display_surface, self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)) #then shown it #then shown it
             self.dialogbox.run_window(self.display_surface, self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)) #then shown it #then shown it
         
 
