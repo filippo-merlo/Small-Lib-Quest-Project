@@ -13,7 +13,6 @@ class testi:
         self.Genius = False #check if you've got the books
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
         self.endgame = False #last interaction done
-        self.i = 0
     
 
 
@@ -46,7 +45,7 @@ class testi:
 
             # Genius Dialogues
             if name == 'Table_up' and not diag_print and self.Librarian2 == False: #table_up is the new genius
-                speech = "It's kinda ugly! But it release a mysterous aurea.."
+                speech = "It's kinda ugly! But it release a mysterous aurea.." 
                 diag_print = True
                 return speech
             elif name == 'Table_up' and not diag_print and self.Librarian2 == True:
@@ -54,10 +53,11 @@ class testi:
                 diag_print = True
                 self.Genius = True
                 return speech
-            #elif name == 'Table_up' and not diag_print and self.Librarian2 == True and self.Genius == True:
+            #elif name == 'Table_up' and not diag_print and self.Librarian2 == True and self.interaction > 1:#self.Genius == True:
             #    speech = "GENIUS: Bro i've already gave you the books, just grab them and finish the quests.."
             #    diag_print = True
             #    return speech
+                
 
             #Squid Dialogues
             if name == 'King_squid' and not diag_print and self.Librarian1 == False: #if not interacted with Librarian yet
