@@ -43,8 +43,6 @@ class Game:
             #pygame.mixer.music.set_volume(0)
 
             
-            
-
             self.clock.tick(FPS) # set the maximum frame rate
             pygame.display.update() # this method will update the screen at each iteration of the while loop
            

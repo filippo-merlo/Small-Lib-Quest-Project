@@ -40,16 +40,14 @@ class Level:
 
         ## SET DIALOGUES AND INTERACTIONS
     
-        
         self.screen = pygame.display.set_mode((WIDTH,HEIGHT)) 
-        self.who_is_talking = None
-        self.speech = ""
+        self.who_is_talking = None #output of check interaction function
+        self.speech = "" #gets in input the current line of text for the dialgue
         self.dialgue_printed = False #keep track if something has to be printed or no
-        self.dialogbox = MyWindow(self.speech)
-        self.testi = testi()
+        self.dialogbox = MyWindow(self.speech) #instance of the class Mywindow
+        self.testi = testi() #instance of the class testi
         
     
-
     def create_map(self):
          for layer in self.tmx_data.visible_layers:
              if layer.name in ["Buildings", "Library"] and hasattr(layer,'data'):
@@ -341,8 +339,7 @@ class Level:
                                 self.who_is_talking = name
                                 
         return self.who_is_talking
-                            
-                        
+                                           
     def run(self):
         # draw and update the game
         self.create_map_from_img(self.player)
