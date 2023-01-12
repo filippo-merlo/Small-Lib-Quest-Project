@@ -40,7 +40,7 @@ class Level:
 
         ## SET DIALOGUES AND INTERACTIONS
     
-        self.screen = pygame.display.set_mode((WIDTH,HEIGHT)) 
+        
         self.who_is_talking = None #output of check interaction function
         self.speech = "" #gets in input the current line of text for the dialgue
         self.dialgue_printed = False #keep track if something has to be printed or no
@@ -336,9 +336,7 @@ class Level:
                             if pygame.Rect.colliderect(player_area, area_rect):
                                 self.dialogbox.toggle_dialog_box() #change from False to True or viceversa
                                 self.dialgue_printed = False #says that something has not been printed yet
-                                self.who_is_talking = name
-                                
-        return self.who_is_talking
+                                self.who_is_talking = name             
                                            
     def run(self):
         # draw and update the game
@@ -349,11 +347,11 @@ class Level:
         self.update_animated_objects(self.animations_list_objects, self.player)
         self.visible_sprites.update()
 
-        self.player_coord()# get player coord for interaction
+        #self.player_coord()# get player coord for interaction
         self.check_interaction() #run the events interaction function
         self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)
         if self.dialogbox.show_dialog_box: #if the text box has to be shown (is True)
-            self.dialogbox.run_window(self.screen, self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)) #then shown it #then shown it
+            self.dialogbox.run_window(self.display_surface, self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)) #then shown it #then shown it
         
 
 class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate

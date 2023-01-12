@@ -44,16 +44,16 @@ class testi:
                 return speech
 
             # Genius Dialogues
-            if name == 'Genius' and not diag_print and self.Librarian2 == False:
+            if name == 'Genius' and not diag_print:
                 speech = "It's kinda ugly! But it release a mysterous aurea.."
                 diag_print = True
                 return speech
-            elif name == 'Genius' and not diag_print and self.Librarian2 == True:
+            elif name == 'Genius' and not diag_print and self.Librarian2 == True and self.Genius == False and not all(self.mission_check):
                 speech = "THE FLOOR SHAKES! THREE BOOK APPEARS ON THE FLOOR"
                 diag_print = True
                 self.Genius = True
                 return speech
-            elif name == 'Genius' and not diag_print and self.Genius == True:
+            elif name == 'Genius' and not diag_print and self.Librarian2 == True and self.Genius == True and not all(self.mission_check):
                 speech = "GENIUS: Bro i've already gave you the books, just grab them and finish the quests.."
                 diag_print = True
                 return speech
