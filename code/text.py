@@ -45,7 +45,7 @@ class testi:
                 return speech
 
             # Genius Dialogues
-            if name == 'Table_up' and not diag_print and self.Librarian2 == False:
+            if name == 'Table_up' and not diag_print and self.Librarian2 == False: #table_up is the new genius
                 speech = "It's kinda ugly! But it release a mysterous aurea.."
                 diag_print = True
                 return speech
@@ -54,7 +54,7 @@ class testi:
                 diag_print = True
                 self.Genius = True
                 return speech
-            #elif name == 'Genius' and not diag_print and self.Librarian2 == True and self.Genius == True:
+            #elif name == 'Table_up' and not diag_print and self.Librarian2 == True and self.Genius == True:
             #    speech = "GENIUS: Bro i've already gave you the books, just grab them and finish the quests.."
             #    diag_print = True
             #    return speech
