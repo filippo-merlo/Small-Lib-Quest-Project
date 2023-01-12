@@ -12,13 +12,14 @@ class Game:
         ## Initiate pygame
         pygame.init() 
         ## Create the display surface, the window where the game will run 
-        self.screen = pygame.display.set_mode((WIDTH,HEIGHT)) 
+        info = pygame.display.Info()
+        size = (info.current_w, info.current_h)
+        self.screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
         pygame.display.set_caption('Small Lib Quest') # Set the window's name
-        pygame.mixer.music.load('./data/sound/zelda_theme_8_bit.mp3') # import music file
         self.clock = pygame.time.Clock() # create a clock object to set a celing for the frame rate on which the update of the screen will be performed
+        # Imprt music and initialize level class
+        pygame.mixer.music.load('./data/sound/zelda_theme_8_bit.mp3') # import music file
         self.level = Level() # Create the Level object imported from level.
-
-         
 
     ### Create the while loop that will update the screen each frame
     def run(self):
@@ -27,7 +28,10 @@ class Game:
         while True:
             ## Set the Quit  button
             for event in pygame.event.get(): # Get the vector with all the events (input from the user) 
-                if event.type == pygame.QUIT: # the QUIT event is clicking on the red cross at the top right of the window
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        self.screen = pygame.display.set_mode((WIDTH,HEIGHT))
+                elif event.type == pygame.QUIT: # the QUIT event is clicking on the red cross at the top right of the window
                     pygame.quit() # quit pygame
                     sys.exit() # quit the while loop
                 
