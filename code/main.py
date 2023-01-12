@@ -29,6 +29,7 @@ class Game:
                 if event.type == pygame.QUIT: # the QUIT event is clicking on the red cross at the top right of the window
                     pygame.quit() # quit pygame
                     sys.exit() # quit the while loop
+                
     
             ### Run the level object and update
             self.level.run() # run the Level Object

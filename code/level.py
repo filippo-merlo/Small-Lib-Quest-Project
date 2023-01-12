@@ -290,12 +290,11 @@ class Level:
         return self.correct_obj_pos_list ## so it gives in output the list, and we can use it in text.position.get_the_pos
 
 ### Functions to get the dialogues
-
     def player_coord(self):
         
         ### PLAYER COORDINATES FOR INTERACTION (so it's in the center of the screen)
-        self.offset.x = self.player.rect.centerx - self.half_width # get the player rectangle center position on x and subtract half of the dislay w
-        self.offset.y = self.player.rect.centery - self.half_height # get the player rectangle center position on y and subtract half of the dislay h
+        self.offset.x = self.player.rect.x+PLAYERSIZE_W - self.half_width # get the player rectangle center position on x and subtract half of the dislay w
+        self.offset.y = self.player.rect.y+PLAYERSIZE_H - self.half_height # get the player rectangle center position on y and subtract half of the display h
     
         offset_pos = self.player.rect.center - self.offset # in his position - the offset given by the position of the player
         if self.offset.x >= self.map.get_width() - self.width:
