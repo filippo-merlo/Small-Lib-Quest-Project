@@ -1,7 +1,5 @@
 import pygame
 
-
-
 class MyWindow:
     def __init__(self, text, font_size=20, offset = 30):
         # Create the main window
@@ -27,7 +25,7 @@ class MyWindow:
                 word_width, word_height = word_surface.get_size()
                 if x + word_width >= max_width:
                     x = pos[0]  # Reset the x.
-                    y += word_height  # Start on new row.
+                    y += word_height*2  # Start on new row.
                 surface.blit(word_surface, (x, y))
                 x += word_width + space
             x = pos[0]  # Reset the x.
@@ -37,9 +35,7 @@ class MyWindow:
     def draw(self, screen): #method to draw the dialog_box
         pygame.draw.rect(screen, (255, 255, 255), (self.x - 10, self.y - 10, self.width + 20, self.height + 20)) #draw the out_rect, to get the white edges
         pygame.draw.rect(screen, (0, 0, 0), (self.x, self.y, self.width, self.height))  #assign the inner rectangle to a var
-        #screen.blit(self.text_surface, (rect.x + 10, rect.y + 30))  #blit the text onto the screen in the rect position
-        self.blit_text(screen, self.text, (self.x + 10, self.y + 10), self.font)
-        
+        self.blit_text(screen, self.text, (self.x + 10, self.y + 10), self.font)        
        
     def toggle_dialog_box(self): # method to toggle the value of the show_dialog_box variable from False (intial value) to True and viceversa
         self.show_dialog_box = not self.show_dialog_box

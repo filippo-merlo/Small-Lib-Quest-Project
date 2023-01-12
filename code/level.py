@@ -268,7 +268,7 @@ class Level:
                                 pos = (obj.x*ZOOM, obj.y*ZOOM)
                                 surf = obj.image
                                 surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_bamboo',]:
+                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_bamboo',"The deadman's letter"]:
                                     self.obj_pos_list.append([name,pos,surf])
                                 if name in ['Table_up']:
                                     self.obj_pos_list.append([name,pos,pygame.transform.scale(surf,(surf.get_width()*2.5,surf.get_height()))])
@@ -325,14 +325,12 @@ class Level:
                             if pygame.Rect.colliderect(player_area, area_rect):
                                 self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
         for event in pygame.event.get():     
-            #sia qui che main, temporaneo? bho vedremo amici
-            if event.type == pygame.QUIT: # the QUIT event is clicking on the red cross at the top right of the window
-                pygame.quit() # quit pygame
-                sys.exit() # quit the while loop  
+                
             #check event click
             if event.type == pygame.KEYDOWN: #if you click a key
                 if event.key == pygame.K_ESCAPE:
-                        self.screen = pygame.display.set_mode((WIDTH,HEIGHT))
+                    pygame.quit() # quit pygame
+                    sys.exit() # quit the while loop  
                 if event.key == pygame.K_SPACE:  #and the key is spacebar
                         for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
                             width = surf.get_width()+20
@@ -345,6 +343,7 @@ class Level:
                                 self.who_is_talking = name             
                                            
     def run(self):
+        self.display_surface = pygame.display.get_surface()
         # draw and update the game
         self.create_map_from_img(self.player)
         self.visible_sprites.custom_draw(self.player)
