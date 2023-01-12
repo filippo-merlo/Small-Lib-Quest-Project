@@ -22,7 +22,6 @@ class MyWindow:
         self.show_dialog_box = False #init dialogbox at False don't show
     
        
-        
     def draw(self, screen): #method to draw the dialog_box
         pygame.draw.rect(screen, (255, 255, 255), (self.x - 10, self.y - 10, self.width + 20, self.height + 20)) #draw the out_rect, to get the white edges
         rect = pygame.draw.rect(screen, (0, 0, 0), (self.x, self.y, self.width, self.height))  #assign the inner rectangle to a var
