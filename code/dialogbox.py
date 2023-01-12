@@ -1,10 +1,9 @@
 import pygame
-from text import testi
-from settings import*
+#from settings import*
 
 
 class MyWindow:
-    def __init__(self, text, font_size=10, offset = 10):
+    def __init__(self, text, font_size=11, offset = 30):
         # Create the main window
         self.screen_size = pygame.display.get_surface().get_size() #get the screen size
         
@@ -21,7 +20,7 @@ class MyWindow:
         self.text = text #instance of the text
         self.font = pygame.font.Font("./graphics/font/font.ttf", font_size) #define font and size
         self.text_surface = self.font.render(self.text, True, (255, 255, 255)) #render the text with the text instance, True is for smoothness, and the color
-        self.testi = testi() #instance of the class testi (from text.py)
+        #self.testi = testi() #instance of the class testi (from text.py)
         self.show_dialog_box = False #init dialogbox at False don't show
     
        
@@ -32,22 +31,20 @@ class MyWindow:
         screen.blit(self.text_surface, (rect.x + 10, rect.y + 30))  #blit the text onto the screen in the rect position
         
        
-
     def toggle_dialog_box(self): # method to toggle the value of the show_dialog_box variable from False (intial value) to True and viceversa
         self.show_dialog_box = not self.show_dialog_box
-
     
-    def run_window(self, screen, who_is_talking): # method that join an run the dialog box and the text
-        text = self.testi.dialogues(who_is_talking)  #get the output text from the method of the output text
-        self.testo_out = text #crate an instance of text line to show
-        self.dialog_box = MyWindow(self.testo_out) #instance of class MyWindow (declaring the variable of text that we need)
+    def run_window(self, screen, text): # method that join an run the dialog box and the text
+        #text = self.testi.dialogues()  #get the output text from the method of the output text
+        #self.testo_out = text #crate an instance of text line to show
+        self.dialog_box = MyWindow(text) #instance of class MyWindow (declaring the variable of text that we need)
         self.dialog_box.draw(screen) #draw the dialogbox
             
 
     
         
-# Create an instance of the MyWindow class
-#window = MyWindow()
+## Create an instance of the MyWindow class
+##window = MyWindow()
 
 # Call the show_window() method to display the window
 #window.run_window(window.dialogues())
