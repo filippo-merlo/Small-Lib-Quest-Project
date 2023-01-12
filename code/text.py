@@ -4,15 +4,16 @@ class testi:
 
     def __init__(self):
        #check dialogue line
-        self.King_raccoon = False #check if you've got the quest of the raccoon
-        self.King_squid = False #check if you've got the quest of the squid
-        self.King_skeleton = False #check if you've got the quest of the skeleton
-        self.King_bamboo = False #check if you've got the quest of the bamboo
-        self.Librarian1 = False #check if first interaction with librarian has been done
+        self.King_raccoon = True #check if you've got the quest of the raccoon
+        self.King_squid = True #check if you've got the quest of the squid
+        self.King_skeleton = True #check if you've got the quest of the skeleton
+        self.King_bamboo = True #check if you've got the quest of the bamboo
+        self.Librarian1 = True #check if first interaction with librarian has been done
         self.Librarian2 = False #check if second interaction with librarian has been done
         self.Genius = False #check if you've got the books
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
         self.endgame = False #last interaction done
+        self.i = 0
     
 
 
@@ -44,19 +45,19 @@ class testi:
                 return speech
 
             # Genius Dialogues
-            if name == 'Genius' and not diag_print:
+            if name == 'Table_up' and not diag_print and self.Librarian2 == False:
                 speech = "It's kinda ugly! But it release a mysterous aurea.."
                 diag_print = True
                 return speech
-            elif name == 'Genius' and not diag_print and self.Librarian2 == True and self.Genius == False and not all(self.mission_check):
+            elif name == 'Table_up' and not diag_print and self.Librarian2 == True:
                 speech = "THE FLOOR SHAKES! THREE BOOK APPEARS ON THE FLOOR"
                 diag_print = True
                 self.Genius = True
                 return speech
-            elif name == 'Genius' and not diag_print and self.Librarian2 == True and self.Genius == True and not all(self.mission_check):
-                speech = "GENIUS: Bro i've already gave you the books, just grab them and finish the quests.."
-                diag_print = True
-                return speech
+            #elif name == 'Genius' and not diag_print and self.Librarian2 == True and self.Genius == True:
+            #    speech = "GENIUS: Bro i've already gave you the books, just grab them and finish the quests.."
+            #    diag_print = True
+            #    return speech
 
             #Squid Dialogues
             if name == 'King_squid' and not diag_print and self.Librarian1 == False: #if not interacted with Librarian yet

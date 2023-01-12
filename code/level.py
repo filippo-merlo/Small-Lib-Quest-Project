@@ -260,14 +260,14 @@ class Level:
     def get_objects_pos(self):
         self.obj_pos_list = []
         for layer in self.tmx_data.objectgroups:
-                    if layer.name in ["Key_objects","NPC","Legendary_creatures"]:
+                    if layer.name in ["Key_objects","NPC","Legendary_creatures","Objects_no_interactions"]:
                         for obj in self.tmx_data.get_layer_by_name(layer.name):
                             if obj.image:
                                 name = obj.name
                                 pos = (obj.x*ZOOM, obj.y*ZOOM)
                                 surf = obj.image
                                 surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_skeleton','King_skeleton','King_skeleton','King_bamboo',"The deadman's letter",'Genius']:
+                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_bamboo',"The deadman's letter",'Table_up']:
                                     self.obj_pos_list.append([name,pos,surf])
 
     def get_objects_offset_pos(self,player):
