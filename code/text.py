@@ -43,7 +43,6 @@ class testi:
                 diag_print= True
                 return speech
 
-
             # Genius Dialogues
             if name == 'Genius' and not diag_print and self.Librarian2 == False:
                 speech = "It's kinda ugly! But it release a mysterous aurea.."
@@ -59,8 +58,6 @@ class testi:
                 diag_print = True
                 return speech
 
-
-        
             #Squid Dialogues
             if name == 'King_squid' and not diag_print and self.Librarian1 == False: #if not interacted with Librarian yet
                 speech = "KING SQUID: BLUB BLUB BLUB"
@@ -78,9 +75,6 @@ class testi:
                     self.mission_check[0] = True
                 return speech
                 
-            
-
-            
             #Raccoon Dialogues
             if name == 'King_raccoon' and not diag_print and self.Librarian1 == False:
                 speech ="KING RACCOON: Grrr.. I'm Hungry! Who's there? I'm going to eat you!"
@@ -98,7 +92,6 @@ class testi:
                     self.mission_check[1] = True
                 return speech
 
-            
             #Bamboo Dialogue
             if name == 'King_bamboo' and not diag_print and self.Librarian1 == False:
                 speech = "KING BAMBOO: Oi.. oi.. Who are you? Stay away from my family!"
@@ -116,19 +109,17 @@ class testi:
                     self.mission_check[2] = True
                 return speech
         
-
-
             #Skeleton Dialogue
             if name == 'King_skeleton' or "The deadman's letter" and not diag_print and  self.Librarian1 == False:
                 speech = " NORMAL SKELETON: Sigh, sigh,.. i feel so lonely.."
                 diag_print = True
                 return speech
-            elif name == 'King_skeleton' or "The deadman's letter" and not diag_print and  self.Librarian1 == True and self.Genius == False and self.King_skeleton == False:
+            elif name == 'King_skeleton' or "The deadman's letter" and not diag_print and  self.Librarian1 == True and self.Genius == False:
                 speech = "NORMAL SKELETON: My King has disappeard! He left this letter but i cannod read it! I need a vocabulary!"
                 diag_print = True
                 self.King_skeleton = True
                 return speech
-            elif name == 'King_skeleton' or "The deadman's letter" and not diag_print and self.Genius == True:
+            elif name == 'King_skeleton' or "The deadman's letter" and not diag_print and  self.Librarian1 == True and self.Librarian2 == True and self.Genius == True:
                 speech = "NORMAL SKELETON: Oh thank you, he just said he needed a holiday.. Why didn't he invite me? sigh.."
                 diag_print = True
                 if not self.mission_check[3]:
