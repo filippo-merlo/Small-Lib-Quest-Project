@@ -313,6 +313,15 @@ class Level:
     def check_interaction(self):
         objects_offset_pos= self.get_objects_offset_pos(self.player) #function to get the pos of the npc scaled on the player
         player_area = self.player_coord() #function to get the player coord based on the center of its rect
+        dialogue_icon = pygame.image.load('./sprites/icons/dialogue_icon.png').convert_alpha()
+        dialogue_icon = pygame.transform.scale(dialogue_icon, (TILESIZE,TILESIZE))
+        for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
+                            width = surf.get_width()+20
+                            height = surf.get_height()+80
+                            position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
+                            area_rect = pygame.Rect(position, (width, height))
+                            if pygame.Rect.colliderect(player_area, area_rect):
+                                self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
         for event in pygame.event.get():     
             #sia qui che main, temporaneo? bho vedremo amici
             if event.type == pygame.QUIT: # the QUIT event is clicking on the red cross at the top right of the window
@@ -322,17 +331,18 @@ class Level:
             if event.type == pygame.KEYDOWN: #if you click a key
                 if event.key == pygame.K_SPACE:  #and the key is spacebar
                         for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
-                            area_rect = pygame.Rect(pos[0], pos[1], surf.get_width() +50, surf.get_height()+ 80) # define rect of the tile
-                            if pygame.Rect.colliderect(player_area, area_rect): 
+                            width = surf.get_width()+20
+                            height = surf.get_height()+80
+                            position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
+                            area_rect = pygame.Rect(position, (width, height))
+                            if pygame.Rect.colliderect(player_area, area_rect):
                                 self.dialogbox.toggle_dialog_box() #change from False to True or viceversa
                                 self.dialgue_printed = False #says that something has not been printed yet
                                 self.who_is_talking = name
                                 
         return self.who_is_talking
                             
-        
- 
-
+                        
     def run(self):
         # draw and update the game
         self.create_map_from_img(self.player)
