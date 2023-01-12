@@ -261,7 +261,7 @@ class Level:
                                 pos = (obj.x*ZOOM, obj.y*ZOOM)
                                 surf = obj.image
                                 surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_skeleton','King_skeleton','King_skeleton','King_bamboo',"The deadman's letter",'Genius']:
+                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_skeleton','King_skeleton','King_skeleton','King_bamboo','Genius']:
                                     self.obj_pos_list.append([name,pos,surf])
 
     def get_objects_offset_pos(self,player):
@@ -309,16 +309,11 @@ class Level:
         dialogue_icon = pygame.transform.scale(dialogue_icon, (TILESIZE,TILESIZE))
         for n,p,s in objects_offset_pos:
                         width = s.get_width()+20
-                        height = s.get_height()+80
+                        height = s.get_height()+60
                         pos = (p[0]-s.get_width()/5, p[1]-s.get_height()/5)
                         area_rect = pygame.Rect(pos, (width, height))
                         if pygame.Rect.colliderect(player_area, area_rect):
-                            self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
-                            debug('yes')
-            #for event in pygame.event.get():       
-            #if event.type == pygame.KEYDOWN:
-            #    if event.key == pygame.K_SPACE:
-                    
+                            self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))           
 
     def run(self):
         # draw and update the game
