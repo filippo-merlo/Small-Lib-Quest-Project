@@ -268,7 +268,7 @@ class Level:
                                 pos = (obj.x*ZOOM, obj.y*ZOOM)
                                 surf = obj.image
                                 surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_bamboo',]:
+                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_bamboo',"The deadman's letter"]:
                                     self.obj_pos_list.append([name,pos,surf])
                                 if name in ['Table_up']:
                                     self.obj_pos_list.append([name,pos,pygame.transform.scale(surf,(surf.get_width()*2.5,surf.get_height()))])
