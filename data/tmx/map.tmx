@@ -571,7 +571,7 @@
  <objectgroup id="10" name="Objects_no_interactions" class="Objects_no_interactions" locked="1">
   <object id="2871" name="Table" gid="1880" x="544.273" y="439.682" width="16" height="16"/>
   <object id="2872" name="Table" gid="1881" x="560.273" y="439.682" width="16" height="16"/>
-  <object id="2870" name="Table_up" gid="1849" x="560.273" y="423.682" width="16" height="16"/>
+  <object id="2870" name="Table" gid="1849" x="560.273" y="423.682" width="16" height="16"/>
   <object id="2869" name="Table_up" gid="1848" x="544.273" y="423.682" width="16" height="16"/>
   <object id="7" name="Stair" gid="406" x="799.944" y="129.553" width="32.6906" height="32.6906"/>
   <object id="14" name="Stair" gid="407" x="832.635" y="129.638" width="32.6906" height="32.6906"/>
