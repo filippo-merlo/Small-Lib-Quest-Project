@@ -3,6 +3,7 @@ import pygame, sys
 from settings import *
 from debug import debug
 from level import Level
+from start_and_end_menu import menu
 
 
 ### Create the Game class
@@ -30,7 +31,8 @@ class Game:
                     pygame.quit() # quit pygame
                     sys.exit() # quit the while loop
                 
-    
+            ### Starting Menu
+
             ### Run the level object and update
             self.level.run() # run the Level Object
     

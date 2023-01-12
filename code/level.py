@@ -48,6 +48,7 @@ class Level:
         self.testi = testi() #instance of the class testi
         
     
+
     def create_map(self):
          for layer in self.tmx_data.visible_layers:
              if layer.name in ["Buildings", "Library"] and hasattr(layer,'data'):
@@ -267,8 +268,9 @@ class Level:
                                 pos = (obj.x*ZOOM, obj.y*ZOOM)
                                 surf = obj.image
                                 surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_bamboo',"The deadman's letter",'Table_up']:
+                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_bamboo','Table_up']:
                                     self.obj_pos_list.append([name,pos,surf])
+          
 
     def get_objects_offset_pos(self,player):
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
@@ -318,6 +320,7 @@ class Level:
                             height = surf.get_height()+80
                             position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
                             area_rect = pygame.Rect(position, (width, height))
+                            pygame.draw.rect(self.display_surface, (0,0,0), area_rect)
                             if pygame.Rect.colliderect(player_area, area_rect):
                                 self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
         for event in pygame.event.get():     
@@ -347,10 +350,10 @@ class Level:
         self.update_animated_objects(self.animations_list_objects, self.player)
         self.visible_sprites.update()
 
-        #self.player_coord()# get player coord for interaction
         self.check_interaction() #run the events interaction function
         self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)
         if self.dialogbox.show_dialog_box: #if the text box has to be shown (is True)
+            self.dialogbox.run_window(self.display_surface, self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)) #then shown it #then shown it
             self.dialogbox.run_window(self.display_surface, self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)) #then shown it #then shown it
         
 
