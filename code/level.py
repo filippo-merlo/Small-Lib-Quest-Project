@@ -322,7 +322,6 @@ class Level:
                             height = surf.get_height()+80
                             position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
                             area_rect = pygame.Rect(position, (width, height))
-                            pygame.draw.rect(self.display_surface, (0,0,0), area_rect)
                             if pygame.Rect.colliderect(player_area, area_rect):
                                 self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
         for event in pygame.event.get():     
@@ -332,6 +331,8 @@ class Level:
                 sys.exit() # quit the while loop  
             #check event click
             if event.type == pygame.KEYDOWN: #if you click a key
+                if event.key == pygame.K_ESCAPE:
+                        self.screen = pygame.display.set_mode((WIDTH,HEIGHT))
                 if event.key == pygame.K_SPACE:  #and the key is spacebar
                         for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
                             width = surf.get_width()+20
