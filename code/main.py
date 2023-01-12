@@ -5,6 +5,7 @@ from debug import debug
 from level import Level
 from start_and_end_menu import menu
 
+
 ### Create the Game class
 class Game:
     def __init__(self):
@@ -17,9 +18,12 @@ class Game:
         self.clock = pygame.time.Clock() # create a clock object to set a celing for the frame rate on which the update of the screen will be performed
         self.level = Level() # Create the Level object imported from level.
 
+         
+
     ### Create the while loop that will update the screen each frame
     def run(self):
         pygame.mixer.music.play() #Play the music
+        #pygame.mixer.music.set_volume(0)
         while True:
             ## Set the Quit  button
             for event in pygame.event.get(): # Get the vector with all the events (input from the user) 
@@ -30,13 +34,18 @@ class Game:
             ### Starting Menu
 
             ### Run the level object and update
-            self.level.run() # run the Level Object        
-
+            self.level.run() # run the Level Object
+    
             if pygame.mixer.music.get_pos() >= 2.37*60000:
                 pygame.mixer.music.fadeout(6000)
 
             if pygame.mixer.music.get_pos() == -1:
-                pygame.mixer.music.play()
+                 pygame.mixer.music.play()
+            
+            #pygame.mixer.music.set_volume(0)
+
+            
+            
 
             self.clock.tick(FPS) # set the maximum frame rate
             pygame.display.update() # this method will update the screen at each iteration of the while loop
