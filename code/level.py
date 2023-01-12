@@ -1,11 +1,9 @@
-import pygame
+import pygame, sys
 from settings import *
 from tile import Tile, Object_Tile
 from player import Player
 from debug import debug
 from pytmx.util_pygame import load_pygame # module of tmxpy that works for pygame
-
-from text import interaction
 
 
 # The Level class will contain every visible object in the game 
@@ -39,7 +37,12 @@ class Level:
         self.upper_tiles_list = self.get_upper_tiles()
 
         # SET DIALOGUES AND INTERACTIONS
-        self.interact = interaction()
+        
+        #self.testi = testi()
+        #self.dialogbox = MyWindow(self.testi.dialogues(self.check_interaction()))
+        #self.name = None
+        #self.show_dialog_box = False  #init dialogbox at False don't show
+        #self.screen = pygame.display.set_mode((WIDTH,HEIGHT)) 
 
     
     def create_map(self):
@@ -264,7 +267,6 @@ class Level:
                                 if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_skeleton','King_skeleton','King_skeleton','King_bamboo',"The deadman's letter",'Genius']:
                                     self.obj_pos_list.append([name,pos,surf])
 
-
     def get_objects_offset_pos(self,player):
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
         self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
@@ -282,10 +284,9 @@ class Level:
             self.correct_obj_pos_list.append([name,offset_pos,surf])
         return self.correct_obj_pos_list ## so it gives in output the list, and we can use it in text.position.get_the_pos
 
+### Functions to get the dialogues
 
     def player_coord(self):
-        pos_list = self.get_objects_offset_pos(self.player)
-        self.interact.touch(pos_list, self.player.rect)
         
         ### PLAYER COORDINATES FOR INTERACTION (so it's in the center of the screen)
         self.offset.x = self.player.rect.centerx - self.half_width # get the player rectangle center position on x and subtract half of the dislay w
@@ -302,27 +303,27 @@ class Level:
             offset_pos.y = self.player.rect.y
        
         our_personal_player_rect = pygame.Rect(offset_pos,(PLAYERSIZE_W,PLAYERSIZE_H))
-        for n,p,s in pos_list:
-            area_rect = pygame.Rect(p[0],p[1],s.get_width()+50,s.get_height()+80)
-            return our_personal_player_rect
-           
-            #if pygame.Rect.colliderect(our_personal_player_rect, area_rect):
-            #    debug('yes')
+       
+        return our_personal_player_rect
 
-        
     def check_interaction(self):
         objects_offset_pos= self.get_objects_offset_pos(self.player) #function to get the pos of the npc scaled on the player
         player_area = self.player_coord() #function to get the player coord based on the center of its rect
+        self.spacebar_pressed = False
         for event in pygame.event.get():       
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    for n,p,s in objects_offset_pos:
-                        area_rect = pygame.Rect(p[0], p[1], s.get_width() +80, s.get_height()+ 80)
+            if event.type == pygame.KEYDOWN: #if you click a key
+                if event.key == pygame.K_SPACE: #and the key is spacebar
+                    #self.dialogbox.toggle_dialog_box(self.show_dialog_box)
+                    for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
+                        area_rect = pygame.Rect(pos[0], pos[1], surf.get_width() +50, surf.get_height()+ 80)
                         if pygame.Rect.colliderect(player_area, area_rect):
-                            debug('yes')
-
-
-
+                            return name
+            
+            #sia qui che main, temporaneo? bho vedremo amici
+            if event.type == pygame.QUIT: # the QUIT event is clicking on the red cross at the top right of the window
+                pygame.quit() # quit pygame
+                sys.exit() # quit the while loop
+    
 
     def run(self):
         # draw and update the game
@@ -332,9 +333,11 @@ class Level:
         self.update_animated_tiles(self.animations_list, self.player)
         self.update_animated_objects(self.animations_list_objects, self.player)
         self.visible_sprites.update()
+
         self.player_coord()# get player coord for interaction
-        self.check_interaction()
+        self.check_interaction() #run the events interaction function
         
+    
         # SET DIALOGUES AND INTERACTIONS
         
         #debug(our_personal_player_rect)
@@ -345,8 +348,7 @@ class Level:
         #    rect = rect.set_aplha(128)
         #    rect.fill((125,255,125))
         #    pygame.draw.rect(self.display_surface,rect)
-           
-       
+            
                  
 
 class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate
@@ -385,3 +387,7 @@ class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work
     # how the camera works:
     # We draw the image in the rect of the sprite, but
     # we can usa a vectror2 to offset the rect and thus blit the image somewere else
+
+
+
+

@@ -37,8 +37,8 @@ class MyWindow:
         self.show_dialog_box = not self.show_dialog_box
 
     
-    def run_window(self, screen): # method that join an run the dialog box and the text
-        text = self.testi.dialogues()  #get the output text from the method of the output text
+    def run_window(self, screen, who_is_talking): # method that join an run the dialog box and the text
+        text = self.testi.dialogues(who_is_talking)  #get the output text from the method of the output text
         self.testo_out = text #crate an instance of text line to show
         self.dialog_box = MyWindow(self.testo_out) #instance of class MyWindow (declaring the variable of text that we need)
         self.dialog_box.draw(screen) #draw the dialogbox

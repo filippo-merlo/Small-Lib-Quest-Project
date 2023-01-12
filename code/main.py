@@ -29,9 +29,7 @@ class Game:
     
             ### Run the level object and update
             self.level.run() # run the Level Object
-
-        
-
+    
             if pygame.mixer.music.get_pos() >= 2.37*60000:
                 pygame.mixer.music.fadeout(6000)
 
