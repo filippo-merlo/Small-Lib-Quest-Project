@@ -39,16 +39,12 @@ class Level:
         self.upper_tiles_list = self.get_upper_tiles()
 
         ## SET DIALOGUES AND INTERACTIONS
-    
-        
-        self.screen = pygame.display.set_mode((WIDTH,HEIGHT)) 
         self.who_is_talking = None
         self.speech = ""
         self.dialgue_printed = False #keep track if something has to be printed or no
         self.dialogbox = MyWindow(self.speech)
         self.testi = testi()
         
-    
 
     def create_map(self):
          for layer in self.tmx_data.visible_layers:
@@ -315,15 +311,15 @@ class Level:
         player_area = self.player_coord() #function to get the player coord based on the center of its rect
         dialogue_icon = pygame.image.load('./sprites/icons/dialogue_icon.png').convert_alpha()
         dialogue_icon = pygame.transform.scale(dialogue_icon, (TILESIZE,TILESIZE))
-        rect_list = []
+        intercative_entities = []
         for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
                             width = surf.get_width()+20
                             height = surf.get_height()+80
                             position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
                             area_rect = pygame.Rect(position, (width, height))
-                            rect_list.append(area_rect)
-        for r in rect_list:
-            if pygame.Rect.colliderect(player_area, r):
+                            intercative_entities.append([name,area_rect])
+        for name, rect in intercative_entities:
+            if pygame.Rect.colliderect(player_area, rect):
                 self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
             for event in pygame.event.get():     
                 #sia qui che main, temporaneo? bho vedremo amici
@@ -331,7 +327,7 @@ class Level:
                     pygame.quit() # quit pygame
                     sys.exit() # quit the while loop  
                 #check event click
-                if pygame.Rect.colliderect(player_area, r) and event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE: #if you click a key and the key is spacebar
+                if pygame.Rect.colliderect(player_area, rect) and event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE: #if you click a key and the key is spacebar
                     self.dialogbox.toggle_dialog_box() #change from False to True or viceversa
                     self.dialgue_printed = False #says that something has not been printed yet
                     self.who_is_talking = name                                     
@@ -349,7 +345,7 @@ class Level:
         self.check_interaction() #run the events interaction function
         self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)
         if self.dialogbox.show_dialog_box: #if the text box has to be shown (is True)
-            self.dialogbox.run_window(self.screen, self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)) #then shown it #then shown it
+            self.dialogbox.run_window(self.display_surface, self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)) #then shown it #then shown it
         
 
 class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate
