@@ -13,16 +13,17 @@ class testi:
         self.Genius = False #check if you've got the books
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
         self.endgame = False #last interaction done
+    
 
 
     def dialogues(self, name, diag_print, speech):  # methods with all the text interaction of the game
         
-        if name:
+        if name: #if there is a name as entry from the colliderect function in Level
 
             #Librarian Dialogues
             if name == 'Librarian' and not diag_print and self.King_raccoon == False and self.King_squid == False and self.King_skeleton == False and self.King_bamboo == False: #if you have not  talk with the four magic beasts yet
                 speech = "LIBRARIAN: You!!! You are the hero the king sent! Go talk with the four magic beasts in the corner of the map"
-                diag_print= True #say that something has been printed (Then in Level there it takes false, useful to stop the for loop at the first occurences)
+                diag_print= True #says that something has been printed (Then in Level there it takes false, useful to stop the for loop at the first occurences)
                 self.Librarian1 = True
                 return speech
             elif name == 'Librarian' and not diag_print and self.King_raccoon == True and self.King_squid == True and self.King_skeleton == True and self.King_bamboo == True and not all(self.mission_check): #if you have already talk with the four magic beasts
@@ -30,7 +31,7 @@ class testi:
                 diag_print = True
                 self.Librarian2 = True
                 return speech
-            elif name == 'Librarian' and not diag_print and self.Genius == True and all(self.mission_check):
+            elif name == 'Librarian' and not diag_print and self.Genius == True and all(self.mission_check): #if you have completed all the mission
                 speech = "LIBRARIAN: Thank you! You have saved the Kingdom!"
                 diag_print
                 self.endgame = True
@@ -48,13 +49,13 @@ class testi:
                 speech = "It's kinda ugly! But it release a mysterous aurea.."
                 diag_print = True
                 return speech
-            elif name =='Genius' and not diag_print and self.Librarian2 == True:
+            elif name == 'Genius' and not diag_print and self.Librarian2 == True:
                 speech = "THE FLOOR SHAKES! THREE BOOK APPEARS ON THE FLOOR"
                 diag_print = True
                 self.Genius = True
                 return speech
             elif name == 'Genius' and not diag_print and self.Genius == True:
-                speech = "GENIUS: Bro i've already gave you the books, just grab them and finish the quest.."
+                speech = "GENIUS: Bro i've already gave you the books, just grab them and finish the quests.."
                 diag_print = True
                 return speech
 
@@ -82,7 +83,7 @@ class testi:
             
             #Raccoon Dialogues
             if name == 'King_raccoon' and not diag_print and self.Librarian1 == False:
-                speech ="KING RACCOON: Grrr I'm Hungry! Who's there? I'm going to eat you!"
+                speech ="KING RACCOON: Grrr.. I'm Hungry! Who's there? I'm going to eat you!"
                 diag_print = True
                 return speech
             elif name == 'King_raccoon' and not diag_print and self.Librarian1 == True and self.Genius == False:
@@ -91,7 +92,7 @@ class testi:
                 self.King_raccoon = True
                 return speech
             elif name == 'King_raccoon' and not diag_print and self.Genius == True:
-                speech = "KING RACOON: Thank you! Now I can finally eat those noisy Bamboo"
+                speech = "KING RACOON: Thank you! Now I can finally eat those noisy Bamboo!"
                 diag_print = True
                 if not self.mission_check[1]:
                     self.mission_check[1] = True
@@ -100,7 +101,7 @@ class testi:
             
             #Bamboo Dialogue
             if name == 'King_bamboo' and not diag_print and self.Librarian1 == False:
-                speech = "KING BAMBOO: Who are you? Stay away from my family!"
+                speech = "KING BAMBOO: Oi.. oi.. Who are you? Stay away from my family!"
                 diag_print = True
                 return speech
             elif name == 'King_bamboo' and not diag_print and self.Librarian1 == True and self.Genius == False:
@@ -109,7 +110,7 @@ class testi:
                 self.King_bamboo = True
                 return speech
             elif name == 'King_bamboo' and not diag_print and  self.Genius == True:
-                speech = "KING BAMBOO: Oh my God, Thank you! I will finally be able to hug my children again!"
+                speech = "KING BAMBOO: Oh my Tree, Thank you! I will finally be able to hug my children again!"
                 diag_print = True
                 if not self.mission_check[2]:
                     self.mission_check[2] = True
@@ -122,13 +123,13 @@ class testi:
                 speech = " NORMAL SKELETON: Sigh, sigh,.. i feel so lonely.."
                 diag_print = True
                 return speech
-            elif name == 'King_skeleton' or "The deadman's letter" and not diag_print and  self.Librarian1 == True and self.Genius == False:
-                speech = "NORMAL SKELETON: The King disappeard! He left this letter but i cannod read it! I need a vocabulary."
+            elif name == 'King_skeleton' or "The deadman's letter" and not diag_print and  self.Librarian1 == True and self.Genius == False and self.King_skeleton == False:
+                speech = "NORMAL SKELETON: My King has disappeard! He left this letter but i cannod read it! I need a vocabulary!"
                 diag_print = True
                 self.King_skeleton = True
                 return speech
             elif name == 'King_skeleton' or "The deadman's letter" and not diag_print and self.Genius == True:
-                speech = "NORMAL SKELETON: Oh thank you, he just said he needed a holiday.. Why he did not invite me? sigh.."
+                speech = "NORMAL SKELETON: Oh thank you, he just said he needed a holiday.. Why didn't he invite me? sigh.."
                 diag_print = True
                 if not self.mission_check[3]:
                     self.mission_check[3] = True
