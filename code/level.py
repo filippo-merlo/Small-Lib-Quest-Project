@@ -42,7 +42,7 @@ class Level:
     
         self.who_is_talking = None #output of check interaction function
         self.speech = "" #gets in input the current line of text for the dialgue
-        self.dialgue_printed = False #keep track if something has to be printed or no
+        self.dialgue_printed = True #keep track if something has to be printed or no
         self.dialogbox = MyWindow(self.speech) #instance of the class Mywindow
         self.testi = testi() #instance of the class testi
         
@@ -323,23 +323,23 @@ class Level:
                             area_rect = pygame.Rect(position, (width, height))
                             if pygame.Rect.colliderect(player_area, area_rect):
                                 self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
-        for event in pygame.event.get():     
-                
-            #check event click
-            if event.type == pygame.KEYDOWN: #if you click a key
-                if event.key == pygame.K_ESCAPE:
-                    pygame.quit() # quit pygame
-                    sys.exit() # quit the while loop  
-                if event.key == pygame.K_SPACE:  #and the key is spacebar
-                        for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
-                            width = surf.get_width()+20
-                            height = surf.get_height()+80
-                            position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
-                            area_rect = pygame.Rect(position, (width, height))
-                            if pygame.Rect.colliderect(player_area, area_rect):
-                                self.dialogbox.toggle_dialog_box() #change from False to True or viceversa
-                                self.dialgue_printed = False #says that something has not been printed yet
-                                self.who_is_talking = name             
+        #for event in pygame.event.get():     
+        keys = pygame.key.get_pressed()
+        #check event click
+        #if event.type == pygame.KEYUP: #if you click a key
+            #if event.key == pygame.K_ESCAPE:
+                #pygame.quit() # quit pygame
+                #sys.exit() # quit the while loop  
+        if keys[pygame.K_SPACE]:  #and the key is spacebar
+            for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
+                width = surf.get_width()+20
+                height = surf.get_height()+80
+                position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
+                area_rect = pygame.Rect(position, (width, height))
+                if pygame.Rect.colliderect(player_area, area_rect) and self.dialgue_printed == True:
+                    self.dialogbox.toggle_dialog_box() #change from False to True or viceversa
+                    self.dialgue_printed = False #says that something has not been printed yet
+                    self.who_is_talking = name             
                                            
     def run(self):
         # draw and update the game
