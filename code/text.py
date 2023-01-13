@@ -9,9 +9,11 @@ class testi:
         self.Librarian1 = False #check if first interaction with librarian has been done
         self.Librarian2 = False #check if second interaction with librarian has been done
         self.Genius = False #check if you've got the books
-        self.Genius_count = 0
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
-        self.endgame = False #last interaction done    
+        self.endgame = False #last interaction done
+        self.statua = True
+        
+    
 
 
     def dialogues(self, name, diag_print, speech):  # methods with all the text interaction of the game
@@ -46,10 +48,9 @@ class testi:
                 speech = "This statue is kinda ugly! But I feel like it releases a mysterous aura.." 
                 diag_print = True
                 return speech
-            elif name == 'Table_up' and not diag_print and self.Librarian2 == True and self.Genius_count == 0:
+            elif name == 'Table_up' and not diag_print and self.Librarian2 == True:
                 speech = "THE FLOOR SHAKES! THREE BOOK APPEAR ON THE FLOOR (and a nasty gossip magazine also..)"
                 diag_print = True
-                self.Genius_count = 1
                 self.Genius = True
                 return speech
             elif name == 'Table_up' and not diag_print and self.Librarian2 == True and self.Genius_count == 1:

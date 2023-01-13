@@ -356,8 +356,7 @@ class Level:
             self.player.block = True
         if not self.dialogbox.show_dialog_box:
             self.player.block = False
-             
-                   
+        
 
 class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate
     def __init__(self):
