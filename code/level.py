@@ -336,7 +336,7 @@ class Level:
                 height = surf.get_height()+80
                 position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
                 area_rect = pygame.Rect(position, (width, height))
-                if pygame.Rect.colliderect(player_area, area_rect) and self.dialgue_printed == True:
+                if pygame.Rect.colliderect(player_area, area_rect):
                     self.dialogbox.toggle_dialog_box() #change from False to True or viceversa
                     self.dialgue_printed = False #says that something has not been printed yet
                     self.who_is_talking = name             
