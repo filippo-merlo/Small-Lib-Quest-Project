@@ -33,11 +33,11 @@ class MyWindow:
 
         
     def draw(self, screen): #method to draw the dialog_box
-        surf = pygame.Surface((self.width+20, self.height+20))
+        surf = pygame.Surface((self.width+20, self.height+20)) #create surface with the same size of the rect
         pygame.draw.rect(surf, (255, 255, 255), (0, 0, self.width+20, self.height+20)) #draw the out_rect, to get the white edges
         pygame.draw.rect(surf, (0, 0, 0), (10, 10, self.width, self.height))  #assign the inner rectangle to a var
-        self.blit_text(surf, self.text, (20, 20), self.font)    
-        screen.blit(surf,(self.x - 10, self.y - 10))    
+        self.blit_text(surf, self.text, (20, 20), self.font) #print the text on the surf
+        screen.blit(surf,(self.x - 10, self.y - 10))  #print the surf with the text on the screen
        
     def toggle_dialog_box(self): # method to toggle the value of the show_dialog_box variable from False (intial value) to True and viceversa
         self.show_dialog_box = not self.show_dialog_box
