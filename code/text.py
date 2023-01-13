@@ -7,9 +7,8 @@ class testi:
        #check dialogue line
         self.Kings_interact = [False, False, False, False] #check if you had the first interaction with all the kings
         self.Librarian1 = False #check if first interaction with librarian has been done
-        self.Librarian2 = True #check if second interaction with librarian has been done
+        self.Librarian2 = False #check if second interaction with librarian has been done
         self.Genius = False #check if you've got the books
-        self.Genius_count = 0
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
         self.endgame = False #last interaction done
         self.statua = True
@@ -52,13 +51,12 @@ class testi:
             elif name == 'Table_up' and not diag_print and self.Librarian2 == True:
                 speech = "THE FLOOR SHAKES! THREE BOOK APPEAR ON THE FLOOR (and a nasty gossip magazine also..)"
                 diag_print = True
-                self.Genius_count = 1
                 self.Genius = True
                 return speech
-            elif name == 'Table_up' and not diag_print and self.Librarian2 == True and self.Genius_count == 1:
-                speech = "GENIUS: Bro i've already gave you the books, just grab them and finish the quests.."
-                diag_print = True
-                return speech
+            #elif name == 'Table_up' and not diag_print and self.Librarian2 == True and self.Genius == True:
+            #    speech = "GENIUS: Bro i've already gave you the books, just grab them and finish the quests.."
+            #    diag_print = True
+            #    return speech
                 
             #Squid Dialogues
             if name == 'King_squid' and not diag_print and self.Librarian1 == False: #if not interacted with Librarian yet
