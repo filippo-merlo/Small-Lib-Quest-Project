@@ -10,7 +10,6 @@ class testi:
         self.endgame = False #last interaction done
         self.Genius_count = 0
         
-
     def dialogues(self, name, show_dialoguebox):  # methods with all the text interaction of the game
         show_dialoguebox = show_dialoguebox
         if name: #if there is a name as entry from the colliderect function in Level
@@ -125,7 +124,5 @@ class testi:
                 if not self.mission_check[3]:
                     self.mission_check[3] = True
                 return speech
-
         else:
-            ''
-
+            return ''

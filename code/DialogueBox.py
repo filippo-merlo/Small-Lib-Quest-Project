@@ -29,8 +29,7 @@ class DialogueBox:
                 x += word_width + space
             x = pos[0]  # Reset the x.
             y += word_height  # Start on new row.
-
-        
+   
     def draw(self, screen, text): #method to draw the dialoguebox
         surf_white = pygame.Surface((self.width+20, self.height+20)) #create surface with the same size of the rect
         surf_black = pygame.Surface((self.width, self.height))
@@ -43,6 +42,3 @@ class DialogueBox:
     def toggle_dialoguebox(self): # method to toggle the value of the show_dialoguebox variable from False (intial value) to True and viceversa
         self.show_dialoguebox = not self.show_dialoguebox
         self.dialoguebox_sound.play()
-    
-        
-            

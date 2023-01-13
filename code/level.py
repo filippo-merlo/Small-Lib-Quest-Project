@@ -1,12 +1,10 @@
 import pygame, sys
 from settings import *
-from tile import Tile, Object_Tile
+from tile import Tile
 from player import Player
-from debug import debug
 from pytmx.util_pygame import load_pygame # module of tmxpy that works for pygame
 from  DialogueBox import *
 from text import testi
-
 
 # The Level class will contain every visible object in the game 
 class Level:
@@ -59,7 +57,7 @@ class Level:
                      if obj.image:
                          pos = (obj.x*ZOOM, obj.y*ZOOM)
                          surf = pygame.transform.scale(obj.image, (round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                         Object_Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
+                         Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
     
          for layer in self.tmx_data.visible_layers:
              if layer.name in ["Vegetation"] and hasattr(layer,'data'):
@@ -82,7 +80,7 @@ class Level:
                          pos = (obj.x*ZOOM, obj.y*ZOOM)
                          surf = obj.image
                          surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                         Object_Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
+                         Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
 
     def get_upper_tiles(self):
         upper_tiles_list = []
@@ -336,8 +334,7 @@ class Level:
                                     self.dialoguebox.toggle_dialoguebox() #change from False to True or viceversa the attribute show_dialoguebox
                                     self.who_is_talking = name
                                     self.dialogue_block = False
-                                
-                                           
+                                                          
     def run(self):
         # draw and update the game
         self.create_map_from_img(self.player)
@@ -346,9 +343,9 @@ class Level:
         self.update_animated_tiles(self.animations_list, self.player)
         self.update_animated_objects(self.animations_list_objects, self.player)
         self.visible_sprites.update()
-
+        
+        # Make dialogues work
         self.check_interaction() #run the events interaction function
-
         if self.dialoguebox.show_dialoguebox: #if the text box has to be shown (is True)
             if not self.dialogue_block:
                 self.speach = self.testi.dialogues(self.who_is_talking, self.dialoguebox.show_dialoguebox)
@@ -361,7 +358,6 @@ class Level:
         if not self.dialoguebox.show_dialoguebox:
             self.player.block = False
         
-
 class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate
     def __init__(self):
         # general setup
@@ -398,7 +394,3 @@ class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work
     # how the camera works:
     # We draw the image in the rect of the sprite, but
     # we can usa a vectror2 to offset the rect and thus blit the image somewere else
-
-
-
-
