@@ -1,7 +1,7 @@
 import pygame
 
 class MyWindow:
-    def __init__(self, text, font_size=20, offset = 30):
+    def __init__(self, text, font_size=17, offset = 30):
         # Create the main window
         self.screen_size = pygame.display.get_surface().get_size() #get the screen size
 
