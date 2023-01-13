@@ -1,6 +1,3 @@
-import pygame
-from debug import debug
-
 class testi:
 
     def __init__(self):
@@ -11,7 +8,6 @@ class testi:
         self.Genius = False #check if you've got the books
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
         self.endgame = False #last interaction done
-        self.statua = True
         self.Genius_count = 0
         
 
@@ -47,7 +43,7 @@ class testi:
                 speech = "This statue is kinda ugly! But I feel like it releases a mysterous aura.." 
                 show_dialoguebox = False
                 return speech
-            elif name == 'Table_up' and show_dialoguebox and self.Librarian2 == True:
+            elif name == 'Table_up' and show_dialoguebox and self.Librarian2 == True and self.Genius_count == 0:
                 speech = "THE FLOOR SHAKES! THREE BOOK APPEAR ON THE FLOOR (and a nasty gossip magazine also..)"
                 show_dialoguebox = False
                 self.Genius = True

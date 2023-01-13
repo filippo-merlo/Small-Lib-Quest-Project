@@ -34,7 +34,7 @@ class Game:
                         pygame.quit() # quit pygame
                         sys.exit() # quit the while loop
                     if event.key == pygame.K_SPACE:
-                        self.level.dialogue_printed = True
+                        self.level.dialoguebox.show_dialoguebox = True
                     
             ### Starting Menu
 

@@ -42,6 +42,7 @@ class Level:
     
         self.who_is_talking = None #output of check interaction function
         self.speech = "" #gets in input the current line of text for the dialogue
+        self.dialogue_block = True
         self.dialoguebox = DialogueBox() #instance of the class Mywindow
         self.testi = testi() #instance of the class testi
 
@@ -319,18 +320,22 @@ class Level:
                             area_rect = pygame.Rect(position, (width, height))
                             if pygame.Rect.colliderect(player_area, area_rect):
                                 self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
-        #for event in pygame.event.get():     
-        keys = pygame.key.get_pressed()
         #check event click
-        if keys[pygame.K_SPACE]:  #and the key is spacebar
-            for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
-                width = surf.get_width()+20
-                height = surf.get_height()+80
-                position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
-                area_rect = pygame.Rect(position, (width, height))
-                if pygame.Rect.colliderect(player_area, area_rect):
-                    self.dialoguebox.toggle_dialoguebox() #change from False to True or viceversa the attribute show_dialoguebox
-                    self.who_is_talking = name
+        for event in pygame.event.get(): # Get the vector with all the events (input from the user) 
+            if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_ESCAPE:
+                            pygame.quit() # quit pygame
+                            sys.exit() # quit the while loop
+                        if event.key == pygame.K_SPACE:
+                            for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
+                                width = surf.get_width()+20
+                                height = surf.get_height()+80
+                                position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
+                                area_rect = pygame.Rect(position, (width, height))
+                                if pygame.Rect.colliderect(player_area, area_rect):
+                                    self.dialoguebox.toggle_dialoguebox() #change from False to True or viceversa the attribute show_dialoguebox
+                                    self.who_is_talking = name
+                                    self.dialogue_block = False
                                 
                                            
     def run(self):
@@ -343,11 +348,15 @@ class Level:
         self.visible_sprites.update()
 
         self.check_interaction() #run the events interaction function
-        
+
         if self.dialoguebox.show_dialoguebox: #if the text box has to be shown (is True)
-            dialogue = self.testi.dialogues(self.who_is_talking, self.dialoguebox.show_dialoguebox)
-            self.dialoguebox.draw(self.display_surface, dialogue) #then shown it #then shown it
+            if not self.dialogue_block:
+                self.speach = self.testi.dialogues(self.who_is_talking, self.dialoguebox.show_dialoguebox)
+                self.dialogue_block = True
+            self.dialoguebox.draw(self.display_surface, self.speach) #then shown it #then shown it
             self.player.block = True
+            self.player.direction.x = 0
+            self.player.direction.y = 0
 
         if not self.dialoguebox.show_dialoguebox:
             self.player.block = False
