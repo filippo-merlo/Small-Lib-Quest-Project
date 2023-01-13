@@ -5,14 +5,12 @@ class testi:
 
     def __init__(self):
        #check dialogue line
-        self.Kings_interact = [True, True, True, True] #check if you had the first interaction with all the kings
-        self.Librarian1 = True #check if first interaction with librarian has been done
+        self.Kings_interact = [False, False, False, False] #check if you had the first interaction with all the kings
+        self.Librarian1 = False #check if first interaction with librarian has been done
         self.Librarian2 = False #check if second interaction with librarian has been done
         self.Genius = False #check if you've got the books
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
-        self.endgame = False #last interaction done
-        self.q = 0
-    
+        self.endgame = False #last interaction done    
 
 
     def dialogues(self, name, diag_print, speech):  # methods with all the text interaction of the game
@@ -38,13 +36,13 @@ class testi:
                 
             # Calsifer Dialogues
             if name == 'Calsifer'and not diag_print:
-                speech = "Damn this fire is hot!"
+                speech = "Brrrn*.. Brn.. Brrrrrn*.. 'Damn this fire is hot!'"
                 diag_print= True
                 return speech
 
             # Genius Dialogues
             if name == 'Table_up' and not diag_print and self.Librarian2 == False: #table_up is the new genius
-                speech = "This statue is kinda ugly! But I feel like it releases a mysterous aurea.." 
+                speech = "This statue is kinda ugly! But I feel like it releases a mysterous aura.." 
                 diag_print = True
                 return speech
             elif name == 'Table_up' and not diag_print and self.Librarian2 == True:
@@ -53,7 +51,7 @@ class testi:
                 self.Genius = True
                 return speech
             elif name == 'Table_up' and not diag_print and self.q >= 1:
-                speech = "GENIUS: Bro i've already gave you the books, just grab them and finish the quests.."
+                speech = "GENIUS: Bro I've already gave you the books, just grab them and finish the quests.."
                 diag_print = True
                 return speech
                 
