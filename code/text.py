@@ -20,17 +20,17 @@ class testi:
 
             #Librarian Dialogues
             if name == 'Librarian' and not diag_print and not all(self.Kings_interact): #if you have not  talk with the four magic beasts yet
-                speech = "LIBRARIAN: You!!! I was waiting for you! You are the hero the Human King sent! The four King of the beasts of this world are mad, you have to help us! Go and look for them at the boundaries of this realm."
+                speech = "LIBRARIAN: You!!! I was waiting for you! You are the hero the Human King sent! The four Beast Kings of this region are mad, you have to help us! The last time they were mad all togheter something tremendous happened! ..even though it was the reason the librarian position became vacant *Blink*.. But now is BAD! Even WORSE! Go and look for them at the boundaries of this realm!"
                 #diag_print= True #says that something has been printed (Then in Level there it takes false, useful to stop the for loop at the first occurences)
                 self.Librarian1 = True
                 return speech
             elif name == 'Librarian' and not diag_print and all(self.Kings_interact) and not all(self.mission_check): #if you have already talk with the four magic beasts
-                speech = "LIBRARIAN: All this stuff?! This library is a mess you'll never find these books, and it's almost lunch break for me, so I cannot help you. We are doomed.. it's the end.. you better pray to that statue on the table!"
+                speech = "LIBRARIAN: All this stuff?! This library is a mess you'll never find these books, and it's almost lunch break for me, so I cannot help you. AH we are doomed.. it's the end.. nothing will save us.. you better go and pray to that statue on the table!"
                 diag_print = True
                 self.Librarian2 = True
                 return speech
             elif name == 'Librarian' and not diag_print and self.Genius == True and all(self.mission_check): #if you have completed all the mission
-                speech = "LIBRARIAN: Can't you see that I'm having my lunch? What?! All the Kings are happy now? Well thank you! We have saved the Kingdom!"
+                speech = "LIBRARIAN: Can't you see that I'm having my lunch? What?! All the Kings are happy now? Well thank you! WE have saved the Kingdom! Yuppie! Please if you see the Human King tell him about my essential contribuition to the mission!"
                 diag_print = True
                 self.endgame = True
                 return speech
@@ -53,23 +53,23 @@ class testi:
                 self.Genius = True
                 return speech
             elif name == 'Table_up' and not diag_print and self.Librarian2 == True and self.Genius_count == 1:
-                speech = "GENIUS: Bro i've already gave you the books, just grab them and finish the quests.."
+                speech = "GENIUS: Bro I've already gave you the books, just grab them and finish the quests.."
                 diag_print = True
                 return speech
                 
             #Squid Dialogues
             if name == 'King_squid' and not diag_print and self.Librarian1 == False: #if not interacted with Librarian yet
-                speech = "KING SQUID: BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB"
+                speech = "KING SQUID: ° ° BLUB BLUB BLUB ° ° BLUB ° ° BLUB BLUB ° ° BLUB BLUB BLUB ° ° BLUB BLUB BLUB ° °"
                 diag_print = True
                 return speech
             elif name == 'King_squid'and not diag_print and self.Librarian1 == True and self.Genius == False: #if already interacted with Librarian
-                speech = "KING SQUID: I'm too old and tired to keep destroying these ships.. But I'm bored, bring me a tabloid!"
+                speech = "KING SQUID: I'm too old and tired to keep destroying these ships ° BLUB ° But I'm bored, what other things could I do? ° bored BLUB ° You! Bring me somethig entertaining! Bring me a tabloid! ° BLUB BLUB °"
                 diag_print = True
                 if not self.Kings_interact[0]:
                     self.Kings_interact[0] = True
                 return speech
             elif name == 'King_squid'and not diag_print and self.Genius == True: #if you've get the books
-                speech ="KING SQUID: Thank you! Finally I can read something about the royal family... What?! The Queen died?!? I'm going to destroy even more ships now!"
+                speech ="KING SQUID: Thank you! ° BLUB ° Finally I can read something about the royal family... What?! The Queen died?!? I'm going to destroy even more ships now! ° angry BLUB BLUB °"
                 diag_print = True
                 if not self.mission_check[0]:
                     self.mission_check[0] = True
@@ -95,17 +95,17 @@ class testi:
 
             #Bamboo Dialogue
             if name == 'King_bamboo' and not diag_print and self.Librarian1 == False:
-                speech = "KING BAMBOO: Oi.. oi.. Who are you? Stay away from my family!"
+                speech = "KING BAMBOO: Frù.. Frù.. ~chasse~ oi! Frù.. Frù.. ~twist~ oi oi!"
                 diag_print = True
                 return speech
             elif name == 'King_bamboo' and not diag_print and self.Librarian1 == True and self.Genius == False:
-                speech = "KING BAMBOO: Look! Me and all my children are having so much fun dancing, but my back hurt so much, I need a book to learn how to strech!"
+                speech = "KING BAMBOO: Look! Me and my family are having so much fun dancing ~chasse~ oi! But my back hurt so much.. I am not flexible as when I was little anymore.. Frù.. it feels like I'm made of wood.. ~twist~ OI! I need a yoga book to learn how to strech.. Frù!"
                 diag_print = True
                 if not self.Kings_interact[2]:
                     self.Kings_interact[2] = True
                 return speech
             elif name == 'King_bamboo' and not diag_print and  self.Genius == True:
-                speech = "KING BAMBOO: Oh my Holy Tree, Thank you! I will finally be able to dance with my children again!"
+                speech = "KING BAMBOO: Oh my Holy Tree, Thank you! Frù! I will finally be able to dance with my children again ~pirouette~!"
                 diag_print = True
                 if not self.mission_check[2]:
                     self.mission_check[2] = True
