@@ -6,6 +6,7 @@ from debug import debug
 from pytmx.util_pygame import load_pygame # module of tmxpy that works for pygame
 from dialogbox import MyWindow
 from text import testi
+from start_and_end_menu import menu
 
 
 # The Level class will contain every visible object in the game 
@@ -45,6 +46,9 @@ class Level:
         self.dialogue_printed = False #keep track if something has to be printed or no
         self.dialogbox = MyWindow(self.speech) #instance of the class Mywindow
         self.testi = testi() #instance of the class testi
+        
+        
+        self.menu = menu()
         
     
 
@@ -324,7 +328,7 @@ class Level:
                             if pygame.Rect.colliderect(player_area, area_rect):
                                 self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
         #for event in pygame.event.get():     
-        pygame.key.set_repeat(5000)
+        pygame.key.set_repeat(500)
         keys = pygame.key.get_pressed()
         #check event click
         #if event.type == pygame.KEYDOWN: #if you click a key
@@ -353,6 +357,7 @@ class Level:
         self.update_animated_tiles(self.animations_list, self.player)
         self.update_animated_objects(self.animations_list_objects, self.player)
         self.visible_sprites.update()
+        self.menu.run()  
 
         self.check_interaction() #run the events interaction function
         if self.dialogbox.show_dialog_box: #if the text box has to be shown (is True)
