@@ -20,6 +20,7 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
                                                # now x,y = 0, then we want to modify them such as when you pres right x += 1 * player_speed
         self.speed = SPEED # set pix/sec speed of moovement of the player
         self.obstacle_sprites = obstacle_sprites # instantiate the obstacle_sprites =  pygame.sprite.Group() to use it in this class
+        self.block = False # to block the player during dialogues
 
     def import_player_assets(self):
         character_path =  "./sprites/characters/"
@@ -102,7 +103,8 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
         self.rect = self.image.get_rect(center = self.hitbox.center)
 
     def update(self):
-        self.input()
-        self.get_status()
+        if not self.block:
+            self.input()
+            self.get_status()
         self.animate()
         self.move(self.speed)

@@ -348,16 +348,16 @@ class Level:
         self.update_upper_tiles(self.upper_tiles_list,self.player)
         self.update_animated_tiles(self.animations_list, self.player)
         self.update_animated_objects(self.animations_list_objects, self.player)
+        self.visible_sprites.update()
 
         self.check_interaction() #run the events interaction function
         if self.dialogbox.show_dialog_box: #if the text box has to be shown (is True)
             self.dialogbox.run_window(self.display_surface, self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)) #then shown it #then shown it
+            self.player.block = True
         if not self.dialogbox.show_dialog_box:
-             self.visible_sprites.update()
-            
-
-
-        
+            self.player.block = False
+             
+                   
 
 class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate
     def __init__(self):
