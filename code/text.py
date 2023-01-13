@@ -37,7 +37,7 @@ class testi:
                 
             # Calsifer Dialogues
             if name == 'Calsifer'and not diag_print:
-                speech = "Brrrn*.. Brn.. Brrrrrn*.. 'Damn this fire is hot!'"
+                speech = "CALCIFER: Brrrn*.. Brn.. Brrrrrn*.. 'Damn this fire is hot!'"
                 diag_print= True
                 return speech
 
@@ -81,7 +81,7 @@ class testi:
                 diag_print = True
                 return speech
             elif name == 'King_raccoon' and not diag_print and self.Librarian1 == True and self.Genius == False:
-                speech = "KING RACCOON: I'm tired of eating humans! Also, have you heard that meat it's actually bad for the evniroment? I need to be better! I need a book of vegan recipes to save the planet!"
+                speech = "KING RACCOON: I'm tired of eating humans! Also, have you heard that meat it's actually bad for the enviroment? I need to be better! I need a book of vegan recipes to save the planet!"
                 diag_print = True
                 if not self.Kings_interact[1]:
                     self.Kings_interact[1] = True
