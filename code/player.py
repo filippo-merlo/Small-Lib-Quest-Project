@@ -2,7 +2,6 @@ import pygame, os
 from settings import *
 import debug
 
-
 ### This is the class defining the vary objects to print in the game
 
 class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
@@ -42,7 +41,6 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
 
     ### Connect the user input with variations in the direction 2D  vector
     def input(self):
-        
             keys = pygame.key.get_pressed() # get input
             if keys[pygame.K_UP]:
                 self.direction.y = -1
@@ -52,7 +50,6 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
                 self.status = self.status.replace('_still','')
             else:
                 self.direction.y = 0
-                
             if keys[pygame.K_LEFT]:
                 self.direction.x = -1
                 self.status = 'left'

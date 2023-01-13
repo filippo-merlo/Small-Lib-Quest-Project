@@ -33,6 +33,8 @@ class Game:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit() # quit pygame
                         sys.exit() # quit the while loop
+                    if event.key == pygame.K_SPACE:
+                        self.level.dialogue_printed = True
                     
             ### Starting Menu
 
