@@ -22,7 +22,7 @@ class testi:
 
             #Librarian Dialogues
             if name == 'Librarian' and not diag_print and not all(self.Kings_interact): #if you have not  talk with the four magic beasts yet
-                speech = "LIBRARIAN: You!!! I was waiting for you! You are the hero the Human King sent! The four Beast Kings of this region are mad, you have to help us! The last time they were mad all togheter something tremendous happened! ..even though it was the reason the librarian position became vacant *Blink*.. But now is BAD! Even WORSE! Go and look for them at the boundaries of this realm!"
+                speech = "LIBRARIAN: You!!! I was waiting for you! You are the hero the Human King sent! The four Beast Kings of this region are mad, you have to help us! The last time they were mad all together something tremendous happened! ..even though it was the reason the librarian position became vacant *Blink*.. But now is BAD! Even WORSE! Go and look for them at the boundaries of this realm!"
                 #diag_print= True #says that something has been printed (Then in Level there it takes false, useful to stop the for loop at the first occurences)
                 self.Librarian1 = True
                 return speech
