@@ -45,13 +45,13 @@ class testi:
                 speech = "This statue is kinda ugly! But I feel like it releases a mysterous aura.." 
                 diag_print = True
                 return speech
-            elif name == 'Table_up' and not diag_print and self.Librarian2 == True:
+            elif name == 'Table_up' and not diag_print and self.Librarian2 == True and self.Genius == False:
                 speech = "THE FLOOR SHAKES! THREE BOOK APPEAR ON THE FLOOR (and a nasty gossip magazine also..)"
                 diag_print = True
                 self.Genius = True
                 return speech
-            elif name == 'Table_up' and not diag_print and self.q >= 1:
-                speech = "GENIUS: Bro I've already gave you the books, just grab them and finish the quests.."
+            elif name == 'Table_up' and not diag_print and self.Librarian2 == True and self.Genius == True:
+                speech = "GENIUS: Bro i've already gave you the books, just grab them and finish the quests.."
                 diag_print = True
                 return speech
                 
