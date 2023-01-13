@@ -12,7 +12,7 @@ class Game:
         ## Initiate pygame
         pygame.init() 
         ## Create the display surface, the window where the game will run 
-        info = pygame.display.Info()
+        info = pygame.display.Info() 
         size = (info.current_w, info.current_h)
         pygame.display.set_mode(size, pygame.FULLSCREEN)
         pygame.display.set_caption('Small Lib Quest') # Set the window's name

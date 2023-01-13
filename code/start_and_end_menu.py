@@ -1,7 +1,6 @@
 import pygame
 from settings import *
 from text import testi
-from dialogbox import MyWindow
 
 class menu:
     def __init__(self):
@@ -12,7 +11,6 @@ class menu:
         self.height = self.display_surface.get_size()[1]
         self.testi = testi() #instance of testi class from text
         self.text = ''
-        self.window = MyWindow(self.text)
 
     def blit_text(self,surface, text, pos, font, color=pygame.Color('White')):
         words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
@@ -35,7 +33,7 @@ class menu:
             print('')
    
     def end_screen(self):
-        if self.testi.endgame == True and self.window.show_dialog_box == False: #if last interaction True and there is no dialogbox (so you should have close it)
+        if self.testi.endgame == True and self.window.show_dialoguebox == False: #if last interaction True and there is no dialogbox (so you should have close it)
             pygame.time.wait(2000) #then wait 2 seconds and print everything
             pygame.draw.rect(self.display_surface, (255, 255, 255), (0, 0, self.width+20, self.height+20)) #draw the out_rect, to get the white edges
             pygame.draw.rect(self.display_surface, (0, 0, 0), (10, 10, self.width, self.height))  #assign the inner rectangle to a var
