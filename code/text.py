@@ -7,11 +7,12 @@ class testi:
        #check dialogue line
         self.Kings_interact = [True, True, True, True] #check if you had the first interaction with all the kings
         self.Librarian1 = True #check if first interaction with librarian has been done
-        self.Librarian2 = False #check if second interaction with librarian has been done
+        self.Librarian2 = True #check if second interaction with librarian has been done
         self.Genius = False #check if you've got the books
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
         self.endgame = False #last interaction done
-        self.q = False
+        self.statua = True
+        
     
 
 
@@ -32,7 +33,7 @@ class testi:
                 return speech
             elif name == 'Librarian' and not diag_print and self.Genius == True and all(self.mission_check): #if you have completed all the mission
                 speech = "LIBRARIAN: Can't you see that I'm having my lunch? What?! All the Kings are happy now? Well thank you! We have saved the Kingdom!"
-                diag_print
+                diag_print = True
                 self.endgame = True
                 return speech
                 
@@ -47,7 +48,7 @@ class testi:
                 speech = "This statue is kinda ugly! But I feel like it releases a mysterous aurea.." 
                 diag_print = True
                 return speech
-            elif name == 'Table_up' and not diag_print and self.Librarian2 == True and self.Genius == False:
+            elif name == 'Table_up' and not diag_print and self.Librarian2 == True:
                 speech = "THE FLOOR SHAKES! THREE BOOK APPEAR ON THE FLOOR (and a nasty gossip magazine also..)"
                 diag_print = True
                 self.Genius = True

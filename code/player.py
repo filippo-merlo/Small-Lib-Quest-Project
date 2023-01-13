@@ -2,6 +2,7 @@ import pygame, os
 from settings import *
 import debug
 
+
 ### This is the class defining the vary objects to print in the game
 
 class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
@@ -21,6 +22,7 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
         self.speed = SPEED # set pix/sec speed of moovement of the player
         self.obstacle_sprites = obstacle_sprites # instantiate the obstacle_sprites =  pygame.sprite.Group() to use it in this class
 
+
     def import_player_assets(self):
         character_path =  "./sprites/characters/"
         frames_dict = {'player_still':[],'player_moove':[]}
@@ -39,24 +41,25 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
 
     ### Connect the user input with variations in the direction 2D  vector
     def input(self):
-        keys = pygame.key.get_pressed() # get input
-        if keys[pygame.K_UP]:
-            self.direction.y = -1
-            self.status = self.status.replace('_still','')
-        elif keys[pygame.K_DOWN]:
-            self.direction.y = 1
-            self.status = self.status.replace('_still','')
-        else:
-            self.direction.y = 0
-            
-        if keys[pygame.K_LEFT]:
-            self.direction.x = -1
-            self.status = 'left'
-        elif keys[pygame.K_RIGHT]:
-            self.direction.x = 1
-            self.status = 'right'
-        else:
-            self.direction.x = 0
+        
+            keys = pygame.key.get_pressed() # get input
+            if keys[pygame.K_UP]:
+                self.direction.y = -1
+                self.status = self.status.replace('_still','')
+            elif keys[pygame.K_DOWN]:
+                self.direction.y = 1
+                self.status = self.status.replace('_still','')
+            else:
+                self.direction.y = 0
+                
+            if keys[pygame.K_LEFT]:
+                self.direction.x = -1
+                self.status = 'left'
+            elif keys[pygame.K_RIGHT]:
+                self.direction.x = 1
+                self.status = 'right'
+            else:
+                self.direction.x = 0
 
     def get_status(self):
         if self.direction.y == 0 and self.direction.x == 0:
@@ -101,7 +104,9 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center = self.hitbox.center)
 
+    
     def update(self):
+        
         self.input()
         self.get_status()
         self.animate()

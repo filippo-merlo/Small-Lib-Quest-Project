@@ -355,7 +355,6 @@ class Level:
         self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)
         if self.dialogbox.show_dialog_box: #if the text box has to be shown (is True)
             self.dialogbox.run_window(self.display_surface, self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)) #then shown it #then shown it
-            self.dialogbox.run_window(self.display_surface, self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)) #then shown it #then shown it
         
 
 class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate
