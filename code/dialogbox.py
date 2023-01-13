@@ -11,6 +11,7 @@ class MyWindow:
         self.width = self.screen_size[0] - (offset * 2) # Sets the width attribute to the width of the screen minus twice the offset value. This will reduce the width of the rectangle by "offset" pixels on each side.
         self.text = text #instance of the text
         self.font = pygame.font.Font("./graphics/font/font.ttf", font_size) #define font and size
+        self.dialoguebox_sound =  pygame.mixer.Sound('./data/sound/dialoguebox_sound.mp3')
         self.text_surface = self.font.render(self.text, True, (255, 255, 255)) #render the text with the text instance, True is for smoothness, and the color
         self.show_dialog_box = False #init dialogbox at False don't show
     
@@ -41,6 +42,7 @@ class MyWindow:
        
     def toggle_dialog_box(self): # method to toggle the value of the show_dialog_box variable from False (intial value) to True and viceversa
         self.show_dialog_box = not self.show_dialog_box
+        self.dialoguebox_sound.play()
     
     def run_window(self, screen, text): # method that join an run the dialog box and the text
         self.dialog_box = MyWindow(text) #instance of class MyWindow (declaring the variable of text that we need)
