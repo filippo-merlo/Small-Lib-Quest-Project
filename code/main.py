@@ -20,6 +20,7 @@ class Game:
         # Imprt music and initialize level class
         pygame.mixer.music.load('./data/sound/zelda_theme_8_bit.mp3') # import music file
         self.level = Level() # Create the Level object imported from level.
+        self.menu = menu()
 
     ### Create the while loop that will update the screen each frame
     def run(self):
@@ -37,6 +38,7 @@ class Game:
 
             ### Run the level object and update
             self.level.run() # run the Level Object
+            self.menu.run()
     
             if pygame.mixer.music.get_pos() >= 2.37*60000:
                 pygame.mixer.music.fadeout(6000)
