@@ -5,7 +5,7 @@ class MyWindow:
         # Create the main window
         self.screen_size = pygame.display.get_surface().get_size() #get the screen size
 
-        self.height = 250 #Sets the height to 75 pixels
+        self.height = 200 #Sets the height in pixels
         self.x = offset # This will position the rectangle "offset" pixels from the left edge of the screen.
         self.y = self.screen_size[1] - self.height - offset # Sets the y attribute to the height of the screen minus the height of the rectangle (75 pixels) minus the offset value.
         self.width = self.screen_size[0] - (offset * 2) # Sets the width attribute to the width of the screen minus twice the offset value. This will reduce the width of the rectangle by "offset" pixels on each side.
