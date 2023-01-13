@@ -17,7 +17,7 @@ class Game:
         pygame.display.set_mode(size, pygame.FULLSCREEN)
         pygame.display.set_caption('Small Lib Quest') # Set the window's name
         self.clock = pygame.time.Clock() # create a clock object to set a celing for the frame rate on which the update of the screen will be performed
-        # Imprt music and initialize level class
+        # Import music and initialize level class
         pygame.mixer.music.load('./data/sound/zelda_theme_8_bit.mp3') # import music file
         self.level = Level() # Create the Level object imported from level.
         self.menu = menu()
@@ -38,7 +38,6 @@ class Game:
 
             ### Run the level object and update
             self.level.run() # run the Level Object
-            self.menu.run()
     
             if pygame.mixer.music.get_pos() >= 2.37*60000:
                 pygame.mixer.music.fadeout(6000)
