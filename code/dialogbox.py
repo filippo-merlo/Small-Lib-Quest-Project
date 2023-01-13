@@ -45,4 +45,5 @@ class MyWindow:
     def run_window(self, screen, text): # method that join an run the dialog box and the text
         self.dialog_box = MyWindow(text) #instance of class MyWindow (declaring the variable of text that we need)
         self.dialog_box.draw(screen) #draw the dialogbox
+        
             

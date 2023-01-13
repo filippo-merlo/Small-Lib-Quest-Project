@@ -342,20 +342,21 @@ class Level:
                                 self.who_is_talking = name             
                                            
     def run(self):
-        self.display_surface = pygame.display.get_surface()
         # draw and update the game
         self.create_map_from_img(self.player)
         self.visible_sprites.custom_draw(self.player)
         self.update_upper_tiles(self.upper_tiles_list,self.player)
         self.update_animated_tiles(self.animations_list, self.player)
         self.update_animated_objects(self.animations_list_objects, self.player)
-        self.visible_sprites.update()
 
         self.check_interaction() #run the events interaction function
-        self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)
         if self.dialogbox.show_dialog_box: #if the text box has to be shown (is True)
             self.dialogbox.run_window(self.display_surface, self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)) #then shown it #then shown it
-            self.dialogbox.run_window(self.display_surface, self.testi.dialogues(self.who_is_talking, self.dialgue_printed, self.speech)) #then shown it #then shown it
+        if not self.dialogbox.show_dialog_box:
+             self.visible_sprites.update()
+            
+
+
         
 
 class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate
