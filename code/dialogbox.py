@@ -5,7 +5,7 @@ class MyWindow:
         # Create the main window
         self.screen_size = pygame.display.get_surface().get_size() #get the screen size
 
-        self.height = 200 #Sets the height in pixels
+        self.height = 210 #Sets the height in pixels
         self.x = offset # This will position the rectangle "offset" pixels from the left edge of the screen.
         self.y = self.screen_size[1] - self.height - offset # Sets the y attribute to the height of the screen minus the height of the rectangle (75 pixels) minus the offset value.
         self.width = self.screen_size[0] - (offset * 2) # Sets the width attribute to the width of the screen minus twice the offset value. This will reduce the width of the rectangle by "offset" pixels on each side.
@@ -35,7 +35,7 @@ class MyWindow:
     def draw(self, screen): #method to draw the dialog_box
         pygame.draw.rect(screen, (255, 255, 255), (self.x - 10, self.y - 10, self.width + 20, self.height + 20)) #draw the out_rect, to get the white edges
         pygame.draw.rect(screen, (0, 0, 0), (self.x, self.y, self.width, self.height))  #assign the inner rectangle to a var
-        self.blit_text(screen, self.text, (self.x + 10, self.y + 10), self.font)        
+        self.blit_text(screen, self.text, (self.x + 20, self.y + 20), self.font)        
        
     def toggle_dialog_box(self): # method to toggle the value of the show_dialog_box variable from False (intial value) to True and viceversa
         self.show_dialog_box = not self.show_dialog_box

@@ -40,7 +40,6 @@ class Level:
 
         ## SET DIALOGUES AND INTERACTIONS
     
-        
         self.who_is_talking = None #output of check interaction function
         self.speech = "" #gets in input the current line of text for the dialgue
         self.dialgue_printed = False #keep track if something has to be printed or no
