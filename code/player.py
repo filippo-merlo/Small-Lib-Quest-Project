@@ -1,6 +1,5 @@
-import pygame, os
+import pygame
 from settings import *
-import debug
 
 ### This is the class defining the vary objects to print in the game
 
