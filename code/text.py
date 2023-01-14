@@ -30,13 +30,13 @@ class testi:
                 self.Librarian2 = True
                 return speech
             elif name == 'Librarian' and show_dialoguebox and self.Genius == True and self.Librarian_count == 0 and all(self.mission_check): #if you have completed all the mission
-                speech = "LIBRARIAN: Can't you see that I'm having my lunch? What?! All the Kings are happy now? Well thank you! WE have saved the Kingdom! Yuppie! Please if you see the Human King tell him about my essential contribuition to the mission!"
+                speech = "LIBRARIAN: Can't you see that I'm having my lunch? What?! All the Kings are happy now? Well thank you! WE have saved the Kingdom! Yuppie! Please if you see the Human King tell him about my essential contribuition to the mission! Ah you should talk with Calcifer before leaving."
                 show_dialoguebox = False
                 self.Librarian_count += 1 #now you can interact with the librarian again and another text will be shown
                 self.Genius_count += 1
                 return speech
             elif name == 'Librarian' and show_dialoguebox and self.Librarian_count == 1: #if you have completed all the mission
-                speech = "Ah, I'm so proud of me today *Blink*. If you want to finish the game you should talk with Calcifer"
+                speech = "Ah, I'm so proud of me today *Blink*. Before leaving you should talk with Calcifer"
                 show_dialoguebox = False
                 return speech
                 
