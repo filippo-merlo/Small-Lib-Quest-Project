@@ -43,8 +43,7 @@ class Level:
         self.speach = ""  #gets in input the current line of text for the dialogue
         self.dialogue_block = True
         self.dialoguebox = DialogueBox() #instance of the class Mywindow
-        self.testi = testi() #instance of the class testi
-        
+        self.testi = testi() #instance of the class testi        
         
         self.menu = menu()
         
@@ -328,6 +327,8 @@ class Level:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit() # quit pygame
                     sys.exit() # quit the while loop
+                if event.key == pygame.K_u:
+                    self.menu.first_screen = False
                 if event.key == pygame.K_SPACE:
                     for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
                         width = surf.get_width()+20
