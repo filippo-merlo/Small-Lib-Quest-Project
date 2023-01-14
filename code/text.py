@@ -30,7 +30,7 @@ class testi:
                 self.Librarian_count += 1
                 return speech
             elif name == 'Librarian' and show_dialoguebox and self.Librarian_count == 1: #if you have completed all the mission
-                speech = "Ah, I'm so proud of me today *Blink*. If you want to finish the came you should talk with Calcifer"
+                speech = "Ah, I'm so proud of me today *Blink*. If you want to finish the game you should talk with Calcifer"
                 show_dialoguebox = False
                 return speech
                 
