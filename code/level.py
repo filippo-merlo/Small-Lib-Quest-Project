@@ -12,19 +12,19 @@ class Level:
     def __init__(self):
 
         ## Get the display surface specified in the main and get his sizes 
-        self.display_surface = pygame.display.get_surface()
+        self.display_surface = pygame.display.get_surface() 
         self.half_width = self.display_surface.get_size()[0]//2
         self.half_height = self.display_surface.get_size()[1]//2
         self.width = self.display_surface.get_size()[0]
         self.height = self.display_surface.get_size()[1]
         ## Create an offset vector that will be used to get the offset position of the objects in the map. They will be moving accordingly with the players input. This will print the player on the center of the screen and make the camera moving around following him
-        self.offset = pygame.math.Vector2()
+        self.offset = pygame.math.Vector2() #will give as a 2d vector to define the player movement
         
         # Sprites are all the objects printed on the screen in videogames 
         # in pygame the sprite class allows to combines a surface(an image) and a rectangle (needed to moove the surfaces on the main one) + other features in the same object
         # Sprite Group, allows to target (es update), a determined category of sprites.
-        self.visible_sprites = YSortCameraGroup()  
-        self.obstacle_sprites = pygame.sprite.Group()
+        self.visible_sprites = YSortCameraGroup()  #Build-in class in Pygame ????
+        self.obstacle_sprites = pygame.sprite.Group() #Build-in class in Pygame that allow to manage multiple sprite at once
 
         ## Load and scale the map BACKGROUND immage accordingly with the ZOOM level we decided
         self.tmx_data = load_pygame('./data/tmx/map.tmx')
