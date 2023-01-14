@@ -1,6 +1,7 @@
+from screeninfo import get_monitors
+
 ### GAME SETUP
 ## Get the current pc screen's size 
-from screeninfo import get_monitors
 monitor_sizes = get_monitors()
 screen_width = monitor_sizes[0].width # screen's width
 screen_height = monitor_sizes[0].height # screen's height
