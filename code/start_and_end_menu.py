@@ -14,8 +14,8 @@ class Menu:
         # Settings for the start sceen
         self.image_start = pygame.image.load("./graphics/Title/Small Lib Quest(Gold font).png").convert_alpha()
         self.image_end = pygame.image.load("./graphics/Title/THE_END(Gold font).png").convert_alpha()
-        self.font =  pygame.font.Font("./graphics/font/font.ttf", 25)
-        self.end_font = pygame.font.Font("./graphics/font/font.ttf", 40) #define font and size
+        self.font =  pygame.font.Font("./graphics/font/font.ttf", 20)
+        self.end_font = pygame.font.Font("./graphics/font/font.ttf", 30) #define font and size
 
     def blit_text(self, surface, text, pos, font, color=pygame.Color('White')):
         words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
