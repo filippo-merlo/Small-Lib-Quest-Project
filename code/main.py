@@ -57,9 +57,9 @@ class Game:
                     pygame.mixer.music.load('./data/sound/Hudson Mohawke - Cbat.mp3') 
                     pygame.mixer.music.play()
                     self.switch_music = False
-                if pygame.mixer.music.get_pos() <= 0.24*60000:
+                if pygame.mixer.music.get_pos() <= 0.415*60000:
                     self.level.run() # run the Level Object
-                if pygame.mixer.music.get_pos() >= 0.24*60000:
+                if pygame.mixer.music.get_pos() >= 0.415*60000:
                     self.menu.end_screen()
 
             #if self.level.testi.endgame: #if the var that check for the endgame (from dialogues in testi class) is True then
