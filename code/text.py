@@ -11,7 +11,7 @@ class testi:
         self.Genius_count = 0
         
     def dialogues(self, name, show_dialoguebox):  # methods with all the text interaction of the game
-        show_dialoguebox = show_dialoguebox
+        #show_dialoguebox = show_dialoguebox
         if name: #if there is a name as entry from the colliderect function in Level
 
             #Librarian Dialogues
@@ -29,7 +29,7 @@ class testi:
                 speech = "LIBRARIAN: Can't you see that I'm having my lunch? What?! All the Kings are happy now? Well thank you! WE have saved the Kingdom! Yuppie! Please if you see the Human King tell him about my essential contribuition to the mission!"
                 show_dialoguebox = False
                 self.endgame = True
-                return speech, self.endgame
+                return speech
                 
             # Calsifer Dialogues
             if name == 'Calsifer'and show_dialoguebox:

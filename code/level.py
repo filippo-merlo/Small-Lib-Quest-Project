@@ -40,7 +40,7 @@ class Level:
         ## SET DIALOGUES AND INTERACTIONS
     
         self.who_is_talking = None #output of check interaction function
-        self.speach = "" #gets in input the current line of text for the dialogue
+        self.speach = ""  #gets in input the current line of text for the dialogue
         self.dialogue_block = True
         self.dialoguebox = DialogueBox() #instance of the class Mywindow
         self.testi = testi() #instance of the class testi
@@ -48,8 +48,6 @@ class Level:
         
         self.menu = menu()
         
-    
-
     def create_map(self):
          for layer in self.tmx_data.visible_layers:
              if layer.name in ["Buildings", "Library"] and hasattr(layer,'data'):
@@ -338,8 +336,10 @@ class Level:
                         area_rect = pygame.Rect(position, (width, height))
                         if pygame.Rect.colliderect(player_area, area_rect):
                             self.dialoguebox.toggle_dialoguebox() #change from False to True or viceversa the attribute show_dialoguebox
-                            self.who_is_talking = name
                             self.dialogue_block = False
+                            self.who_is_talking = name
+                           
+                            
                                                           
     def run(self):
         # draw and update the game
