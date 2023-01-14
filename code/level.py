@@ -348,9 +348,9 @@ class Level:
         self.check_interaction() #run the events interaction function
         if self.dialoguebox.show_dialoguebox: #if the text box has to be shown (is True)
             if not self.dialogue_block:
-                self.speach = self.testi.dialogues(self.who_is_talking, self.dialoguebox.show_dialoguebox)
+                self.speech = self.testi.dialogues(self.who_is_talking, self.dialoguebox.show_dialoguebox)
                 self.dialogue_block = True
-            self.dialoguebox.draw(self.display_surface, self.speach) #then shown it #then shown it
+            self.dialoguebox.draw(self.display_surface, self.speech) #then shown it #then shown it
             self.player.block = True
             self.player.direction.x = 0
             self.player.direction.y = 0
