@@ -44,5 +44,5 @@ class DialogueBox:
         screen.blit(surf_black,(self.x, self.y)) 
        
     def toggle_dialoguebox(self): # method to toggle the value of the show_dialoguebox variable from False (intial value) to True and viceversa
-        self.show_dialoguebox = not self.show_dialoguebox
-        self.dialoguebox_sound.play()
+        self.show_dialoguebox = not self.show_dialoguebox #if true chang it to false and viceversa
+        self.dialoguebox_sound.play() #display the dialogbox
