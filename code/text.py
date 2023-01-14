@@ -46,7 +46,7 @@ class testi:
                 show_dialoguebox= False
                 return speech
             elif name == 'Calsifer'and show_dialoguebox and self.Librarian_count == 1:
-                speech = "Brrrn*.. Good job MATE, check THIS out! This pieace is FIIIREEE!!! You deserve it.  Brrrrrn*.." #does not say anything, but...
+                speech = "Brrrn*.. Good job MATE, check THIS out! This piece is FIIIREEE!!! You deserve it.  Brrrrrn*.." #does not say anything, but...
                 show_dialoguebox= False
                 self.endgame = True #...update the endgame variable that will activate the endgame screen in main.py
                 return speech
