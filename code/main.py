@@ -22,6 +22,8 @@ class Game:
         self.level = Level() # Create the Level object imported from level.
         self.menu = Menu() # Instantiate menu class
         self.start = True # If true the start screen is printed, if false the self.level instrance is runned, and the game start
+
+        self.switch_music = True
     
 
 ### Create the while loop that will update the screen each frame
@@ -40,11 +42,28 @@ class Game:
             ## other events in the main loop        
             if self.start: #if the game is open (this variable is intialized at True)
                 self.menu.start_menu() #show the itro screen
+
             if self.start == False and self.level.testi.endgame == False: #start become false after closing the intro screen, and endgame is intialized as False
                 ## Run the level object from Level class with all the functions we need in the Game
                 self.level.run() # run the Level Object
-            if self.level.testi.endgame: #if the var that check for the endgame (from dialogues in testi class) is True then
-                self.menu.end_screen() #show the end screen
+                ## When the music file reproduction finish restart the music
+                if pygame.mixer.music.get_pos() >= 2.37*60000: # get the music timing and compare with the duration of the music file
+                    pygame.mixer.music.fadeout(6000) # set a fadeout for ending the music reproduction
+                if pygame.mixer.music.get_pos() == -1: # when the fadeout is performed the timing become -1
+                    pygame.mixer.music.play() # start a new music file reproduction
+
+            if self.level.testi.endgame:
+                if self.switch_music:
+                    pygame.mixer.music.load('./data/sound/Hudson Mohawke - Cbat.mp3') 
+                    pygame.mixer.music.play()
+                    self.switch_music = False
+                if pygame.mixer.music.get_pos() <= 0.24*60000:
+                    self.level.run() # run the Level Object
+                if pygame.mixer.music.get_pos() >= 0.24*60000:
+                    self.menu.end_screen()
+
+            #if self.level.testi.endgame: #if the var that check for the endgame (from dialogues in testi class) is True then
+            #    self.menu.end_screen() #show the end screen
 
             ## When the music file reproduction finish restart the music
             if pygame.mixer.music.get_pos() >= 2.37*60000: # get the music timing and compare with the duration of the music file

@@ -12,7 +12,7 @@ class testi:
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
         self.endgame = False #last interaction done
         self.Genius_count = 0 #check for the second interaction in a row with the Genius/statue (after the books are dropped)
-        self.Librarian_count = 0 #check for the second interaciton in a row with the Librarian (to get to the endgame)
+        self.Librarian_count = 1 #check for the second interaciton in a row with the Librarian (to get to the endgame)
         
     ## methods with all the text interaction of the game
     def dialogues(self, name, show_dialoguebox):  
@@ -33,6 +33,7 @@ class testi:
                 speech = "LIBRARIAN: Can't you see that I'm having my lunch? What?! All the Kings are happy now? Well thank you! WE have saved the Kingdom! Yuppie! Please if you see the Human King tell him about my essential contribuition to the mission!"
                 show_dialoguebox = False
                 self.Librarian_count += 1 #now you can interact with the librarian again and another text will be shown
+                self.Genius_count += 1
                 return speech
             elif name == 'Librarian' and show_dialoguebox and self.Librarian_count == 1: #if you have completed all the mission
                 speech = "Ah, I'm so proud of me today *Blink*. If you want to finish the game you should talk with Calcifer"
@@ -45,7 +46,7 @@ class testi:
                 show_dialoguebox= False
                 return speech
             elif name == 'Calsifer'and show_dialoguebox and self.Librarian_count == 1:
-                speech = "" #does not say anything, but...
+                speech = "Brrrn*.. Good job mate, check this out. This pieace is FIRE. You deserve it.  Brrrrrn*.." #does not say anything, but...
                 show_dialoguebox= False
                 self.endgame = True #...update the endgame variable that will activate the endgame screen in main.py
                 return speech
@@ -56,13 +57,17 @@ class testi:
                 show_dialoguebox = False
                 return speech
             elif name == 'Table_up' and show_dialoguebox and self.Librarian2 == True and self.Genius_count == 0:
-                speech = "THE FLOOR SHAKES! THREE BOOK APPEAR ON THE FLOOR (and a nasty gossip magazine also..)"
+                speech = "You sit in front of the statue.. meanwhile you are sadly thinking about the horrible destiny you will have to face the shiny baldness of the statue capture your gaze.. you touch the statue and!!! THE FLOOR SHAKES!!! THREE BOOK APPEAR ON THE FLOOR (and a nasty gossip magazine also..)"
                 show_dialoguebox = False
                 self.Genius = True
                 self.Genius_count += 1
                 return speech
             elif name == 'Table_up' and show_dialoguebox and self.Librarian2 == True and self.Genius_count == 1:
                 speech = "GENIUS: Bro I've already gave you the books, just grab them and finish the quests.."
+                show_dialoguebox = False
+                return speech
+            elif name == 'Table_up' and show_dialoguebox and self.Librarian2 == True and self.Genius_count == 2:
+                speech = "GENIUS: Well done bro.. I like this library after all.. it would have been a shame having it burnt down again by those guys.."
                 show_dialoguebox = False
                 return speech
                 
