@@ -70,6 +70,7 @@ class testi:
                 speech = "GENIUS: Well done bro.. I like this library after all.. it would have been a shame having it burnt down again by those guys.."
                 show_dialoguebox = False
                 return speech
+            
                 
             #Squid Dialogues
             if name == 'King_squid' and show_dialoguebox and self.Librarian1 == False: #if you have not interacted with Librarian yet
