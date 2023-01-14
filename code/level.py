@@ -1,13 +1,11 @@
 import pygame, sys
 from settings import *
-from tile import Tile, Object_Tile
+from tile import Tile
 from player import Player
-from debug import debug
 from pytmx.util_pygame import load_pygame # module of tmxpy that works for pygame
-from dialogbox import MyWindow
+from  DialogueBox import *
 from text import testi
 from start_and_end_menu import menu
-
 
 # The Level class will contain every visible object in the game 
 class Level:
@@ -43,8 +41,8 @@ class Level:
     
         self.who_is_talking = None #output of check interaction function
         self.speech = "" #gets in input the current line of text for the dialogue
-        self.dialogue_printed = False #keep track if something has to be printed or no
-        self.dialogbox = MyWindow(self.speech) #instance of the class Mywindow
+        self.dialogue_block = True
+        self.dialoguebox = DialogueBox() #instance of the class Mywindow
         self.testi = testi() #instance of the class testi
         
         
@@ -65,7 +63,7 @@ class Level:
                      if obj.image:
                          pos = (obj.x*ZOOM, obj.y*ZOOM)
                          surf = pygame.transform.scale(obj.image, (round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                         Object_Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
+                         Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
     
          for layer in self.tmx_data.visible_layers:
              if layer.name in ["Vegetation"] and hasattr(layer,'data'):
@@ -88,7 +86,7 @@ class Level:
                          pos = (obj.x*ZOOM, obj.y*ZOOM)
                          surf = obj.image
                          surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                         Object_Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
+                         Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
 
     def get_upper_tiles(self):
         upper_tiles_list = []
@@ -276,7 +274,6 @@ class Level:
                                 if name in ['Table_up']:
                                     self.obj_pos_list.append([name,pos,pygame.transform.scale(surf,(surf.get_width()*2.5,surf.get_height()))])
           
-
     def get_objects_offset_pos(self,player):
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
         self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
@@ -327,28 +324,23 @@ class Level:
                             area_rect = pygame.Rect(position, (width, height))
                             if pygame.Rect.colliderect(player_area, area_rect):
                                 self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
-        #for event in pygame.event.get():     
-        pygame.key.set_repeat(500)
-        keys = pygame.key.get_pressed()
         #check event click
-        #if event.type == pygame.KEYDOWN: #if you click a key
-            #if event.key == pygame.K_ESCAPE:
-                #pygame.quit() # quit pygame
-                #sys.exit() # quit the while loop  
-        if keys[pygame.K_SPACE]:  #and the key is spacebar
-            self.dialogue_printed = True
-
-        for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
-            width = surf.get_width()+20
-            height = surf.get_height()+80
-            position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
-            area_rect = pygame.Rect(position, (width, height))
-            if pygame.Rect.colliderect(player_area, area_rect) and self.dialogue_printed == True:
-                self.dialogbox.toggle_dialog_box() #change from False to True or viceversa
-                self.dialogue_printed = False #says that something has not been printed yet
-                self.who_is_talking = name
-                             
-                                           
+        for event in pygame.event.get(): # Get the vector with all the events (input from the user) 
+            if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_ESCAPE:
+                            pygame.quit() # quit pygame
+                            sys.exit() # quit the while loop
+                        if event.key == pygame.K_SPACE:
+                            for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
+                                width = surf.get_width()+20
+                                height = surf.get_height()+80
+                                position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
+                                area_rect = pygame.Rect(position, (width, height))
+                                if pygame.Rect.colliderect(player_area, area_rect):
+                                    self.dialoguebox.toggle_dialoguebox() #change from False to True or viceversa the attribute show_dialoguebox
+                                    self.who_is_talking = name
+                                    self.dialogue_block = False
+                                                          
     def run(self):
         # draw and update the game
         self.create_map_from_img(self.player)
@@ -358,15 +350,21 @@ class Level:
         self.update_animated_objects(self.animations_list_objects, self.player)
         self.visible_sprites.update()
         self.menu.run()  
-
+        
+        # Make dialogues work
         self.check_interaction() #run the events interaction function
-        if self.dialogbox.show_dialog_box: #if the text box has to be shown (is True)
-            self.dialogbox.run_window(self.display_surface, self.testi.dialogues(self.who_is_talking, self.dialogue_printed, self.speech)) #then shown it #then shown it
+        if self.dialoguebox.show_dialoguebox: #if the text box has to be shown (is True)
+            if not self.dialogue_block:
+                self.speach = self.testi.dialogues(self.who_is_talking, self.dialoguebox.show_dialoguebox)
+                self.dialogue_block = True
+            self.dialoguebox.draw(self.display_surface, self.speach) #then shown it #then shown it
             self.player.block = True
-        if not self.dialogbox.show_dialog_box:
+            self.player.direction.x = 0
+            self.player.direction.y = 0
+
+        if not self.dialoguebox.show_dialoguebox:
             self.player.block = False
         
-
 class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate
     def __init__(self):
         # general setup
@@ -403,7 +401,3 @@ class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work
     # how the camera works:
     # We draw the image in the rect of the sprite, but
     # we can usa a vectror2 to offset the rect and thus blit the image somewere else
-
-
-
-

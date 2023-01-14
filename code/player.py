@@ -106,6 +106,6 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
     def update(self):
         if not self.block:
             self.input()
-            self.get_status()
+        self.get_status()
         self.animate()
         self.move(self.speed)
