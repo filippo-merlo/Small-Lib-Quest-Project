@@ -51,7 +51,7 @@ class Menu:
         Gold_border_1.fill((255, 225, 0))
         Gold_border_2.fill((255, 225, 0))
         # Create the text 
-        text1 = "Press <ARROW KEYS> to move your player and the <SPACEBAR> to interact.\n\n\nPress <RETURN> to start the game!\n\n\nPress <ESCAPE> to close the game.."
+        text1 = "Press <ARROW KEYS> to move your player and the <SPACEBAR> to interact with NPCs.\n\n\nPress <RETURN> to start the game!\n\n\nPress <ESCAPE> to close the game.."
         # Blit the text/image on the center of their corresponding rectangle surfaces
         surface.blit(self.image_start, self.image_start.get_rect(center =(surface.get_rect().centerx, surface.get_rect().centery - 200)))
         self.blit_text(text_surface, text1, (20,20), self.font)
@@ -68,18 +68,23 @@ class Menu:
         pygame.time.wait(2) #then wait 2 seconds and print everything
         surface = pygame.Surface((self.width, self.height))
         text_surf_x = self.width//1.5
-        text_surf_y = self.height//6
-        text_surface = pygame.Surface((text_surf_x, text_surf_y))
+        text_surf_y = self.height//2
+        text_surface1 = pygame.Surface((text_surf_x, text_surf_y))
+        text_surface2 = pygame.Surface((text_surf_x, text_surf_y))
 
         # Fill the rectangles surfaces with the same color
         surface.fill((0, 0, 0))
-        text_surface.fill((0, 0, 0))
+        text_surface1.fill((0, 0, 0))
+        text_surface2.fill((0, 0, 0))
         # Create the text 
         text1 = "Thank you for playing our game!"
+        text2 = "A game designed by: Filippo Merlo & Matteo Melis\n\n\nA special thanks to Clear Code <3\n\n\nPress <ESCAPE> to exit the game."
         # Blit the text/image on the center of their corresponding rectangle surfaces
         surface.blit(self.image_end , self.image_end.get_rect(center =(surface.get_rect().centerx, surface.get_rect().centery - 200)))
-        self.blit_text(text_surface, text1, (20,20), self.end_font)
+        self.blit_text(text_surface1, text1, (20,20), self.end_font)
+        self.blit_text(text_surface2, text2, (20,20), self.font)
     
         self.display_surface.blit(surface, (0,0))
-        self.display_surface.blit(text_surface, (self.half_width-(text_surf_x//2), self.half_height+80))
+        self.display_surface.blit(text_surface1, (self.half_width-(text_surf_x//2), self.half_height+60))
+        self.display_surface.blit(text_surface2, (self.half_width-(text_surf_x//2), self.half_height+180))
         

@@ -9,7 +9,7 @@ class testi:
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
         self.endgame = False #last interaction done
         self.Genius_count = 0
-        self.Librarian_count = 1
+        self.Librarian_count = 0
         
     def dialogues(self, name, show_dialoguebox):  # methods with all the text interaction of the game
         if name: #if there is a name as entry from the colliderect function in Level
