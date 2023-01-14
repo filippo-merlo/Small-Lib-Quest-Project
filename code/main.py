@@ -39,10 +39,10 @@ class Game:
 
             if self.start:
                 self.menu.start_menu()
-            if self.start == False and self.level.endgame == False:
+            if self.start == False and self.level.testi.endgame == False:
                 ### Run the level object and update
                 self.level.run() # run the Level Object
-            if self.level.endgame:
+            if self.level.testi.endgame:
                 self.menu.end_screen()
 
             if pygame.mixer.music.get_pos() >= 2.37*60000:
