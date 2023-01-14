@@ -7,16 +7,17 @@ from player import Player
 from  DialogueBox import *
 from text import testi
 
-## The Level class will contain every visible object in the game 
+### The Level class will contain every visible object in the game 
 class Level:
     def __init__(self):
 
-        # Get the display surface specified in the main
+        ## Get the display surface specified in the main and get his sizes 
         self.display_surface = pygame.display.get_surface()
         self.half_width = self.display_surface.get_size()[0]//2
         self.half_height = self.display_surface.get_size()[1]//2
         self.width = self.display_surface.get_size()[0]
         self.height = self.display_surface.get_size()[1]
+        ## Create an offset vector that will be used to get the offset position of the objects in the map. They will be moving accordingly with the players input. This will print the player on the center of the screen and make the camera moving around following him
         self.offset = pygame.math.Vector2()
         
         # Sprites are all the objects printed on the screen in videogames 
@@ -24,15 +25,15 @@ class Level:
         # Sprite Group, allows to target (es update), a determined category of sprites.
         self.visible_sprites = YSortCameraGroup()  
         self.obstacle_sprites = pygame.sprite.Group()
-        # What the sprite.Group() does:
-        # it stores different sprites, if i call
+
+        ## Load and scale the map BACKGROUND immage accordingly with the ZOOM level we decided
         self.tmx_data = load_pygame('./data/tmx/map.tmx')
         self.map = pygame.image.load('./data/tmx/map.png').convert_alpha() # load map image 
         self.map = pygame.transform.scale(self.map,(self.map.get_width()*ZOOM,self.map.get_height()*ZOOM))
-        # Sprite set up
-        self.create_map()
-        self.get_objects_pos()
-        self.animations_list = self.get_animated_tiles()
+        ## Sprite set up
+        self.create_map() # function that extract all the map tiles immages from the tmx file
+        self.get_objects_pos() # function that get the position in the map of some objects
+        self.animations_list = self.get_animated_tiles() 
         self.animations_list_objects = self.get_animated_objects()
         self.player = Player((1600,2300),[self.visible_sprites], self.obstacle_sprites) # use class player
         self.upper_tiles_list = self.get_upper_tiles()
