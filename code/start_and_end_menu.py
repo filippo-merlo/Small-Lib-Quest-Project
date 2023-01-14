@@ -1,5 +1,8 @@
 import pygame
+
 from settings import *
+
+### THIS FILE CONTAINS THE CLASS WITH THE METHOD WE ARE USING FOR THE INTRODUCTION SCREEN AND THE ENDGAME SCREEN
 
 class Menu:
     def __init__(self):
