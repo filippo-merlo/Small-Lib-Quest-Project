@@ -29,6 +29,7 @@ LORE:
 Something bad happen in the SLQ world, the four Beast Kings are mad and they are threating the realm. So the Human King sent you to solve the situation.
 
 THE GAME:
+
 -In the very beginning you can have a walk around the map and interact with the npcs but the quest will not be activated yet.
 
 -Around the map there are four npcs that will talk to you, but to start the quests you'll have to talk with the Librarian first. 
