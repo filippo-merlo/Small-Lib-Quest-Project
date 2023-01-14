@@ -4,7 +4,6 @@ import pygame, sys
 from settings import *
 from level import Level
 from start_and_end_menu import Menu
-import debug
 
 ### CREATE THE GAME CLASS, THIS IS THE CLASS THAT HAS TO BE RAN
 class Game:
