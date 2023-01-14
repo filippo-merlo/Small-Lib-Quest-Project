@@ -15,6 +15,7 @@ class menu:
         self.font_bottom_end = pygame.font.Font("./graphics/font/font.ttf", 50)
         self.image_start = pygame.image.load("./graphics/Title/Small Lib Quest(Gold font).png").convert_alpha()
         self.font_bottom_start =  pygame.font.Font("./graphics/font/font.ttf", 30)
+        self.first_screen = True
 
     def blit_text(self,surface, text, pos, font, color=pygame.Color('White')):
         words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
@@ -33,7 +34,7 @@ class menu:
             x = pos[0]  # Reset the x.
             y += word_height  # Start on new row.
             
-    def start_menu(self, first_screen):
+    def start_menu(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_l]: 
             
@@ -60,7 +61,7 @@ class menu:
             
 
             # Blit the rectangles surfaces on the main screen
-            if first_screen:
+            if self.first_screen:
                 self.display_surface.blit(surface_top, rect_top_rect)
                 self.display_surface.blit(surface_bottom, rect_bottom_rect)
 
@@ -100,8 +101,8 @@ class menu:
 
         
 
-    def run(self,first_screen):
-        self.start_menu(first_screen)
+    def run(self):
+        self.start_menu()
         self.end_screen()
 
         
