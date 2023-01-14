@@ -38,15 +38,15 @@ class Menu:
         # Create the rectangles surfaces
         surface = pygame.Surface((self.width, self.height))
         text_surface = pygame.Surface((self.width//2, self.height//4))
-        white_border_1 = pygame.Surface(((self.width//2)+20, (self.height//4)+20))
-        white_border_2 = pygame.Surface(((self.width//2)+60, (self.height//4)+60))
-        Gold_border = pygame.Surface(((self.width//2)+40, (self.height//4)+40))
+        Gold_border_1 = pygame.Surface(((self.width//2)+20, (self.height//4)+20))
+        Gold_border_2 = pygame.Surface(((self.width//2)+60, (self.height//4)+60))
+        white_border = pygame.Surface(((self.width//2)+40, (self.height//4)+40))
         # Fill the rectangles surfaces with the same color
         surface.fill((0, 0, 0))
         text_surface.fill((0, 0, 0))
-        white_border_1.fill((255, 255, 255))
-        white_border_2.fill((255, 255, 255))
-        Gold_border.fill((255, 223, 0))
+        white_border.fill((255, 255, 255))
+        Gold_border_1.fill((255, 223, 0))
+        Gold_border_2.fill((255, 223, 0))
         # Create the text 
         text1 = "Press <ARROW KEYS> to move your player and the <SPACEBAR> to interact.\n\n\nPress <RETURN> to start the game!"
         # Blit the text/image on the center of their corresponding rectangle surfaces
@@ -54,9 +54,9 @@ class Menu:
         self.blit_text(text_surface, text1, (20,20), self.font)
         
         self.display_surface.blit(surface, (0,0))
-        self.display_surface.blit(white_border_2, ((self.half_width-self.width//4)-30, (self.half_height+20)-30))
-        self.display_surface.blit(Gold_border, ((self.half_width-self.width//4)-20, (self.half_height+20)-20))
-        self.display_surface.blit(white_border_1, ((self.half_width-self.width//4)-10, (self.half_height+20)-10))
+        self.display_surface.blit(Gold_border_2, ((self.half_width-self.width//4)-30, (self.half_height+20)-30))
+        self.display_surface.blit(white_border, ((self.half_width-self.width//4)-20, (self.half_height+20)-20))
+        self.display_surface.blit(Gold_border_1, ((self.half_width-self.width//4)-10, (self.half_height+20)-10))
         self.display_surface.blit(text_surface, (self.half_width-self.width//4, self.half_height+20))
         
 
