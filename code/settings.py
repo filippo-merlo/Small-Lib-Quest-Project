@@ -9,9 +9,9 @@ screen_height = monitor_sizes[0].height # screen's height
 WIDTH = int(screen_width-screen_width*0.2) # to reduce it of 10%
 HEIGHT = int(screen_height-screen_height*0.2) # to reduce it of 10%
 
-FPS = 60 # set frame rate
+FPS = 120 # set frame rate
 ZOOM = 3
 TILESIZE = 16*ZOOM # size of tiles
 PLAYERSIZE_W = TILESIZE*1.2 # set the player size
 PLAYERSIZE_H = TILESIZE*1.7
-SPEED = 15
+SPEED = 8
