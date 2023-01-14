@@ -2,15 +2,16 @@ import pygame
 
 from settings import *
 
-### This is the class defining the vary objects to print in the game
+### THIS FILE HAS IN IT A CLASS WITH ALL THE METHODS THAT REGARD 
 
-class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
-    def __init__(self,pos,groups,obstacle_sprites):
+class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class (build-in class in pygame to manage spirtes)
+    #initialize all the variable useful for the methods below
+    def __init__(self,pos,groups,obstacle_sprites): #as arguments we have the same of the Tile class in tile.py file
         super().__init__(groups) # Call the __init__ method of the Inherited class
-        self.image = pygame.image.load("./sprites/characters/player_still_1.png").convert_alpha() # load image 
-        self.image = pygame.transform.scale(self.image, (PLAYERSIZE_W, PLAYERSIZE_H)) # scale image
-        self.rect = self.image.get_rect(topleft = pos) # create the rect to blit on the screen surf. of the same size of the image and pos given by pos. pos is extracted from the WORLD_MAP in the level class
-        self.hitbox = self.rect.inflate(-15,-40)
+        self.image = pygame.image.load("./sprites/characters/player_still_1.png").convert_alpha() # load image of the player #convert_alpha use only the actual pixel of the png
+        self.image = pygame.transform.scale(self.image, (PLAYERSIZE_W, PLAYERSIZE_H)) # scale image with the size of Width and Height that we have chose in settings.py
+        self.rect = self.image.get_rect(topleft = pos) # create the rect to blit on the screen surface of the same size of the image and position given by pos argument. position is extracted from the "create_map" function in the level class
+        self.hitbox = self.rect.inflate(-15,-40) # hitbox(x,y) is another rect of the same size of the precedent, that can be modified to get 3D illusion in collision with other tiles. In this case it's inflate (reduced both sides) by values that allow us to give a fake 3D illusion
         self.animation_speed = 0.15
         self.frame_index = 0
         self.import_player_assets()
