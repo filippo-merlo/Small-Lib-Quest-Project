@@ -1,5 +1,7 @@
 import pygame
+
 ### Define a debug function to print in real time on the screen text output
+### Useful during work-in-progress to check the state of a variable
 
 pygame.init()
 font = pygame.font.Font(None,30) # func to create a new font object from a file, the first arg will be specified forward
