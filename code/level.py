@@ -44,6 +44,7 @@ class Level:
         self.dialogue_block = True
         self.dialoguebox = DialogueBox() #instance of the class Mywindow
         self.testi = testi() #instance of the class testi
+        self.first_screen = True
         
         
         self.menu = menu()
@@ -328,6 +329,8 @@ class Level:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit() # quit pygame
                     sys.exit() # quit the while loop
+                if event.key == pygame.K_u:
+                    self.first_screen = False
                 if event.key == pygame.K_SPACE:
                     for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
                         width = surf.get_width()+20
@@ -347,7 +350,7 @@ class Level:
         self.update_animated_tiles(self.animations_list, self.player)
         self.update_animated_objects(self.animations_list_objects, self.player)
         self.visible_sprites.update()
-        self.menu.run()  
+        self.menu.run(self.first_screen)  
         
         # Make dialogues work
         self.check_interaction() #run the events interaction function
