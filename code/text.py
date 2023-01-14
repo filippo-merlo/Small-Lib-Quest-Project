@@ -63,7 +63,7 @@ class testi:
                 return speech
                 
             #Squid Dialogues
-            if name == 'King_squid' and show_dialoguebox and self.Librarian1 == False: #if not interacted with Librarian yet
+            if name == 'King_squid' and show_dialoguebox and self.Librarian1 == False: #if you have not interacted with Librarian yet
                 speech = "KING SQUID: ° ° BLUB BLUB BLUB ° ° BLUB ° ° BLUB BLUB ° ° BLUB BLUB BLUB ° ° BLUB BLUB BLUB ° °"
                 show_dialoguebox = False
                 return speech
@@ -73,7 +73,7 @@ class testi:
                 if not self.Kings_interact[0]:
                     self.Kings_interact[0] = True
                 return speech
-            elif name == 'King_squid' and show_dialoguebox and self.Genius == True: #if you've get the books
+            elif name == 'King_squid' and show_dialoguebox and self.Genius == True: #if you've gotten the books
                 speech ="KING SQUID: Thank you! ° BLUB ° Finally I can read something about the royal family... What?! The Queen died?!? I'm going to destroy even more ships now! ° angry BLUB BLUB °"
                 show_dialoguebox = False
                 if not self.mission_check[0]:
