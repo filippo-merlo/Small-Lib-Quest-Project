@@ -11,9 +11,7 @@ class testi:
         self.Genius_count = 0
         
     def dialogues(self, name, show_dialoguebox):  # methods with all the text interaction of the game
-        #show_dialoguebox = show_dialoguebox
         if name: #if there is a name as entry from the colliderect function in Level
-
             #Librarian Dialogues
             if name == 'Librarian' and show_dialoguebox and not all(self.Kings_interact): #if you have not  talk with the four magic beasts yet
                 speech = "LIBRARIAN: You!!! I was waiting for you! You are the hero the Human King sent! The four Beast Kings of this region are mad, you have to help us! The last time they were mad all together something tremendous happened! ..even though it was the reason the librarian position became vacant *Blink*.. But now is BAD! Even WORSE! Go and look for them at the boundaries of this realm!"
@@ -125,4 +123,5 @@ class testi:
                     self.mission_check[3] = True
                 return speech
         else:
-            return ''
+            speech = " "
+            return speech
