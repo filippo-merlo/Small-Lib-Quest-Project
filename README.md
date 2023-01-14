@@ -19,11 +19,11 @@ Conda
 
 HOW TO RUN IT:
 
-Open the main folder "Small-Lib-Quest-Project" with an IDE and run the file "main.py". Then the game will be open in fullscreen modde and to close it you have to use <ESCAPE KEY>.
+Open the main folder "Small-Lib-Quest-Project" with an IDE and run the file "main.py". Then the game will be open in fullscreen modde and to close it you have to use [ESCAPE KEY].
 
 HOW TO PLAY IT:
 
-To move the player around the map use the <ARROW KEYS>. While to interact with the inhabitants of the SLQ world you'll need to use the <SPACEBAR KEY>, also a balloon will appear when the player is in the range to interact with tem.
+To move the player around the map use the [ARROW KEYS]. While to interact with the inhabitants of the SLQ world you'll need to use the [SPACEBAR KEY], also a balloon will appear when the player is in the range to interact with tem.
 
 LORE:
 Something bad happen in the SLQ world, the four Beast Kings are mad and they are threating the realm. So the Human King sent you to solve the situation.
