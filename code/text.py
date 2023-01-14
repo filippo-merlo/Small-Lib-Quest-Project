@@ -12,7 +12,7 @@ class testi:
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
         self.endgame = False #last interaction done
         self.Genius_count = 0 #check for the second interaction in a row with the Genius/statue (after the books are dropped)
-        self.Librarian_count = 1 #check for the second interaciton in a row with the Librarian (to get to the endgame)
+        self.Librarian_count = 0 #check for the second interaciton in a row with the Librarian (to get to the endgame)
         
     ## methods with all the text interaction of the game
     def dialogues(self, name, show_dialoguebox):  
