@@ -2,6 +2,7 @@
 import pygame, sys
 from settings import *
 from level import Level
+from start_and_end_menu import Menu
 
 
 ### Create the Game class
@@ -18,6 +19,8 @@ class Game:
         # Import music and initialize level class
         pygame.mixer.music.load('./data/sound/zelda_theme_8_bit.mp3') # import music file
         self.level = Level() # Create the Level object imported from level.
+        self.menu = Menu() # Instantiate menu class
+        self.start = True
     
 
     ### Create the while loop that will update the screen each frame
@@ -31,14 +34,19 @@ class Game:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit() # quit pygame
                         sys.exit() # quit the while loop
-                    
-            ### Run the level object and update
-            self.level.run() # run the Level Object
-              
+                    if event.key == pygame.K_SPACE:
+                        self.start = False
+
+            if self.start:
+                self.menu.start_menu()
+            if self.start == False and self.level.endgame == False:
+                ### Run the level object and update
+                self.level.run() # run the Level Object
+            if self.level.endgame:
+                self.menu.end_screen()
 
             if pygame.mixer.music.get_pos() >= 2.37*60000:
                 pygame.mixer.music.fadeout(6000)
-
             if pygame.mixer.music.get_pos() == -1:
                  pygame.mixer.music.play()
             
