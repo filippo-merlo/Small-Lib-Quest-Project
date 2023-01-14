@@ -43,9 +43,6 @@ class Level:
         self.dialogue_block = True
         self.dialoguebox = DialogueBox() #instance of the class Mywindow
         self.testi = testi() #instance of the class testi        
-
-        # ENDGAME 
-        self.endgame = self.testi.endgame
         
     def create_map(self):
          for layer in self.tmx_data.visible_layers:

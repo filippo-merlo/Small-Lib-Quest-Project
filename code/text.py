@@ -9,7 +9,7 @@ class testi:
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
         self.endgame = False #last interaction done
         self.Genius_count = 0
-        self.Librarian_count = 0
+        self.Librarian_count = 1
         
     def dialogues(self, name, show_dialoguebox):  # methods with all the text interaction of the game
         if name: #if there is a name as entry from the colliderect function in Level
@@ -35,13 +35,13 @@ class testi:
                 return speech
                 
             # Calsifer Dialogues
-            if name == 'Calsifer'and show_dialoguebox:
+            if name == 'Calsifer'and show_dialoguebox and self.Librarian_count == 0:
                 speech = "CALCIFER: Brrrn*.. Brn.. Brrrrrn*.. 'Damn this fire is hot!'"
                 show_dialoguebox= False
                 self.endgame = True
                 return speech
             elif name == 'Calsifer'and show_dialoguebox and self.Librarian_count == 1:
-                speech = "CALCIFER: Brrrn*.. Brn.. Brrrrrn* GOOODBYE HERO! Brrrn*.. Brn.. Brrrrrn*"
+                speech = ""
                 show_dialoguebox= False
                 self.endgame = True
                 return speech
