@@ -1,5 +1,8 @@
 import pygame
+
 from settings import *
+
+### THIS FILE CONTAINS THE CLASS AND THE METHODS THAT WE ARE USING TO CALL THE DIALOGUE BOX THAT COINTAINS THE TEXT FOR THE INTERACTIONS
 
 class DialogueBox:
     def __init__(self):
