@@ -3,7 +3,6 @@ from settings import *
 
 class DialogueBox:
     def __init__(self):
-        # Create the main window
         self.screen_size = pygame.display.get_surface().get_size() #get the screen size
 
         self.height = 210 #Sets the height in pixels
@@ -11,25 +10,26 @@ class DialogueBox:
         self.y = self.screen_size[1] - self.height - self.x # Sets the y attribute to the height of the screen minus the height of the rectangle (75 pixels) minus the offset value.
         self.width = self.screen_size[0] - (self.x * 2) # Sets the width attribute to the width of the screen minus twice the offset value. This will reduce the width of the rectangle by "offset" pixels on each side.
         self.font = pygame.font.Font("./graphics/font/font.ttf", FONT_SIZE) #define font and size
-        self.dialoguebox_sound =  pygame.mixer.Sound('./data/sound/dialoguebox_sound.mp3')
+        self.dialoguebox_sound =  pygame.mixer.Sound('./data/sound/dialoguebox_sound.mp3') #import sound for the dialogue box 
         self.show_dialoguebox = False #init dialogbox at False don't show
-    
+
+    ## Function to split the text in differnt lines based on the lenght of it 
     def blit_text(self, surface, text, pos, font, color=pygame.Color('White')):
-        words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
-        space = font.size(' ')[0]  # The width of a space.
-        max_width, max_height = surface.get_size()
-        x, y = pos
+        words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words of the current text to display
+        space = font.size(' ')[0]   # The width of a space based on the font used
+        max_width, max_height = surface.get_size() #get the width of height of the surface where the text has to be printed
+        x, y = pos #get the position in where the text has to be printed
         for line in words:
             for word in line:
-                word_surface = font.render(word, 0, color)
-                word_width, word_height = word_surface.get_size()
-                if x + word_width >= max_width:
-                    x = pos[0]  # Reset the x.
-                    y += word_height * 2 # Start on new row.
-                surface.blit(word_surface, (x, y))
-                x += word_width + space
-            x = pos[0]  # Reset the x.
-            y += word_height  # Start on new row.
+                word_surface = font.render(word, 0, color) #get the surface covered by the text
+                word_width, word_height = word_surface.get_size() #it split the surface covered by the text in two variables
+                if x + word_width >= max_width: #if adding another word would exceed the max width of the surface:
+                    x = pos[0]  # Reset the x position to restart another line
+                    y += word_height * 2 # Start a new row by lowering the y position (on screen, so encreasing the value of it) by the first row (the already written one) and keeping a empty row as space 
+                surface.blit(word_surface, (x, y)) #When the line is ended blit the line on the screen
+                x += word_width + space #x parameter is set again to his initial value before starting the next loop for the next line
+            x = pos[0]  # Reset the x, get another line from the text
+            y += word_height  #Start on new row with the new line
    
     def draw(self, screen, text): #method to draw the dialoguebox
         surf_white = pygame.Surface((self.width+20, self.height+20)) #create surface with the same size of the rect

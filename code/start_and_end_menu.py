@@ -32,7 +32,7 @@ class Menu:
                 surface.blit(word_surface, (x, y)) #When the line is ended blit the line on the screen
                 x += word_width + space #x parameter is set again to his initial value before starting the next loop for the next line
             x = pos[0]  # Reset the x, get another line from the text
-            y += word_height  # Start on new row with the new line
+            y += word_height  #Start on new row with the new line
             
     def start_menu(self):      
         # Create the rectangles surfaces
@@ -55,7 +55,7 @@ class Menu:
         surface.blit(self.image_start, self.image_start.get_rect(center =(surface.get_rect().centerx, surface.get_rect().centery - 200))) #blit the image on the screen in the middle of the surface
         self.blit_text(text_surface, text1, (20,20), self.font) #uses the function blit_text(surface,text,position,font) to show the text on the screen.
         
-        #Display everything
+        ##Display everything
         self.display_surface.blit(surface, (0,0))
         self.display_surface.blit(Gold_border_2, ((self.half_width-self.width//4)-30, (self.half_height+20)-30))
         self.display_surface.blit(white_border, ((self.half_width-self.width//4)-20, (self.half_height+20)-20))

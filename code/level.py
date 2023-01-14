@@ -252,7 +252,7 @@ class Level:
                 # Blit the image to the screen
                 self.display_surface.blit(tile_image, offset_pos)
 
-### Functions to get object of interest offsetted position
+## Functions to get object of interest offsetted position
     def get_objects_pos(self):
         self.obj_pos_list = []
         for layer in self.tmx_data.objectgroups:
