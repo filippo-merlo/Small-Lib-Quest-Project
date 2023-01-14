@@ -10,8 +10,8 @@ class Game:
         ## Initiate pygame
         pygame.init() 
         ## Create the display surface, the window where the game will run 
-        info = pygame.display.Info() 
-        size = (info.current_w, info.current_h)
+        info = pygame.display.Info() # get the info of the display
+        size = (info.current_w, info.current_h) #from info get the size of the display Width and Height
         pygame.display.set_mode(size, pygame.FULLSCREEN)
         pygame.display.set_caption('Small Lib Quest') # Set the window's name
         self.clock = pygame.time.Clock() # create a clock object to set a celing for the frame rate on which the update of the screen will be performed
@@ -24,19 +24,19 @@ class Game:
     def run(self):
         pygame.mixer.music.play() #Play the music
         #pygame.mixer.music.set_volume(0)
-        while True:
+        while True: #while the game is open --> everything will pass through here
             ## Set the Quit  button
             for event in pygame.event.get(): # Get the vector with all the events (input from the user) 
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
+                if event.type == pygame.KEYDOWN: #if you press a key
+                    if event.key == pygame.K_ESCAPE: #and the key is <ESC>
                         pygame.quit() # quit pygame
-                        sys.exit() # quit the while loop
+                        sys.exit() # quit the while loop ##it closes the window
                     
             ### Run the level object and update
-            self.level.run() # run the Level Object
+            self.level.run() # run method of the Class Level. It contains almost all the functions that make the game works.
               
-
-            if pygame.mixer.music.get_pos() >= 2.37*60000:
+            #music parameters
+            if pygame.mixer.music.get_pos() >= 2.37*60000: 
                 pygame.mixer.music.fadeout(6000)
 
             if pygame.mixer.music.get_pos() == -1:

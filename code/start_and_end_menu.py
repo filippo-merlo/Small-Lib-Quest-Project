@@ -14,6 +14,7 @@ class menu:
         self.font_top_end = pygame.font.Font("./graphics/font/font.ttf", 80) #define font and size
         self.font_bottom_end = pygame.font.Font("./graphics/font/font.ttf", 50)
         self.image_start = pygame.image.load("./graphics/Title/Small Lib Quest(Gold font).png").convert_alpha()
+        self.image_the_end = pygame.image.load("./graphics/Title/THE_END(Gold font).png").convert_alpha()
         self.font_bottom_start =  pygame.font.Font("./graphics/font/font.ttf", 30)
         self.first_screen = True
 
@@ -86,12 +87,13 @@ class menu:
             rect_bottom_rect = surface_bottom.get_rect(bottom = self.height)
 
             # Create the text surfaces
-            text_top = self.font_top_end.render("THE END", True, (255, 255, 255))
+            #text_top = self.font_top_end.render("THE END", True, (255, 255, 255))
             text_bottom = self.font_bottom_end.render("Thank you for playing! Press esc to close", True, (255, 255, 255))
 
 
             # Blit the text on the center of their corresponding rectangle surfaces
-            surface_top.blit(text_top,text_top.get_rect(center = surface_top.get_rect().center))
+            #surface_top.blit(text_top,text_top.get_rect(center = surface_top.get_rect().center))
+            surface_top.blit(self.image_the_end, self.image_the_end.get_rect(center = surface_top.get_rect().center))
             surface_bottom.blit(text_bottom,text_bottom.get_rect(center = surface_bottom.get_rect().center))
             
 
