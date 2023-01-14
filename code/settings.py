@@ -1,5 +1,4 @@
 ### GAME SETUP
-
 ## Get the current pc screen's size 
 from screeninfo import get_monitors
 monitor_sizes = get_monitors()
@@ -14,4 +13,4 @@ ZOOM = 3
 TILESIZE = 16*ZOOM # size of tiles
 PLAYERSIZE_W = TILESIZE*1.2 # set the player size
 PLAYERSIZE_H = TILESIZE*1.7
-SPEED = 8
+SPEED = 10
