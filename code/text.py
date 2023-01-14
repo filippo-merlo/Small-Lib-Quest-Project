@@ -104,11 +104,11 @@ class testi:
 
             #Bamboo Dialogue
             if name == 'King_bamboo' and show_dialoguebox and self.Librarian1 == False:
-                speech = "KING BAMBOO: Frù.. Frù.. ~chasse~ oi! Frù.. Frù.. ~twist~ oi oi!"
+                speech = "KING BAMBOO: Frù.. Frù.. ~chasse~ ohi! Frù.. Frù.. ~twist~ ohi ohi!"
                 show_dialoguebox = False
                 return speech
             elif name == 'King_bamboo' and show_dialoguebox and self.Librarian1 == True and self.Genius == False:
-                speech = "KING BAMBOO: Look! Me and my family are having so much fun dancing ~chasse~ oi! But my back hurt so much.. I am not flexible as when I was little anymore.. Frù.. it feels like I'm made of wood.. ~twist~ OI! I need a yoga book to learn how to strech.. Frù!"
+                speech = "KING BAMBOO: Look! Me and my family are having so much fun dancing ~chasse~ ohi! But my back hurt so much.. I am not flexible as when I was little anymore.. Frù.. it feels like I'm made of wood.. ~twist~ OHI! I need a yoga book to learn how to strech.. Frù!"
                 show_dialoguebox = False
                 if not self.Kings_interact[2]:
                     self.Kings_interact[2] = True
@@ -122,7 +122,7 @@ class testi:
         
             #Skeleton Dialogue
             if name == 'King_skeleton' or "The deadman's letter" and show_dialoguebox and  self.Librarian1 == False:
-                speech = "NORMAL SKELETON: Sigh* sigh*.. i feel so lonely.."
+                speech = "NORMAL SKELETON: Sigh* sigh*.. I feel so lonely.."
                 show_dialoguebox = False
                 return speech
             elif name == 'King_skeleton' or "The deadman's letter" and show_dialoguebox and  self.Librarian1 == True and self.Genius == False:
