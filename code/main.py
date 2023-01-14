@@ -52,15 +52,15 @@ class Game:
                 if pygame.mixer.music.get_pos() == -1: # when the fadeout is performed the timing become -1
                     pygame.mixer.music.play() # start a new music file reproduction
 
-            if self.level.testi.endgame:
-                if self.switch_music:
-                    pygame.mixer.music.load('./data/sound/Hudson Mohawke - Cbat.mp3') 
-                    pygame.mixer.music.play()
-                    self.switch_music = False
-                if pygame.mixer.music.get_pos() <= 0.415*60000:
-                    self.level.run() # run the Level Object
-                if pygame.mixer.music.get_pos() >= 0.415*60000:
-                    self.menu.end_screen()
+            if self.level.testi.endgame: #if endgame is reached
+                if self.switch_music: #if variable switch music is True (is initialized as True)
+                    pygame.mixer.music.load('./data/sound/Hudson Mohawke - Cbat.mp3') #load the new music
+                    pygame.mixer.music.play() #and play it
+                    self.switch_music = False #then swithc music become false
+                if pygame.mixer.music.get_pos() <= 0.415*60000: #if music-time is under a certain amount of time played
+                    self.level.run() #run the level method (the if statement is out of the other one, because we wanted to change music)
+                if pygame.mixer.music.get_pos() >= 0.415*60000: #if the music is over a certain amount of time played
+                    self.menu.end_screen() #run the end screen
 
             #if self.level.testi.endgame: #if the var that check for the endgame (from dialogues in testi class) is True then
             #    self.menu.end_screen() #show the end screen
