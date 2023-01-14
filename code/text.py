@@ -36,7 +36,7 @@ class testi:
                 self.Genius_count += 1
                 return speech
             elif name == 'Librarian' and show_dialoguebox and self.Librarian_count == 1: #if you have completed all the mission
-                speech = "Ah, I'm so proud of me today *Blink*. Before leaving you should talk with Calcifer"
+                speech = "I'm so proud of me today *Blink*. Ah, before leaving you should talk with Calcifer."
                 show_dialoguebox = False
                 return speech
                 
@@ -46,7 +46,7 @@ class testi:
                 show_dialoguebox= False
                 return speech
             elif name == 'Calsifer'and show_dialoguebox and self.Librarian_count == 1:
-                speech = "Brrrn*.. Good job mate, check this out. This pieace is FIRE. You deserve it.  Brrrrrn*.." #does not say anything, but...
+                speech = "Brrrn*.. Good job MATE, check THIS out! This pieace is FIIIREEE!!! You deserve it.  Brrrrrn*.." #does not say anything, but...
                 show_dialoguebox= False
                 self.endgame = True #...update the endgame variable that will activate the endgame screen in main.py
                 return speech
@@ -63,15 +63,14 @@ class testi:
                 self.Genius_count += 1
                 return speech
             elif name == 'Table_up' and show_dialoguebox and self.Librarian2 == True and self.Genius_count == 1:
-                speech = "GENIUS: Bro I've already gave you the books, just grab them and finish the quests.."
+                speech = "GENIUS: Bro I've already gave you the books, just deliver them and finish the quests.. And don't touch my head again.."
                 show_dialoguebox = False
                 return speech
             elif name == 'Table_up' and show_dialoguebox and self.Librarian2 == True and self.Genius_count == 2:
-                speech = "GENIUS: Well done bro.. I like this library after all.. it would have been a shame having it burnt down again by those guys.."
+                speech = "GENIUS: Well done bro.. I like this library after all.. It would have been a shame if those guys had smashed it again.. Ah you should talk with that lil spark over there befoare rolling out of here."
                 show_dialoguebox = False
                 return speech
             
-                
             #Squid Dialogues
             if name == 'King_squid' and show_dialoguebox and self.Librarian1 == False: #if you have not interacted with Librarian yet
                 speech = "KING SQUID: ° ° BLUB BLUB BLUB ° ° BLUB ° ° BLUB BLUB ° ° BLUB BLUB BLUB ° ° BLUB BLUB BLUB ° °"
