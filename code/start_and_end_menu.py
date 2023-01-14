@@ -14,6 +14,7 @@ class Menu:
         
         # Settings for the start sceen
         self.image_start = pygame.image.load("./graphics/Title/Small Lib Quest(Gold font).png").convert_alpha()
+        self.image_end = pygame.image.load("./graphics/Title/THE_END(Gold font).png").convert_alpha()
         self.font =  pygame.font.Font("./graphics/font/font.ttf", 25)
         self.font_the_end = pygame.font.Font("./graphics/font/font.ttf", 80) #define font and size
 
