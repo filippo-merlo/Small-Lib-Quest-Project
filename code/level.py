@@ -5,6 +5,7 @@ from player import Player
 from pytmx.util_pygame import load_pygame # module of tmxpy that works for pygame
 from  DialogueBox import *
 from text import testi
+from start_and_end_menu import menu
 
 # The Level class will contain every visible object in the game 
 class Level:
@@ -43,6 +44,11 @@ class Level:
         self.dialogue_block = True
         self.dialoguebox = DialogueBox() #instance of the class Mywindow
         self.testi = testi() #instance of the class testi
+        
+        
+        self.menu = menu()
+        
+    
 
     def create_map(self):
          for layer in self.tmx_data.visible_layers:
@@ -343,6 +349,7 @@ class Level:
         self.update_animated_tiles(self.animations_list, self.player)
         self.update_animated_objects(self.animations_list_objects, self.player)
         self.visible_sprites.update()
+        self.menu.run()  
         
         # Make dialogues work
         self.check_interaction() #run the events interaction function

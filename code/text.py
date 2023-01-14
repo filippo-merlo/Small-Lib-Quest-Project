@@ -2,11 +2,11 @@ class testi:
 
     def __init__(self):
        #check dialogue line
-        self.Kings_interact = [False, False, False, False] #check if you had the first interaction with all the kings
-        self.Librarian1 = False #check if first interaction with librarian has been done
-        self.Librarian2 = False #check if second interaction with librarian has been done
-        self.Genius = False #check if you've got the books
-        self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
+        self.Kings_interact = [True, True, True, True] #check if you had the first interaction with all the kings
+        self.Librarian1 = True #check if first interaction with librarian has been done
+        self.Librarian2 = True #check if second interaction with librarian has been done
+        self.Genius = True #check if you've got the books
+        self.mission_check = [True, True, True, True] #check if the 4 quest has been solved
         self.endgame = False #last interaction done
         self.Genius_count = 0
         
@@ -29,7 +29,7 @@ class testi:
                 speech = "LIBRARIAN: Can't you see that I'm having my lunch? What?! All the Kings are happy now? Well thank you! WE have saved the Kingdom! Yuppie! Please if you see the Human King tell him about my essential contribuition to the mission!"
                 show_dialoguebox = False
                 self.endgame = True
-                return speech
+                return speech, self.endgame
                 
             # Calsifer Dialogues
             if name == 'Calsifer'and show_dialoguebox:
