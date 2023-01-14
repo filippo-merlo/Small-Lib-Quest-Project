@@ -34,24 +34,24 @@ class Game:
                     if event.key == pygame.K_ESCAPE: #and the key is <ESC>
                         pygame.quit() # quit pygame
                         sys.exit() # quit the while loop
-                    if event.key == pygame.K_RETURN:
-                        self.start = False
+                    if event.key == pygame.K_RETURN: #Key to press to start the game after the introduction screen
+                        self.start = False #variable to check if the introduction screen has to be shown or not
                     
-                    
-            if self.start:
-                self.menu.start_menu()
-            if self.start == False and self.level.testi.endgame == False:
-                ### Run the level object and update
+            ## other events in the main loop        
+            if self.start: #if the game is open (this variable is intialized at True)
+                self.menu.start_menu() #show the itro screen
+            if self.start == False and self.level.testi.endgame == False: #start become false after closing the intro screen, and endgame is intialized as False
+                ## Run the level object from Level class with all the functions we need in the Game
                 self.level.run() # run the Level Object
-            if self.level.testi.endgame:
-                self.menu.end_screen()
+            if self.level.testi.endgame: #if the var that check for the endgame (from dialogues in testi class) is True then
+                self.menu.end_screen() #show the end screen
 
             if pygame.mixer.music.get_pos() >= 2.37*60000:
                 pygame.mixer.music.fadeout(6000)
             if pygame.mixer.music.get_pos() == -1:
                  pygame.mixer.music.play()
             
-            self.clock.tick(FPS) # set the maximum frame rate
+            self.clock.tick(FPS) # set the maximum frame rate (from settings.py)
             pygame.display.update() # this method will update the screen at each iteration of the while loop
            
 ### Run the game with .run() method
