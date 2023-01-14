@@ -7,6 +7,8 @@ from player import Player
 from  DialogueBox import *
 from text import testi
 
+### THIS FILE HAS EVERYTHING!!!!!!
+
 ### The Level class will contain every visible object in the game 
 class Level:
     def __init__(self):
