@@ -4,6 +4,7 @@ import pygame, sys
 from settings import *
 from level import Level
 from start_and_end_menu import Menu
+import debug
 
 ### CREATE THE GAME CLASS, THIS IS THE CLASS THAT HAS TO BE RAN
 class Game:
@@ -64,12 +65,6 @@ class Game:
 
             #if self.level.testi.endgame: #if the var that check for the endgame (from dialogues in testi class) is True then
             #    self.menu.end_screen() #show the end screen
-
-            ## When the music file reproduction finish restart the music
-            if pygame.mixer.music.get_pos() >= 2.37*60000: # get the music timing and compare with the duration of the music file
-                pygame.mixer.music.fadeout(6000) # set a fadeout for ending the music reproduction
-            if pygame.mixer.music.get_pos() == -1: # when the fadeout is performed the timing become -1
-                 pygame.mixer.music.play() # start a new music file reproduction
             
             self.clock.tick(FPS) # set the maximum frame rate (from settings.py)
             pygame.display.update() # this method will update the screen at each iteration of the while loop
