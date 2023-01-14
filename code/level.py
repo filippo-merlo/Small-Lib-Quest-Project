@@ -7,7 +7,7 @@ from player import Player
 from  DialogueBox import *
 from text import testi
 
-# The Level class will contain every visible object in the game 
+## The Level class will contain every visible object in the game 
 class Level:
     def __init__(self):
 
@@ -253,7 +253,7 @@ class Level:
                 # Blit the image to the screen
                 self.display_surface.blit(tile_image, offset_pos)
 
-## Functions to get object of interest offsetted position
+### Functions to get object of interest offsetted position
     def get_objects_pos(self):
         self.obj_pos_list = []
         for layer in self.tmx_data.objectgroups:
@@ -335,7 +335,8 @@ class Level:
                             self.dialoguebox.toggle_dialoguebox() #change from False to True or viceversa the attribute show_dialoguebox
                             self.who_is_talking = name
                             self.dialogue_block = False
-                                                          
+
+### Run method called in main loop                                                 
     def run(self):
         # draw and update the game
         self.create_map_from_img(self.player)

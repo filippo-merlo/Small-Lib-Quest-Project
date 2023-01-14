@@ -1,5 +1,8 @@
+#THIS FILE CONTAINS ALL THE TEXT POSSIBILITIES THAT CAN BE SHOWN IN THE GAME
+
 class testi:
 
+    ##In the init we have all the variables that check that the correct line of text is shown
     def __init__(self):
        #check dialogue line
         self.Kings_interact = [False, False, False, False] #check if you had the first interaction with all the kings
@@ -8,17 +11,19 @@ class testi:
         self.Genius = False #check if you've got the books
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
         self.endgame = False #last interaction done
-        self.Genius_count = 0
-        self.Librarian_count = 0
+        self.Genius_count = 0 #check for the second interaction in a row with the Genius/statue (after the books are dropped)
+        self.Librarian_count = 0 #check for the second interaciton in a row with the Librarian (to get to the endgame)
         
-    def dialogues(self, name, show_dialoguebox):  # methods with all the text interaction of the game
-        if name: #if there is a name as entry from the colliderect function in Level
+    ## methods with all the text interaction of the game
+    def dialogues(self, name, show_dialoguebox):  
+        if name: #if there is a name as entry from the check_interactio function in Level (when player rect and npcs rect are colliding and SPACEBAR is pressed)
+            
             #Librarian Dialogues
-            if name == 'Librarian' and show_dialoguebox and not all(self.Kings_interact): #if you have not  talk with the four magic beasts yet
+            if name == 'Librarian' and show_dialoguebox and not all(self.Kings_interact): #if you have not talk with the four magic beasts yet
                 speech = "LIBRARIAN: You!!! I was waiting for you! You are the hero the Human King sent! The four Beast Kings of this region are mad, you have to help us! The last time they were mad all together something tremendous happened! ..even though it was the reason the librarian position became vacant *Blink*.. But now is BAD! Even WORSE! Go and look for them at the boundaries of this realm!"
-                show_dialoguebox = False #says that something has been printed (Then in Level there it takes false, useful to stop the for loop at the first occurences)
-                self.Librarian1 = True
-                return speech
+                show_dialoguebox = False #says that something has been printed (Then in Level class it takes false, useful to stop the for loop at the first occurency)
+                self.Librarian1 = True #check that you have interacted with the Librarian the first time (now the quests can start)
+                return speech #return the line of text that has to be shown (in Level, as arugment in the dialogbox.draw functions called from the DialogueBox.py file)
             elif name == 'Librarian' and show_dialoguebox and all(self.Kings_interact) and not all(self.mission_check): #if you have already talk with the four magic beasts
                 speech = "LIBRARIAN: All this stuff?! This library is a mess you'll never find these books, and it's almost lunch break for me, so I cannot help you. AH we are doomed.. it's the end.. nothing will save us.. you better go and pray to that statue on the table!"
                 show_dialoguebox = False
@@ -27,7 +32,7 @@ class testi:
             elif name == 'Librarian' and show_dialoguebox and self.Genius == True and self.Librarian_count == 0 and all(self.mission_check): #if you have completed all the mission
                 speech = "LIBRARIAN: Can't you see that I'm having my lunch? What?! All the Kings are happy now? Well thank you! WE have saved the Kingdom! Yuppie! Please if you see the Human King tell him about my essential contribuition to the mission!"
                 show_dialoguebox = False
-                self.Librarian_count += 1
+                self.Librarian_count += 1 #now you can interact with the librarian again and another text will be shown
                 return speech
             elif name == 'Librarian' and show_dialoguebox and self.Librarian_count == 1: #if you have completed all the mission
                 speech = "Ah, I'm so proud of me today *Blink*. If you want to finish the game you should talk with Calcifer"
@@ -40,9 +45,9 @@ class testi:
                 show_dialoguebox= False
                 return speech
             elif name == 'Calsifer'and show_dialoguebox and self.Librarian_count == 1:
-                speech = ""
+                speech = "" #does not say anything, but...
                 show_dialoguebox= False
-                self.endgame = True
+                self.endgame = True #...update the endgame variable that will activate the endgame screen in main.py
                 return speech
 
             # Genius Dialogues
@@ -69,8 +74,8 @@ class testi:
             elif name == 'King_squid' and show_dialoguebox and self.Librarian1 == True and self.Genius == False: #if already interacted with Librarian
                 speech = "KING SQUID: I'm too old and tired to keep destroying these ships ° BLUB ° But I'm bored, what other things could I do? ° bored BLUB ° You! Bring me somethig entertaining! Bring me a tabloid! ° BLUB BLUB °"
                 show_dialoguebox = False
-                if not self.Kings_interact[0]:
-                    self.Kings_interact[0] = True
+                if not self.Kings_interact[0]: #if the first position of the list "Kings_interact" is false...
+                    self.Kings_interact[0] = True #...set it a true
                 return speech
             elif name == 'King_squid' and show_dialoguebox and self.Genius == True: #if you've gotten the books
                 speech ="KING SQUID: Thank you! ° BLUB ° Finally I can read something about the royal family... What?! The Queen died?!? I'm going to destroy even more ships now! ° angry BLUB BLUB °"
