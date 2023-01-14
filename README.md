@@ -36,5 +36,9 @@ THE GAME:
 Then you'll have to talk again with all of 4 Beast Kings to end up the quest.
 Finally you'll have to talk with the Librarian for the last time, and the game will be finish!
 
+A screenshot of the game:
+![image](https://user-images.githubusercontent.com/105349553/212478938-5c6e8a54-9e40-42c5-ba01-80a2de2183e1.png)
+
+
 
 
