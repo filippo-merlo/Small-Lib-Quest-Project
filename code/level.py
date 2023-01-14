@@ -327,19 +327,19 @@ class Level:
         #check event click
         for event in pygame.event.get(): # Get the vector with all the events (input from the user) 
             if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_ESCAPE:
-                            pygame.quit() # quit pygame
-                            sys.exit() # quit the while loop
-                        if event.key == pygame.K_SPACE:
-                            for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
-                                width = surf.get_width()+20
-                                height = surf.get_height()+80
-                                position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
-                                area_rect = pygame.Rect(position, (width, height))
-                                if pygame.Rect.colliderect(player_area, area_rect):
-                                    self.dialoguebox.toggle_dialoguebox() #change from False to True or viceversa the attribute show_dialoguebox
-                                    self.who_is_talking = name
-                                    self.dialogue_block = False
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit() # quit pygame
+                    sys.exit() # quit the while loop
+                if event.key == pygame.K_SPACE:
+                    for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
+                        width = surf.get_width()+20
+                        height = surf.get_height()+80
+                        position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
+                        area_rect = pygame.Rect(position, (width, height))
+                        if pygame.Rect.colliderect(player_area, area_rect):
+                            self.dialoguebox.toggle_dialoguebox() #change from False to True or viceversa the attribute show_dialoguebox
+                            self.who_is_talking = name
+                            self.dialogue_block = False
                                                           
     def run(self):
         # draw and update the game

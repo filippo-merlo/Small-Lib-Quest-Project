@@ -31,8 +31,6 @@ class Game:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit() # quit pygame
                         sys.exit() # quit the while loop
-                    if event.key == pygame.K_SPACE:
-                        self.level.dialoguebox.show_dialoguebox = True
                     
             ### Run the level object and update
             self.level.run() # run the Level Object
