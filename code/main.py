@@ -34,7 +34,7 @@ class Game:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit() # quit pygame
                         sys.exit() # quit the while loop
-                    if event.key == pygame.K_SPACE:
+                    if event.key == pygame.K_RETURN:
                         self.start = False
 
             if self.start:

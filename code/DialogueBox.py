@@ -1,4 +1,5 @@
 import pygame
+from settings import *
 
 class DialogueBox:
     def __init__(self):
@@ -9,11 +10,11 @@ class DialogueBox:
         self.x = 30 # This will position the rectangle "offset" pixels from the left edge of the screen.
         self.y = self.screen_size[1] - self.height - self.x # Sets the y attribute to the height of the screen minus the height of the rectangle (75 pixels) minus the offset value.
         self.width = self.screen_size[0] - (self.x * 2) # Sets the width attribute to the width of the screen minus twice the offset value. This will reduce the width of the rectangle by "offset" pixels on each side.
-        self.font = pygame.font.Font("./graphics/font/font.ttf", 17) #define font and size
+        self.font = pygame.font.Font("./graphics/font/font.ttf", FONT_SIZE) #define font and size
         self.dialoguebox_sound =  pygame.mixer.Sound('./data/sound/dialoguebox_sound.mp3')
         self.show_dialoguebox = False #init dialogbox at False don't show
     
-    def blit_text(self,surface, text, pos, font, color=pygame.Color('White')):
+    def blit_text(self, surface, text, pos, font, color=pygame.Color('White')):
         words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
         space = font.size(' ')[0]  # The width of a space.
         max_width, max_height = surface.get_size()

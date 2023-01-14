@@ -14,13 +14,10 @@ class Menu:
         
         # Settings for the start sceen
         self.image_start = pygame.image.load("./graphics/Title/Small Lib Quest(Gold font).png").convert_alpha()
-        self.font_bottom_start =  pygame.font.Font("./graphics/font/font.ttf", 30)
+        self.font =  pygame.font.Font("./graphics/font/font.ttf", 25)
+        self.font_the_end = pygame.font.Font("./graphics/font/font.ttf", 80) #define font and size
 
-        # Settings for the end sceen
-        self.font_top_end = pygame.font.Font("./graphics/font/font.ttf", 80) #define font and size
-        self.font_bottom_end = pygame.font.Font("./graphics/font/font.ttf", 50)
-        
-    def blit_text(self,surface, text, pos, font, color=pygame.Color('White')):
+    def blit_text(self, surface, text, pos, font, color=pygame.Color('White')):
         words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
         space = font.size(' ')[0]  # The width of a space.
         max_width, max_height = surface.get_size()
@@ -40,19 +37,28 @@ class Menu:
     def start_menu(self):      
         # Create the rectangles surfaces
         surface = pygame.Surface((self.width, self.height))
-        text_surface = pygame.Surface((self.width//4, self.height//4))
+        text_surface = pygame.Surface((self.width//2, self.height//4))
+        white_border_1 = pygame.Surface(((self.width//2)+20, (self.height//4)+20))
+        white_border_2 = pygame.Surface(((self.width//2)+60, (self.height//4)+60))
+        Gold_border = pygame.Surface(((self.width//2)+40, (self.height//4)+40))
         # Fill the rectangles surfaces with the same color
-        surface.fill((255, 0, 0))
-        #text_surface.fill((0, 0, 0))
+        surface.fill((0, 0, 0))
+        text_surface.fill((0, 0, 0))
+        white_border_1.fill((255, 255, 255))
+        white_border_2.fill((255, 255, 255))
+        Gold_border.fill((255, 223, 0))
         # Create the text 
-        text1 = "Press <ARROW KEYS> to move your player and the <SPACEBAR> to interact!"
-        text2 = "Press <SPACEBAR> to start the game"
+        text1 = "Press <ARROW KEYS> to move your player and the <SPACEBAR> to interact.\n\n\nPress <RETURN> to start the game!"
         # Blit the text/image on the center of their corresponding rectangle surfaces
-        surface.blit(self.image_start, self.image_start.get_rect(center = surface.get_rect().center))
-        #self.blit_text(text_surface, text1, (self.width, self.half_height), self.font_bottom_start)
-        #self.blit_text(text_surface, text2, (self.width, self.half_height+20), self.font_bottom_start)
+        surface.blit(self.image_start, self.image_start.get_rect(center =(surface.get_rect().centerx, surface.get_rect().centery - 200)))
+        self.blit_text(text_surface, text1, (20,20), self.font)
         
         self.display_surface.blit(surface, (0,0))
+        self.display_surface.blit(white_border_2, ((self.half_width-self.width//4)-30, (self.half_height+20)-30))
+        self.display_surface.blit(Gold_border, ((self.half_width-self.width//4)-20, (self.half_height+20)-20))
+        self.display_surface.blit(white_border_1, ((self.half_width-self.width//4)-10, (self.half_height+20)-10))
+        self.display_surface.blit(text_surface, (self.half_width-self.width//4, self.half_height+20))
+        
 
     def end_screen(self):
         #if endgame == True and show_dialog_box == False: #if last interaction True and there is no dialogbox (so you should have close it)

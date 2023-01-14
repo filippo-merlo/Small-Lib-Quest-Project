@@ -9,6 +9,7 @@ class testi:
         self.mission_check = [False, False, False, False] #check if the 4 quest has been solved
         self.endgame = False #last interaction done
         self.Genius_count = 0
+        self.Librarian_count = 0
         
     def dialogues(self, name, show_dialoguebox):  # methods with all the text interaction of the game
         if name: #if there is a name as entry from the colliderect function in Level
@@ -26,13 +27,23 @@ class testi:
             elif name == 'Librarian' and show_dialoguebox and self.Genius == True and all(self.mission_check): #if you have completed all the mission
                 speech = "LIBRARIAN: Can't you see that I'm having my lunch? What?! All the Kings are happy now? Well thank you! WE have saved the Kingdom! Yuppie! Please if you see the Human King tell him about my essential contribuition to the mission!"
                 show_dialoguebox = False
-                self.endgame = True
+                self.Librarian_count += 1
+                return speech
+            elif name == 'Librarian' and show_dialoguebox and self.Librarian_count == 1: #if you have completed all the mission
+                speech = "Ah, I'm so proud of me today *Blink*. If you want to finish the came you should talk with Calcifer"
+                show_dialoguebox = False
                 return speech
                 
             # Calsifer Dialogues
             if name == 'Calsifer'and show_dialoguebox:
                 speech = "CALCIFER: Brrrn*.. Brn.. Brrrrrn*.. 'Damn this fire is hot!'"
                 show_dialoguebox= False
+                self.endgame = True
+                return speech
+            elif name == 'Calsifer'and show_dialoguebox and self.Librarian_count == 1:
+                speech = "CALCIFER: Brrrn*.. Brn.. Brrrrrn* GOOODBYE HERO! Brrrn*.. Brn.. Brrrrrn*"
+                show_dialoguebox= False
+                self.endgame = True
                 return speech
 
             # Genius Dialogues
