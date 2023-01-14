@@ -1,4 +1,5 @@
 import pygame
+
 from settings import *
 
 ### This is the class defining the vary objects to print in the game

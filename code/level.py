@@ -1,8 +1,9 @@
 import pygame, sys
+from pytmx.util_pygame import load_pygame # module of tmxpy that works for pygame, we need this to handle the tmx file where the map is contained. The map was created using Tiled, an application for designing games levels
+
 from settings import *
 from tile import Tile
 from player import Player
-from pytmx.util_pygame import load_pygame # module of tmxpy that works for pygame
 from  DialogueBox import *
 from text import testi
 
