@@ -1,4 +1,5 @@
 import pygame
+
 from settings import *
 
 ### Tiles are small squares to compose an image

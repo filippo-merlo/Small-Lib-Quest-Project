@@ -1,10 +1,11 @@
 ### Import all the usefull libraries 
 import pygame, sys
+
 from settings import *
 from level import Level
 from start_and_end_menu import Menu
 
-### Create the Game class
+### CREATE THE GAME CLASS, THIS IS THE CLASS THAT HAS TO BE RAN
 class Game:
     def __init__(self):
         ## Initiate pygame
@@ -17,21 +18,20 @@ class Game:
         self.clock = pygame.time.Clock() # create a clock object to set a celing for the frame rate on which the update of the screen will be performed
         ## Import music
         pygame.mixer.music.load('./data/sound/zelda_theme_8_bit.mp3') # import music file
-        ## Instantiate the level class
+        ## Instantiate the level class (containing the whole game) and the menu class (containing the functions to print the start and the end screens)
         self.level = Level() # Create the Level object imported from level.
         self.menu = Menu() # Instantiate menu class
-        self.start = True
+        self.start = True # If true the start screen is printed, if false the self.level instrance is runned, and the game start
     
 
 ### Create the while loop that will update the screen each frame
     def run(self):
         pygame.mixer.music.play() #Play the music
-        #pygame.mixer.music.set_volume(0)
         while True: #while the game is open --> everything will pass through here
             ## Set the Quit  button
             for event in pygame.event.get(): # Get the vector with all the events (input from the user) 
                 if event.type == pygame.KEYDOWN: #if you press a key
-                    if event.key == pygame.K_ESCAPE: #and the key is <ESC>
+                    if event.key == pygame.K_ESCAPE: #and the key is <ESCAPE>
                         pygame.quit() # quit pygame
                         sys.exit() # quit the while loop
                     if event.key == pygame.K_RETURN: #Key to press to start the game after the introduction screen
@@ -46,10 +46,11 @@ class Game:
             if self.level.testi.endgame: #if the var that check for the endgame (from dialogues in testi class) is True then
                 self.menu.end_screen() #show the end screen
 
-            if pygame.mixer.music.get_pos() >= 2.37*60000:
-                pygame.mixer.music.fadeout(6000)
-            if pygame.mixer.music.get_pos() == -1:
-                 pygame.mixer.music.play()
+            ## When the music file reproduction finish restart the music
+            if pygame.mixer.music.get_pos() >= 2.37*60000: # get the music timing and compare with the duration of the music file
+                pygame.mixer.music.fadeout(6000) # set a fadeout for ending the music reproduction
+            if pygame.mixer.music.get_pos() == -1: # when the fadeout is performed the timing become -1
+                 pygame.mixer.music.play() # start a new music file reproduction
             
             self.clock.tick(FPS) # set the maximum frame rate (from settings.py)
             pygame.display.update() # this method will update the screen at each iteration of the while loop
@@ -57,5 +58,5 @@ class Game:
 ### Run the game with .run() method
 if __name__ == '__main__': # If the source file is executed as the main program, the interpreter sets the __name__ variable to have a value “__main__”. If this file is being imported from another module, __name__ will be set to the module’s name.
                            # __name__ is a built-in variable which evaluates to the name of the current module
-    game = Game()
-    game.run()
+    game = Game() # Instantiate the game class
+    game.run() # Start the game while loop
