@@ -22,7 +22,6 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
         self.obstacle_sprites = obstacle_sprites # instantiate the obstacle_sprites =  pygame.sprite.Group() to use it in this class
         self.block = False # to block the player during dialogues
 
-
     def import_player_assets(self):
         character_path =  "./sprites/characters/"
         frames_dict = {'player_still':[],'player_moove':[]}
@@ -36,8 +35,6 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class
         self.animations['left_still'] = [pygame.transform.scale(pygame.transform.flip(i, flip_x = True, flip_y=False), (PLAYERSIZE_W, PLAYERSIZE_H)) for i in frames_dict['player_still']]
         self.animations['right'] = [pygame.transform.scale(i, (PLAYERSIZE_W, PLAYERSIZE_H)) for i in frames_dict['player_moove']]
         self.animations['left'] = [pygame.transform.scale(pygame.transform.flip(i, flip_x = True, flip_y=False), (PLAYERSIZE_W, PLAYERSIZE_H)) for i in frames_dict['player_moove']]
-
-        
 
     ### Connect the user input with variations in the direction 2D  vector
     def input(self):
