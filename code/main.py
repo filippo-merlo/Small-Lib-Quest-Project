@@ -9,20 +9,21 @@ class Game:
     def __init__(self):
         ## Initiate pygame
         pygame.init() 
-        ## Create the display surface, the window where the game will run 
+        ## Create the display surface, the main surface where all the games images will be printed 
         info = pygame.display.Info() # get the info of the display
         size = (info.current_w, info.current_h) #from info get the size of the display Width and Height
-        pygame.display.set_mode(size, pygame.FULLSCREEN)
+        pygame.display.set_mode(size, pygame.FULLSCREEN) # set the display surface in FULLSCREEN mode
         pygame.display.set_caption('Small Lib Quest') # Set the window's name
         self.clock = pygame.time.Clock() # create a clock object to set a celing for the frame rate on which the update of the screen will be performed
-        # Import music and initialize level class
+        ## Import music
         pygame.mixer.music.load('./data/sound/zelda_theme_8_bit.mp3') # import music file
+        ## Instantiate the level class
         self.level = Level() # Create the Level object imported from level.
         self.menu = Menu() # Instantiate menu class
         self.start = True
     
 
-    ### Create the while loop that will update the screen each frame
+### Create the while loop that will update the screen each frame
     def run(self):
         pygame.mixer.music.play() #Play the music
         #pygame.mixer.music.set_volume(0)
