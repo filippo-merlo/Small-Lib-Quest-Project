@@ -45,8 +45,8 @@ class Menu:
         surface.fill((0, 0, 0))
         text_surface.fill((0, 0, 0))
         white_border.fill((255, 255, 255))
-        Gold_border_1.fill((255, 223, 0))
-        Gold_border_2.fill((255, 223, 0))
+        Gold_border_1.fill((255, 225, 0))
+        Gold_border_2.fill((255, 225, 0))
         # Create the text 
         text1 = "Press <ARROW KEYS> to move your player and the <SPACEBAR> to interact.\n\n\nPress <RETURN> to start the game!"
         # Blit the text/image on the center of their corresponding rectangle surfaces
