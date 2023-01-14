@@ -12,17 +12,20 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class (bui
         self.image = pygame.transform.scale(self.image, (PLAYERSIZE_W, PLAYERSIZE_H)) # scale image with the size of Width and Height that we have chose in settings.py
         self.rect = self.image.get_rect(topleft = pos) # create the rect to blit on the screen surface of the same size of the image and position given by pos argument. position is extracted from the "create_map" function in the level class
         self.hitbox = self.rect.inflate(-15,-40) # hitbox(x,y) is another rect of the same size of the precedent, that can be modified to get 3D illusion in collision with other tiles. In this case it's inflate (reduced both sides) by values that allow us to give a fake 3D illusion
-        self.animation_speed = 0.15
-        self.frame_index = 0
-        self.import_player_assets()
-        self.status = 'right_still'
+        self.animation_speed = 0.15 # FIL?
+        self.frame_index = 0 # FIL?
+        self.import_player_assets() # cancellabile?
+        self.status = 'right_still' #FIL?
 
         self.direction = pygame.math.Vector2() # will give as a 2d vector to define the player movement
                                                # now x,y = 0, then we want to modify them such as when you pres right x += 1 * player_speed
-        self.speed = SPEED # set pix/sec speed of moovement of the player
-        self.obstacle_sprites = obstacle_sprites # instantiate the obstacle_sprites =  pygame.sprite.Group() to use it in this class
+        self.speed = SPEED # set pix/sec speed of movement of the player, defined in settings.py
+        self.obstacle_sprites = obstacle_sprites #instantiate the obstacle_sprites =  pygame.sprite.Group() to use it in this class
+                                                 #Build-in class in Pygame that allow to manage multiple sprite at once
         self.block = False # to block the player during dialogues
 
+
+    ## ??? FIL
     def import_player_assets(self):
         character_path =  "./sprites/characters/"
         frames_dict = {'player_still':[],'player_moove':[]}
@@ -37,17 +40,18 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class (bui
         self.animations['right'] = [pygame.transform.scale(i, (PLAYERSIZE_W, PLAYERSIZE_H)) for i in frames_dict['player_moove']]
         self.animations['left'] = [pygame.transform.scale(pygame.transform.flip(i, flip_x = True, flip_y=False), (PLAYERSIZE_W, PLAYERSIZE_H)) for i in frames_dict['player_moove']]
 
-    ### Connect the user input with variations in the direction 2D  vector
+    ## Connect the user input with variations in the direction 2D vector
+    ## NB the map start from the Origin point (0,0) in the top left corner, if i'm moving right the X encreases, and if the player is moving down, the Y encreases
     def input(self):
             keys = pygame.key.get_pressed() # get input
-            if keys[pygame.K_UP]:
-                self.direction.y = -1
-                self.status = self.status.replace('_still','')
+            if keys[pygame.K_UP]: #If key arrow up is pressed
+                self.direction.y = -1 #direction gets value -1 (going up i'm getting closer to the 0y point)
+                self.status = self.status.replace('_still','') #FIL?
             elif keys[pygame.K_DOWN]:
                 self.direction.y = 1
                 self.status = self.status.replace('_still','')
             else:
-                self.direction.y = 0
+                self.direction.y = 0 #elif, if no keys are pressed the player doesn't have to move
             if keys[pygame.K_LEFT]:
                 self.direction.x = -1
                 self.status = 'left'
@@ -57,15 +61,16 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class (bui
             else:
                 self.direction.x = 0
 
+    #FIL?
     def get_status(self):
         if self.direction.y == 0 and self.direction.x == 0:
             if not '_still' in self.status:
                 self.status = self.status + '_still'
 
-    ### Use the direction vector to update the player rect position
+    ## Use the direction vector (self.direction) to update the player rect position
     def move(self,speed):
-        if self.direction.magnitude() != 0:# normalize direction
-            self.direction = self.direction.normalize() # if the dir vector is diff from 0 it will be normalized
+        if self.direction.magnitude() != 0: # normalize direction
+            self.direction = self.direction.normalize() # if the direction vector is different from 0 it will be normalized (basically, without this pressing e.g. up and right, would move the player faster because of the input of two vectors)
         self.hitbox.x += self.direction.x * speed # modify the self.rect.x position accordingly with the user input 
         self.collision('horizontal') # add the collision in x direction
         self.hitbox.y += self.direction.y * speed # modify the self.rect.x position accordingly with the user input 

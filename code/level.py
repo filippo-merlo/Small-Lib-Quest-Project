@@ -24,7 +24,7 @@ class Level:
         # in pygame the sprite class allows to combines a surface(an image) and a rectangle (needed to moove the surfaces on the main one) + other features in the same object
         # Sprite Group, allows to target (es update), a determined category of sprites.
         self.visible_sprites = YSortCameraGroup()  
-        self.obstacle_sprites = pygame.sprite.Group()
+        self.obstacle_sprites = pygame.sprite.Group() #Build-in class in Pygame that allow to manage multiple sprite at once
 
         ## Load and scale the map BACKGROUND immage accordingly with the ZOOM level we decided
         self.tmx_data = load_pygame('./data/tmx/map.tmx')
