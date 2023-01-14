@@ -86,14 +86,16 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class (bui
                         self.hitbox.right = sprite.hitbox.left #then move the player to the left side of the rect of the object with is colliding with
                     if self.direction.x < 0: # if moving left, means that is colliding with the left side of its rect
                         self.hitbox.left = sprite.hitbox.right #then move the player to the right side of the rect of the object with is colliding with
-        if direction == 'vertical':
-            for sprite in self.obstacle_sprites:
-                if sprite.hitbox.colliderect(self.hitbox):
-                    if self.direction.y > 0: # moving down
-                        self.hitbox.bottom = sprite.hitbox.top
-                    if self.direction.y < 0: # moving up
-                        self.hitbox.top = sprite.hitbox.bottom
+        if direction == 'vertical': # if the movement is within the y dimension of the direction vector 
+            for sprite in self.obstacle_sprites:  #loop through all the sprites
+                if sprite.hitbox.colliderect(self.hitbox): #if there is a collision with one of the sprite in the obstacle_sprite group
+                    if self.direction.y > 0: # if moving down, means that is colliding with the bottom side of its rect
+                        self.hitbox.bottom = sprite.hitbox.top #then move the player to the top side of the rect of the object with is colliding with
+                    if self.direction.y < 0: # if moving up, means that is colliding with the top side of its rect
+                        self.hitbox.top = sprite.hitbox.bottom #then move the player to the bottom side of the rect of the object with is colliding with
 
+    ## Methods for player animations 
+    #FIL
     def animate(self):
         animation = self.animations[self.status]
 
@@ -105,7 +107,7 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class (bui
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center = self.hitbox.center)
 
-    
+    #Method called in level class in run method to update all the player methods
     def update(self):
         if not self.block:
             self.input()
