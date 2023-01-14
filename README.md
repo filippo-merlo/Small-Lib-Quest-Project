@@ -43,6 +43,7 @@ THE GAME:
 -Finally you'll have to talk with the Librarian for the last time, to enter in the end game. After the first dialogue with the librarian, if you'll talk with him again it will tell you to interact with Calcifer (the fire) to close the game by pressing[ESCAPE KEY].
 
 A screenshot of the game:
+
 ![image](https://user-images.githubusercontent.com/105349553/212478938-5c6e8a54-9e40-42c5-ba01-80a2de2183e1.png)
 
 
