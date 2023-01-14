@@ -62,6 +62,7 @@ class Menu:
         
 
     def end_screen(self):
+
         #if endgame == True and show_dialog_box == False: #if last interaction True and there is no dialogbox (so you should have close it)
         pygame.time.wait(2) #then wait 2 seconds and print everything
         # Create the rectangles surfaces

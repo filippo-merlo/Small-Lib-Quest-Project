@@ -36,7 +36,8 @@ class Game:
                         sys.exit() # quit the while loop
                     if event.key == pygame.K_RETURN:
                         self.start = False
-
+                    
+                    
             if self.start:
                 self.menu.start_menu()
             if self.start == False and self.level.endgame == False:
