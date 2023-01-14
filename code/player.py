@@ -75,17 +75,17 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class (bui
         self.collision('horizontal') # add the collision in x direction
         self.hitbox.y += self.direction.y * speed # modify the self.rect.x position accordingly with the user input 
         self.collision('vertical') # add the collision in y direction
-        self.rect.center = (self.hitbox.centerx, self.hitbox.centery-10)
+        self.rect.center = (self.hitbox.centerx, self.hitbox.centery-10) #FIL?
         
-    ### Define collisions
+    ## Define collisions
     def collision(self,direction):
         if direction == 'horizontal': # if the movement is within the x dimension of the direction vector 
-            for sprite in self.obstacle_sprites: # 
-                if sprite.hitbox.colliderect(self.hitbox):
-                    if self.direction.x > 0: # moving right
-                        self.hitbox.right = sprite.hitbox.left
-                    if self.direction.x < 0: # moving left
-                        self.hitbox.left = sprite.hitbox.right
+            for sprite in self.obstacle_sprites: #loop through all the sprites
+                if sprite.hitbox.colliderect(self.hitbox): #if there is a collision with one of the sprite in the obstacle_sprite group
+                    if self.direction.x > 0: # if moving right, means that is colliding with the right side of its rect
+                        self.hitbox.right = sprite.hitbox.left #then move the player to the left side of the rect of the object with is colliding with
+                    if self.direction.x < 0: # if moving left, means that is colliding with the left side of its rect
+                        self.hitbox.left = sprite.hitbox.right #then move the player to the right side of the rect of the object with is colliding with
         if direction == 'vertical':
             for sprite in self.obstacle_sprites:
                 if sprite.hitbox.colliderect(self.hitbox):
