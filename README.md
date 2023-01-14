@@ -30,10 +30,15 @@ Something bad happen in the SLQ world, the four Beast Kings are mad and they are
 
 THE GAME:
 -In the very beginning you can have a walk around the map and interact with the npcs but the quest will not be activated yet.
+
 -Around the map there are four npcs that will talk to you, but to start the quests you'll have to talk with the Librarian first. 
+
 -After that you'll have to talk with the 4 Kings and they will tell you what they need. 
+
 -After you'll have interact with all 4 of them, you'll have to come back to the Librarian and he will  tell you how to solve the situation (interact with the statue in the middle of the libary).
+
 -Then you'll have to talk again with all of 4 Beast Kings to end up the quest.
+
 -Finally you'll have to talk with the Librarian for the last time, to enter in the end game. After the first dialogue with the librarian, if you'll talk with him again it will tell you to interact with Calcifer (the fire) to close the game by pressing[ESCAPE KEY].
 
 A screenshot of the game:
