@@ -4,7 +4,6 @@ from settings import *
 from level import Level
 from start_and_end_menu import Menu
 
-
 ### Create the Game class
 class Game:
     def __init__(self):
