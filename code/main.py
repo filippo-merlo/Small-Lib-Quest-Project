@@ -1,5 +1,6 @@
 ### Import all the usefull libraries 
 import pygame, sys
+from pathlib import Path
 
 from settings import *
 from level import Level
@@ -17,7 +18,7 @@ class Game:
         pygame.display.set_caption('Small Lib Quest') # Set the window's name
         self.clock = pygame.time.Clock() # create a clock object to set a celing for the frame rate on which the update of the screen will be performed
         ## Import music
-        pygame.mixer.music.load('./data/sound/zelda_theme_8_bit.mp3') # import music file
+        pygame.mixer.music.load(Path('./data/sound/zelda_theme_8_bit.mp3')) # import music file
         ## Instantiate the level class (containing the whole game) and the menu class (containing the functions to print the start and the end screens)
         self.level = Level() # Create the Level object imported from level.
         self.menu = Menu() # Instantiate menu class
@@ -54,7 +55,7 @@ class Game:
 
             if self.level.testi.endgame: #if endgame is reached
                 if self.switch_music: #if variable switch music is True (is initialized as True)
-                    pygame.mixer.music.load('./data/sound/Hudson Mohawke - Cbat.mp3') #load the new music
+                    pygame.mixer.music.load(Path('./data/sound/Hudson Mohawke - Cbat.mp3')) #load the new music
                     pygame.mixer.music.play() #and play it
                     self.switch_music = False #then swithc music become false
                 if pygame.mixer.music.get_pos() <= 0.415*60000: #if music-time is under a certain amount of time played

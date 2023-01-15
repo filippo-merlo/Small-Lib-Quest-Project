@@ -12,6 +12,9 @@ LIBRARIES NEEDED
 
 3) Screeinfo:
     pip install screeninfo
+
+4) Pathlib:
+    pip install pathlib
  
 
 ENVIROMENT:

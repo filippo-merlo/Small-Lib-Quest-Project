@@ -1,4 +1,5 @@
 import pygame
+from pathlib import Path
 
 from settings import *
 
@@ -8,7 +9,7 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class (bui
     #initialize all the variable useful for the methods below
     def __init__(self,pos,groups,obstacle_sprites): #as arguments we have the same of the Tile class in tile.py file
         super().__init__(groups) # Call the __init__ method of the Inherited class
-        self.image = pygame.image.load("./sprites/characters/player_still_1.png").convert_alpha() # load image of the player #convert_alpha use only the actual pixel of the png
+        self.image = pygame.image.load(Path("./sprites/characters/player_still_1.png")).convert_alpha() # load image of the player #convert_alpha use only the actual pixel of the png
         self.image = pygame.transform.scale(self.image, (PLAYERSIZE_W, PLAYERSIZE_H)) # scale image with the size of Width and Height that we have chose in settings.py
         self.rect = self.image.get_rect(topleft = pos) # create the rect to blit on the screen surface of the same size of the image and position given by pos argument. position is extracted from the "create_map" function in the level class
         self.hitbox = self.rect.inflate(-15,-40) # hitbox(x,y) is another rect of the same size of the precedent, that can be modified to get 3D illusion in collision with other tiles. In this case it's inflate (reduced both sides) by values that allow us to give a fake 3D illusion
@@ -33,7 +34,7 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class (bui
         r = range(1,6)
         for img in frames_dict.keys(): # iterate over the two keys of the dict
             for i in r: # for i in r = 6
-                full_path =  character_path + img + '_'+str(i)+'.png' # generate the full path for the images: path root + img name from the keys + index + .png: an image names could be 'player_still_1.png'
+                full_path =  Path(character_path + img + '_'+str(i)+'.png') # generate the full path for the images: path root + img name from the keys + index + .png: an image names could be 'player_still_1.png'
                 frames_dict[img].append(pygame.image.load(full_path)) # load the img and append in the dict list
         ## Fill the final animation dict with the right transformation of the images: scaling them to the right PLAYERSIZE and flip theem to make all the left animations
         self.animations['right_still'] = [pygame.transform.scale(i, (PLAYERSIZE_W, PLAYERSIZE_H)) for i in frames_dict['player_still']]
