@@ -294,11 +294,11 @@ class Level:
 ### Functions to get the dialogues
     def player_coord(self):
         
-        ## Player coordinates(x,y) for interaction (so it's in the center of the screen)
+        ## Player coordinates(x,y) that we will use to get interaction with npcs. The player will have the coordinates given by the center of the screen (that will be updated by the offest (map/screen) when it'll get closer to the boarder of the map, because it won't be at the center of the screen anymore)
         self.offset.x = self.player.rect.x+PLAYERSIZE_W - self.half_width # get the player rectangle center position on x, multiply it for the player Width size and subtract half of the dislay Width
         self.offset.y = self.player.rect.y+PLAYERSIZE_H - self.half_height # get the player rectangle center position on y, multiply it for the player Height size and subtract half of the display Height
     
-        offset_pos = self.player.rect.center - self.offset # in his position - the offset given by the position of the player
+        offset_pos = self.player.rect.center - self.offset # in his position minus the offset given by the position of the player
         if self.offset.x >= self.map.get_width() - self.width:
             offset_pos.x = self.player.rect.x - (self.map.get_width() - self.width)
         if self.offset.y >= self.map.get_height() - self.height:
