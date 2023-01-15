@@ -14,7 +14,7 @@ class Menu:
         self.height = self.display_surface.get_size()[1]#get the height of the the display's surface
         self.half_width = self.display_surface.get_size()[0]//2 #get half of the width of the the display's surface
         self.half_height = self.display_surface.get_size()[1]//2 #get half of the height of the the display's surface
-        font_multiplier = self.width/self.height
+        font_multiplier = self.width/self.height # resize on the basis of screen rateo 
         
         # Settings for the start sceen
         self.image_start = pygame.image.load(Path("./graphics/Title/Small Lib Quest(Gold font).png")).convert_alpha() #import image for start screen #convert_alpha use only the actual pixel of the png
