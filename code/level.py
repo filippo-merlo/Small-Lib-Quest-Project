@@ -1,5 +1,6 @@
 import pygame, sys
 from pytmx.util_pygame import load_pygame # module of tmxpy that works for pygame, we need this to handle the tmx file where the map is contained. The map was created using Tiled, an application for designing games levels
+from pathlib import Path
 
 from settings import *
 from tile import Tile
@@ -29,8 +30,8 @@ class Level:
         self.obstacle_sprites = pygame.sprite.Group() # Build-in class in Pygame that allow to manage multiple sprite at once, we need it to create a separate group of sprites that will be use for making the non-overlapable walls of the map
 
         ## Load and scale the map BACKGROUND immage accordingly with the ZOOM level we decided
-        self.tmx_data = load_pygame('./data/tmx/map.tmx') # load tmx file with the coordinates and paths to all the images of the games objects
-        self.map = pygame.image.load('./data/tmx/map.png').convert_alpha() # load map image 
+        self.tmx_data = load_pygame(Path('./data/tmx/map.tmx')) # load tmx file with the coordinates and paths to all the images of the games objects
+        self.map = pygame.image.load(Path('./data/tmx/map.png')).convert_alpha() # load map image 
         self.map = pygame.transform.scale(self.map,(self.map.get_width()*ZOOM,self.map.get_height()*ZOOM)) # scale the map accordingly with the zoom level
        
         ## Sprite set up
@@ -118,7 +119,7 @@ class Level:
                 offset_pos.x = tile_pos[0] 
             if self.offset.y <= 0:
                 offset_pos.y = tile_pos[1]
-            self.display_surface.blit(surf, offset_pos)
+            self.display_surface.blit(surf, offset_pos) # blit/draw the updated tiles on the main surface
 
     def create_map_from_img(self, player): # same as upper tiles but for teh map image, it's starting position in (0,0)
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
@@ -313,7 +314,7 @@ class Level:
     def check_interaction(self):
         objects_offset_pos= self.get_objects_offset_pos(self.player) #function to get the pos of the npc scaled on the player
         player_area = self.player_coord() #function to get the player coord based on the center of its rect
-        dialogue_icon = pygame.image.load('./sprites/icons/dialogue_icon.png').convert_alpha()
+        dialogue_icon = pygame.image.load(Path('./sprites/icons/dialogue_icon.png')).convert_alpha()
         dialogue_icon = pygame.transform.scale(dialogue_icon, (TILESIZE,TILESIZE))
         for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
                             width = surf.get_width()+20
