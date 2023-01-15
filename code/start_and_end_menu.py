@@ -54,7 +54,7 @@ class Menu:
         Gold_border_1.fill((255, 225, 0)) #gold color
         Gold_border_2.fill((255, 225, 0)) #gold color
         # Create the text 
-        text1 = "Press <ARROW KEYS> to move your player and the <SPACEBAR> to interact with NPCs.\n\n\nPress <RETURN> to start the game!\n\n\nPress <ESCAPE> to close the game.."
+        text1 = "Press <ARROW KEYS> to move your player and the <SPACEBAR> when the dialogue balloon appears to interact with NPCs.\n\n\nPress <RETURN> to start the game!\n\n\nPress <ESCAPE> (in any moment) to close the game.."
         # Blit the text/image on the center of their corresponding rectangle surfaces
         surface.blit(self.image_start, self.image_start.get_rect(center =(surface.get_rect().centerx, surface.get_rect().centery - 200))) #blit the image on the screen in the middle of the surface
         self.blit_text(text_surface, text1, (20,20), self.font) #uses the function blit_text(surface,text,position,font) to show the text on the screen.
