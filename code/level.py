@@ -22,16 +22,17 @@ class Level:
         ## Create an offset vector that will be used to get the offset position of the objects in the map. They will be moving accordingly with the players input. This will print the player on the center of the screen and make the camera moving around following him
         self.offset = pygame.math.Vector2() #will give as a 2d vector to define the player movement
         
-        # Sprites are all the objects printed on the screen in videogames 
+        ## Sprites are all the objects printed on the screen in videogames 
         # in pygame the sprite class allows to combines a surface(an image) and a rectangle (needed to moove the surfaces on the main one) + other features in the same object
         # Sprite Group, allows to target (es update), a determined category of sprites.
-        self.visible_sprites = YSortCameraGroup()  #Build-in class in Pygame ????
-        self.obstacle_sprites = pygame.sprite.Group() #Build-in class in Pygame that allow to manage multiple sprite at once
+        self.visible_sprites = YSortCameraGroup()  # Custom Group that is needed to draw each element accordingly with the position of the player. It will generate the illusion of the player mooving in the map (with a camera following him from the top), when actually it will happen the opposite, the map is mooving accordingly of the changes of the player's rect coordinates
+        self.obstacle_sprites = pygame.sprite.Group() # Build-in class in Pygame that allow to manage multiple sprite at once, we need it to create a separate group of sprites that will be use for making the non-overlapable walls of the map
 
         ## Load and scale the map BACKGROUND immage accordingly with the ZOOM level we decided
-        self.tmx_data = load_pygame('./data/tmx/map.tmx')
+        self.tmx_data = load_pygame('./data/tmx/map.tmx') # load tmx file with the coordinates and paths to all the images of the games objects
         self.map = pygame.image.load('./data/tmx/map.png').convert_alpha() # load map image 
-        self.map = pygame.transform.scale(self.map,(self.map.get_width()*ZOOM,self.map.get_height()*ZOOM))
+        self.map = pygame.transform.scale(self.map,(self.map.get_width()*ZOOM,self.map.get_height()*ZOOM)) # scale the map accordingly with the zoom level
+       
         ## Sprite set up
         self.create_map() # function that extract all the map tiles immages from the tmx file
         self.get_objects_pos() # function that get the position in the map of some objects
@@ -41,43 +42,40 @@ class Level:
         self.upper_tiles_list = self.get_upper_tiles()
 
         ## SET DIALOGUES AND INTERACTIONS
-    
         self.who_is_talking = None #output of check interaction function
         self.speach = ""  #gets in input the current line of text for the dialogue
-        self.dialogue_block = True
+        self.dialogue_block = True # Control that only one dialogue is extracted.
         self.dialoguebox = DialogueBox() #instance of the class Mywindow
         self.testi = testi() #instance of the class testi        
         
+    ## CREATE MAP FROM THE .tmx FILE
     def create_map(self):
-         for layer in self.tmx_data.visible_layers:
-             if layer.name in ["Buildings", "Library"] and hasattr(layer,'data'):
-                 for x,y,surf in layer.tiles():
-                     pos = (x*TILESIZE, y*TILESIZE)
-                     surf = pygame.transform.scale(surf, (round(surf.get_width()*ZOOM),round(surf.get_height()*ZOOM)))
-                     Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
-         for layer in self.tmx_data.objectgroups:
+         for layer in self.tmx_data.visible_layers: # from visible layers in the .tmx map file (all the tiles are disposed in different layers to control the overlappings)
+             if layer.name in ["Buildings", "Library"] and hasattr(layer,'data'): # select the layers named buildings and library, nad chech if they are empty 
+                 for x,y,surf in layer.tiles(): # from each layer extract position and image of each single tile 
+                     pos = (x*TILESIZE, y*TILESIZE) # define position
+                     surf = pygame.transform.scale(surf, (round(surf.get_width()*ZOOM),round(surf.get_height()*ZOOM))) # scale image
+                     Tile(pos = pos, surf = surf, groups = [self.visible_sprites]) # create tile assigning it to the self.visible_sprites
+         for layer in self.tmx_data.objectgroups: # same for objects (they are more or less the same but they are genrated differently in Tiled, the application we used to create the level)
              if layer.name in ["Forrest_trees"]:
                  for obj in self.tmx_data.get_layer_by_name(layer.name):
                      if obj.image:
                          pos = (obj.x*ZOOM, obj.y*ZOOM)
                          surf = pygame.transform.scale(obj.image, (round(obj.width*ZOOM),round(obj.height*ZOOM)))
                          Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
-    
-         for layer in self.tmx_data.visible_layers:
+         for layer in self.tmx_data.visible_layers: # same here
              if layer.name in ["Vegetation"] and hasattr(layer,'data'):
                  for x,y,surf in layer.tiles():
                      pos = (x*TILESIZE, y*TILESIZE)
                      surf = pygame.transform.scale(surf, (round(surf.get_width()*ZOOM),round(surf.get_height()*ZOOM)))
                      Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
-         
-         for layer in self.tmx_data.layers:
+         for layer in self.tmx_data.layers: # same here
              if layer.name in ["Invisible_borders"]:
                  for x,y,surf in layer.tiles():
                      pos = (x*TILESIZE, y*TILESIZE)
                      surf = pygame.transform.scale(surf, (round(surf.get_width()*ZOOM),round(surf.get_height()*ZOOM)))
-                     Tile(pos = pos, surf = surf, groups = [self.obstacle_sprites])
-        
-         for layer in self.tmx_data.objectgroups:
+                     Tile(pos = pos, surf = surf, groups = [self.obstacle_sprites]) # this tiles are assigned to the obstacle_sprites group because they wont be printed, they will define the borders and non overlapping areas of the map
+         for layer in self.tmx_data.objectgroups: # same as previous
              if layer.name in ["Key_objects"]:
                  for obj in self.tmx_data.get_layer_by_name(layer.name):
                      if obj.image:
@@ -87,7 +85,7 @@ class Level:
                          Tile(pos = pos, surf = surf, groups = [self.visible_sprites])
 
     def get_upper_tiles(self):
-        upper_tiles_list = []
+        upper_tiles_list = [] # same system of before but for tiles that needs to be printed over the player, so they are handled differently
         for layer in self.tmx_data.visible_layers:
             if layer.name in ["Upper_parts","Lower_upper_parts"] and hasattr(layer,'data'):
                 for x,y,surf in layer.tiles():
@@ -102,12 +100,13 @@ class Level:
                          surf = obj.image
                          surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
                          upper_tiles_list.append([tile_pos,surf])
-        return upper_tiles_list
+        return upper_tiles_list # list of upper tiles
     
-    def update_upper_tiles(self, upper_tiles_list, player):
+    def update_upper_tiles(self, upper_tiles_list, player): # since upper tiles are not in a sprite group we have to compute theyr onset differently than the self.visible_sprites that are an istance of the YSortCameraGroup() class
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
         self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
 
+        
         for tile_pos,surf in upper_tiles_list:
             offset_pos = tile_pos - self.offset # in his position - the offset given by the position of the player
             if self.offset.x >= self.map.get_width() - self.width:
@@ -352,7 +351,7 @@ class Level:
         # Make dialogues work
         self.check_interaction() #run the events interaction function
         if self.dialoguebox.show_dialoguebox: #if the text box has to be shown (is True)
-            if not self.dialogue_block:
+            if not self.dialogue_block: # Control that only one dialogue is extracted. Otherwise it will run all the if skipping subsequent conditions for es  it would skip "if Genius == 0: Genius += 1" going instantly to  "if Genius == 1"
                 self.speech = self.testi.dialogues(self.who_is_talking, self.dialoguebox.show_dialoguebox)
                 self.dialogue_block = True
             self.dialoguebox.draw(self.display_surface, self.speech) #then shown it #then shown it
