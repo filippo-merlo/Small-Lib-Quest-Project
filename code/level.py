@@ -284,8 +284,8 @@ class Level:
                 offset_pos.x = pos[0] - (self.map.get_width() - self.width) #the offset position of [x] is updated by subtracting from the actual position, the difference between the map's Width and the Width of the display surface
             if self.offset.y >= self.map.get_height() - self.height:
                 offset_pos.y = pos[1] - (self.map.get_height() - self.height)
-            if self.offset.x <= 0:
-                offset_pos.x = pos[0] 
+            if self.offset.x <= 0: #if the offset in less then zero (player is not close to the edges of the map)
+                offset_pos.x = pos[0] #offset pos get the actual position
             if self.offset.y <= 0:
                 offset_pos.y = pos[1]
             self.correct_obj_pos_list.append([name,offset_pos,surf]) #append the updated position calculated by the offset
@@ -303,8 +303,8 @@ class Level:
             offset_pos.x = self.player.rect.x - (self.map.get_width() - self.width) #the offset position of [x] is updated by subtracting from the actual position, the difference between the map's Width and the Width of the display surface
         if self.offset.y >= self.map.get_height() - self.height:
             offset_pos.y = self.player.rect.y - (self.map.get_height() - self.height)
-        if self.offset.x <= 0:
-            offset_pos.x = self.player.rect.x 
+        if self.offset.x <= 0: #if the offset in less then zero (player is not close to the edges of the map)
+            offset_pos.x = self.player.rect.x #offset pos get the actual position
         if self.offset.y <= 0:
             offset_pos.y = self.player.rect.y
        
@@ -312,19 +312,21 @@ class Level:
        
         return our_personal_player_rect
 
+    ##Method to check the interaction between the player and  npcs
     def check_interaction(self):
-        objects_offset_pos= self.get_objects_offset_pos(self.player) #function to get the pos of the npc scaled on the player
-        player_area = self.player_coord() #function to get the player coord based on the center of its rect
-        dialogue_icon = pygame.image.load('./sprites/icons/dialogue_icon.png').convert_alpha()
-        dialogue_icon = pygame.transform.scale(dialogue_icon, (TILESIZE,TILESIZE))
-        for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
-                            width = surf.get_width()+20
-                            height = surf.get_height()+80
-                            position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
-                            area_rect = pygame.Rect(position, (width, height))
-                            if pygame.Rect.colliderect(player_area, area_rect):
-                                self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
-        #check event click
+        objects_offset_pos= self.get_objects_offset_pos(self.player) #function to get the pos of the npc scaled on the player position
+        player_area = self.player_coord() #function to get the player coordinates based on the center of its rect
+        dialogue_icon = pygame.image.load('./sprites/icons/dialogue_icon.png').convert_alpha() #upload the image of the ballooon interaction
+        dialogue_icon = pygame.transform.scale(dialogue_icon, (TILESIZE,TILESIZE)) #scale the balloon size
+        for name,pos,surf in objects_offset_pos: #check in which rect the player is colliding with
+                            width = surf.get_width()+20 #rescale the width to encrease the interaction area 
+                            height = surf.get_height()+80 #rescale the height to encrease the interaction area
+                            position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5) #????
+                            area_rect = pygame.Rect(position, (width, height)) #assign to a var the rect of the npc
+                            if pygame.Rect.colliderect(player_area, area_rect): #if player is colliding with the rect
+                                self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height())) #display the balloon interaction icon
+        
+        ##Now instead let's check for the interaction event
         for event in pygame.event.get(): # Get the vector with all the events (input from the user) 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
