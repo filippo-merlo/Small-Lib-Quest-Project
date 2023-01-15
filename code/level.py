@@ -337,11 +337,12 @@ class Level:
                         if pygame.Rect.colliderect(player_area, area_rect): #if player is colliding with the rect (and the SPACEBAR IS PRESSED)
                             self.dialoguebox.toggle_dialoguebox() #change from False to True or viceversa the attribute show_dialoguebox (basically if the dialogue box has to be shown or not)
                             self.who_is_talking = name #get the name of the npc the player is interacting with
-                            self.dialogue_block = False #nothing has been printed 
+                            self.dialogue_block = False #to control the text output, is false so, nothing has been printed yet so you can print something. 
+                                                        #This is also checked in every dialogue interaction in "text.py" and in the same file, it change its state in True
 
-### Run method called in main loop                                                 
+### Run method called in main loop, in which all the other methods that we are using to run the game are in                                               
     def run(self):
-        # draw and update the game
+        ## Draw and update the game
         self.create_map_from_img(self.player)
         self.visible_sprites.custom_draw(self.player)
         self.update_upper_tiles(self.upper_tiles_list,self.player)
@@ -349,19 +350,19 @@ class Level:
         self.update_animated_objects(self.animations_list_objects, self.player)
         self.visible_sprites.update()
         
-        # Make dialogues work
+        ## Make dialogues work
         self.check_interaction() #run the events interaction function
-        if self.dialoguebox.show_dialoguebox: #if the text box has to be shown (is True)
+        if self.dialoguebox.show_dialoguebox: #if the text box has to be shown (if is True)
             if not self.dialogue_block: # Control that only one dialogue is extracted. Otherwise it will run all the if skipping subsequent conditions for es  it would skip "if Genius == 0: Genius += 1" going instantly to  "if Genius == 1"
-                self.speech = self.testi.dialogues(self.who_is_talking, self.dialoguebox.show_dialoguebox)
-                self.dialogue_block = True
-            self.dialoguebox.draw(self.display_surface, self.speech) #then shown it #then shown it
-            self.player.block = True
+                self.speech = self.testi.dialogues(self.who_is_talking, self.dialoguebox.show_dialoguebox) #the text line is get from the "dialogues" function in "text.py". It gets as arguments the name of which npc the player is interacting with and if the dialogue box has to be shown (True/False)
+                self.dialogue_block = True #reset the block to true, so it gets only one interaction each time
+            self.dialoguebox.draw(self.display_surface, self.speech) #then show the dialogbox in the given position of the screen and with the right text, got from the "dialogues" function in "text.py"
+            self.player.block = True #block the player movements (while the dialogue is shown)
             self.player.direction.x = 0
             self.player.direction.y = 0
 
-        if not self.dialoguebox.show_dialoguebox:
-            self.player.block = False
+        if not self.dialoguebox.show_dialoguebox: #if the dialogue box is not shown
+            self.player.block = False #deactivate player block, so you can move it again
         
 class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate
     def __init__(self):
