@@ -14,13 +14,13 @@ class Menu:
         self.height = self.display_surface.get_size()[1]#get the height of the the display's surface
         self.half_width = self.display_surface.get_size()[0]//2 #get half of the width of the the display's surface
         self.half_height = self.display_surface.get_size()[1]//2 #get half of the height of the the display's surface
-        font_multiplier = self.width/self.height # resize on the basis of screen rateo 
+        font_multiplier = self.height//45 # resize on the basis of screen rateo 
         
         # Settings for the start sceen
         self.image_start = pygame.image.load(Path("./graphics/Title/Small Lib Quest(Gold font).png")).convert_alpha() #import image for start screen #convert_alpha use only the actual pixel of the png
         self.image_end = pygame.image.load(Path("./graphics/Title/THE_END(Gold font).png")).convert_alpha() #import image for end screen #convert_alpha use only the actual pixel of the png
-        self.font =  pygame.font.Font(Path("./graphics/font/font.ttf"), int(10*font_multiplier)) #define font and size of the start font
-        self.end_font = pygame.font.Font(Path("./graphics/font/font.ttf"), int(20*font_multiplier)) #define font and size of the end font
+        self.font =  pygame.font.Font(Path("./graphics/font/font.ttf"), int(font_multiplier)) #define font and size of the start font
+        self.end_font = pygame.font.Font(Path("./graphics/font/font.ttf"), int(1.5*font_multiplier)) #define font and size of the end font
 
     def blit_text(self, surface, text, pos, font, color=pygame.Color('White')):
         words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words of the current text to display
