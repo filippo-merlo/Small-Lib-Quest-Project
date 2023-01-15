@@ -295,6 +295,7 @@ class Level:
         self.offset.y = self.player.rect.y+PLAYERSIZE_H - self.half_height # get the player rectangle center position on y and subtract half of the display h
     
         offset_pos = self.player.rect.center - self.offset # in his position - the offset given by the position of the player
+        # Same process previously descripted for getting the right offset position, this time is done for the player 
         if self.offset.x >= self.map.get_width() - self.width:
             offset_pos.x = self.player.rect.x - (self.map.get_width() - self.width)
         if self.offset.y >= self.map.get_height() - self.height:
@@ -304,8 +305,7 @@ class Level:
         if self.offset.y <= 0:
             offset_pos.y = self.player.rect.y
        
-        our_personal_player_rect = pygame.Rect(offset_pos,(PLAYERSIZE_W,PLAYERSIZE_H))
-       
+        our_personal_player_rect = pygame.Rect(offset_pos,(PLAYERSIZE_W,PLAYERSIZE_H)) # create a rect with the coordinates of the player 
         return our_personal_player_rect
 
     def check_interaction(self):
@@ -341,12 +341,12 @@ class Level:
 ### Run method called in main loop, in which all the other methods that we are using to run the game are in                                               
     def run(self):
         ## Draw and update the game
-        self.create_map_from_img(self.player)
-        self.visible_sprites.custom_draw(self.player)
-        self.update_upper_tiles(self.upper_tiles_list,self.player)
-        self.update_animated_tiles(self.animations_list, self.player)
-        self.update_animated_objects(self.animations_list_objects, self.player)
-        self.visible_sprites.update()
+        self.create_map_from_img(self.player) # create the map, updated with the right offset
+        self.visible_sprites.custom_draw(self.player) # draw the sprites
+        self.update_upper_tiles(self.upper_tiles_list,self.player) # draw the upper tiles updated with the right offset
+        self.update_animated_tiles(self.animations_list, self.player) # draw the animated tiles updated with the right offset
+        self.update_animated_objects(self.animations_list_objects, self.player) # draw the animated objects updated with the right offset
+        self.visible_sprites.update() # update the visible sprites with the right offset
         
         ## Make dialogues work
         self.check_interaction() #run the events interaction function
@@ -362,18 +362,18 @@ class Level:
         if not self.dialoguebox.show_dialoguebox: #if the dialogue box is not shown
             self.player.block = False #deactivate player block, so you can move it again
         
-class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate
+class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work as a camera, we are going to sort the sprites by the y coordinate, so the more the sprites are high in the map, the higer they will be printed (overlapping with the lower)
     def __init__(self):
         # general setup
         super().__init__()
-        self.display_surface = pygame.display.get_surface()
+        self.display_surface = pygame.display.get_surface() 
         self.half_width = self.display_surface.get_size()[0]//2
         self.half_height = self.display_surface.get_size()[1]//2
         self.width = self.display_surface.get_size()[0]
         self.height = self.display_surface.get_size()[1]
-        self.offset = pygame.math.Vector2()
+        self.offset = pygame.math.Vector2() # vector that makes the offset of the player 
         self.map = pygame.image.load("./data/tmx/map.png").convert_alpha() # load map image 
-        self.map = pygame.transform.scale(self.map,(self.map.get_width()*ZOOM,self.map.get_height()*ZOOM))
+        self.map = pygame.transform.scale(self.map,(self.map.get_width()*ZOOM,self.map.get_height()*ZOOM)) # scale map image
 
 
     def custom_draw(self,player): # to add the camera
@@ -382,7 +382,7 @@ class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work
         self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
     
         #for sprite in self.sprites(): # draw each sprite in the surface...
-        for sprite in sorted(self.sprites(),key = lambda sprite: sprite.rect.centery):
+        for sprite in sorted(self.sprites(),key = lambda sprite: sprite.rect.centery): # sort the sprites by the y coordinates
             offset_pos = sprite.rect.topleft - self.offset # in his position - the offset given by the position of the player
             if self.offset.x >= self.map.get_width() - self.width:
                 offset_pos.x = sprite.rect.x - (self.map.get_width() - self.width)
@@ -397,4 +397,4 @@ class YSortCameraGroup(pygame.sprite.Group): #this sprite group is going to work
             
     # how the camera works:
     # We draw the image in the rect of the sprite, but
-    # we can usa a vectror2 to offset the rect and thus blit the image somewere else
+    # we can usa a vectror2 to offset the rect and thus blit the image somewere else, accordingly with the player position
