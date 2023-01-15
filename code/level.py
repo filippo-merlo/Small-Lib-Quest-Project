@@ -48,7 +48,7 @@ class Level:
         self.dialoguebox = DialogueBox() #instance of the class Mywindow
         self.testi = testi() #instance of the class testi        
         
-    ## CREATE MAP FROM THE .tmx FILE
+    ### CREATE MAP FROM THE .tmx FILE
     def create_map(self):
          for layer in self.tmx_data.visible_layers: # from visible layers in the .tmx map file (all the tiles are disposed in different layers to control the overlappings)
              if layer.name in ["Buildings", "Library"] and hasattr(layer,'data'): # select the layers named buildings and library, nad chech if they are empty 
@@ -106,24 +106,25 @@ class Level:
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
         self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
 
-        
+        ## For every img in upper_tiles_list compute the offset accordingly with the player position
         for tile_pos,surf in upper_tiles_list:
-            offset_pos = tile_pos - self.offset # in his position - the offset given by the position of the player
+            offset_pos = tile_pos - self.offset # his position - the offset given by the position of the player
+            # to dont make the "camera" (motion of the map) follow the player even after the map boundaries, when the player offset crosses the distance of half the screen thoward the map boundaries the pffset becomes the size of the map - half of the gamescreen..
             if self.offset.x >= self.map.get_width() - self.width:
                 offset_pos.x = tile_pos[0] - (self.map.get_width() - self.width)
             if self.offset.y >= self.map.get_height() - self.height:
                 offset_pos.y = tile_pos[1] - (self.map.get_height() - self.height)
-            if self.offset.x <= 0:
+            if self.offset.x <= 0: # or the upper left corner of the map 
                 offset_pos.x = tile_pos[0] 
             if self.offset.y <= 0:
                 offset_pos.y = tile_pos[1]
             self.display_surface.blit(surf, offset_pos)
 
-    def create_map_from_img(self, player):
+    def create_map_from_img(self, player): # same as upper tiles but for teh map image, it's starting position in (0,0)
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
         self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
-        offset_pos = (0,0) - self.offset # in his position - the offset given by the position of the player
-        
+        offset_pos = (0,0) - self.offset # his position - the offset given by the position of the player
+
         if self.offset.x >= self.map.get_width() - self.width:
             offset_pos.x = 0 - (self.map.get_width() - self.width)
         if self.offset.y >= self.map.get_height() - self.height:
@@ -132,7 +133,7 @@ class Level:
             offset_pos.x = 0 
         if self.offset.y <= 0:
             offset_pos.y = 0
-        self.display_surface.blit(self.map,offset_pos)
+        self.display_surface.blit(self.map,offset_pos) # blit/draw the map on the main surface
 
     def get_animated_tiles(self): 
         animations_list = []   
@@ -256,77 +257,72 @@ class Level:
                 self.display_surface.blit(tile_image, offset_pos)
 
 ### Functions to get object of interest offsetted position
-    ##Function to define info of the objects we are interested in (name, position (x,y) and surface)
     def get_objects_pos(self):
-        self.obj_pos_list = [] #empty list where we will insert the object of interest extracted
-        for layer in self.tmx_data.objectgroups: #for each different layer in the map's data
-                    if layer.name in ["Key_objects","NPC","Legendary_creatures","Objects_no_interactions"]: #if the layer name is in between these
-                        for obj in self.tmx_data.get_layer_by_name(layer.name): #for each object in the given list
-                            if obj.image:  #if the object is composed by the following data
+        self.obj_pos_list = []
+        for layer in self.tmx_data.objectgroups:
+                    if layer.name in ["Key_objects","NPC","Legendary_creatures","Objects_no_interactions"]:
+                        for obj in self.tmx_data.get_layer_by_name(layer.name):
+                            if obj.image:
                                 name = obj.name
                                 pos = (obj.x*ZOOM, obj.y*ZOOM)
                                 surf = obj.image
                                 surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_bamboo',"The deadman's letter"]: #if object has one of these names..
-                                    self.obj_pos_list.append([name,pos,surf]) #.. place it on the list
-                                if name in ['Table_up']: #if the name is "table_up"
-                                    self.obj_pos_list.append([name,pos,pygame.transform.scale(surf,(surf.get_width()*2.5,surf.get_height()))]) #add it to the list but scaling the surface (we did that to get a bigger rect for the interaction area)
+                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_bamboo',"The deadman's letter"]:
+                                    self.obj_pos_list.append([name,pos,surf])
+                                if name in ['Table_up']:
+                                    self.obj_pos_list.append([name,pos,pygame.transform.scale(surf,(surf.get_width()*2.5,surf.get_height()))])
           
-    ##Function to get the object position based on the offset of the player in the map      
     def get_objects_offset_pos(self,player):
-        #center the player position in the screen
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
         self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
-        self.correct_obj_pos_list = [] #empty list to get the offset position of the objects of interest
-        for name,pos,surf in self.obj_pos_list: #from the list that we got with the "get_object_pos" function
+        self.correct_obj_pos_list = []
+        for name,pos,surf in self.obj_pos_list:
             offset_pos = pos - self.offset # in his position - the offset given by the position of the player
-            if self.offset.x >= self.map.get_width() - self.width: #if the player is getting closer to the right/left borders (he's not in the center of the screen anymore)
-                offset_pos.x = pos[0] - (self.map.get_width() - self.width) #the offset position of [x] is updated by subtracting from the actual position, the difference between the map's Width and the Width of the display surface
+            if self.offset.x >= self.map.get_width() - self.width:
+                offset_pos.x = pos[0] - (self.map.get_width() - self.width)
             if self.offset.y >= self.map.get_height() - self.height:
                 offset_pos.y = pos[1] - (self.map.get_height() - self.height)
-            if self.offset.x <= 0: #if the offset in less then zero (player is not close to the edges of the map)
-                offset_pos.x = pos[0] #offset pos get the actual position
+            if self.offset.x <= 0:
+                offset_pos.x = pos[0] 
             if self.offset.y <= 0:
                 offset_pos.y = pos[1]
-            self.correct_obj_pos_list.append([name,offset_pos,surf]) #append the updated position calculated by the offset
-        return self.correct_obj_pos_list
+            self.correct_obj_pos_list.append([name,offset_pos,surf])
+        return self.correct_obj_pos_list ## so it gives in output the list, and we can use it in text.position.get_the_pos
 
 ### Functions to get the dialogues
     def player_coord(self):
         
-        ## Player coordinates(x,y) that we will use to get interaction with npcs. The player will have the coordinates given by the center of the screen (that will be updated by the offest (map/screen) when it'll get closer to the boarder of the map, because it won't be at the center of the screen anymore)
-        self.offset.x = self.player.rect.x+PLAYERSIZE_W - self.half_width # get the player rectangle center position on x, multiply it for the player Width size and subtract half of the dislay Width
-        self.offset.y = self.player.rect.y+PLAYERSIZE_H - self.half_height # get the player rectangle center position on y, multiply it for the player Height size and subtract half of the display Height
+        ### PLAYER COORDINATES FOR INTERACTION (so it's in the center of the screen)
+        self.offset.x = self.player.rect.x+PLAYERSIZE_W - self.half_width # get the player rectangle center position on x and subtract half of the dislay w
+        self.offset.y = self.player.rect.y+PLAYERSIZE_H - self.half_height # get the player rectangle center position on y and subtract half of the display h
     
-        offset_pos = self.player.rect.center - self.offset # in his position minus the offset given by the position of the player
-        if self.offset.x >= self.map.get_width() - self.width:  #if the player is getting closer to the right/left borders (he's not in the center of the screen anymore)
-            offset_pos.x = self.player.rect.x - (self.map.get_width() - self.width) #the offset position of [x] is updated by subtracting from the actual position, the difference between the map's Width and the Width of the display surface
+        offset_pos = self.player.rect.center - self.offset # in his position - the offset given by the position of the player
+        if self.offset.x >= self.map.get_width() - self.width:
+            offset_pos.x = self.player.rect.x - (self.map.get_width() - self.width)
         if self.offset.y >= self.map.get_height() - self.height:
             offset_pos.y = self.player.rect.y - (self.map.get_height() - self.height)
-        if self.offset.x <= 0: #if the offset in less then zero (player is not close to the edges of the map)
-            offset_pos.x = self.player.rect.x #offset pos get the actual position
+        if self.offset.x <= 0:
+            offset_pos.x = self.player.rect.x 
         if self.offset.y <= 0:
             offset_pos.y = self.player.rect.y
        
-        our_personal_player_rect = pygame.Rect(offset_pos,(PLAYERSIZE_W,PLAYERSIZE_H)) #give in output the player's rect but with the offset calculation
+        our_personal_player_rect = pygame.Rect(offset_pos,(PLAYERSIZE_W,PLAYERSIZE_H))
        
         return our_personal_player_rect
 
-    ##Method to check the interaction between the player and  npcs
     def check_interaction(self):
-        objects_offset_pos= self.get_objects_offset_pos(self.player) #function to get the pos of the npc scaled on the player position
-        player_area = self.player_coord() #function to get the player coordinates based on the center of its rect
-        dialogue_icon = pygame.image.load('./sprites/icons/dialogue_icon.png').convert_alpha() #upload the image of the ballooon interaction
-        dialogue_icon = pygame.transform.scale(dialogue_icon, (TILESIZE,TILESIZE)) #scale the balloon size
-        for name,pos,surf in objects_offset_pos: #check in which rect the player is colliding with
-                            width = surf.get_width()+20 #rescale the width to encrease the interaction area 
-                            height = surf.get_height()+80 #rescale the height to encrease the interaction area
-                            position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5) #????
-                            area_rect = pygame.Rect(position, (width, height)) #assign to a var the rect of the npc
-                            if pygame.Rect.colliderect(player_area, area_rect): #if player is colliding with the rect
-                                self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height())) #display the balloon interaction icon
-        
-        ##Now instead let's check for the interaction event
+        objects_offset_pos= self.get_objects_offset_pos(self.player) #function to get the pos of the npc scaled on the player
+        player_area = self.player_coord() #function to get the player coord based on the center of its rect
+        dialogue_icon = pygame.image.load('./sprites/icons/dialogue_icon.png').convert_alpha()
+        dialogue_icon = pygame.transform.scale(dialogue_icon, (TILESIZE,TILESIZE))
+        for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
+                            width = surf.get_width()+20
+                            height = surf.get_height()+80
+                            position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
+                            area_rect = pygame.Rect(position, (width, height))
+                            if pygame.Rect.colliderect(player_area, area_rect):
+                                self.display_surface.blit(dialogue_icon,(player_area.centerx, player_area.centery-dialogue_icon.get_height()))
+        #check event click
         for event in pygame.event.get(): # Get the vector with all the events (input from the user) 
             if event.type == pygame.KEYDOWN: #if a key is pressed..
                 if event.key == pygame.K_ESCAPE: #.. and the key is [ESCAPE]
