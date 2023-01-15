@@ -257,44 +257,47 @@ class Level:
                 self.display_surface.blit(tile_image, offset_pos)
 
 ### Functions to get object of interest offsetted position
+    ##Function to define info of the objects we are interested in (name, position (x,y) and surface)
     def get_objects_pos(self):
-        self.obj_pos_list = []
-        for layer in self.tmx_data.objectgroups:
-                    if layer.name in ["Key_objects","NPC","Legendary_creatures","Objects_no_interactions"]:
-                        for obj in self.tmx_data.get_layer_by_name(layer.name):
-                            if obj.image:
+        self.obj_pos_list = [] #empty list where we will insert the object of interest extracted
+        for layer in self.tmx_data.objectgroups: #for each different layer in the map's data
+                    if layer.name in ["Key_objects","NPC","Legendary_creatures","Objects_no_interactions"]: #if the layer name is in between these
+                        for obj in self.tmx_data.get_layer_by_name(layer.name): #for each object in the given list
+                            if obj.image:  #if the object is composed by the following data
                                 name = obj.name
                                 pos = (obj.x*ZOOM, obj.y*ZOOM)
                                 surf = obj.image
                                 surf = pygame.transform.scale(surf,(round(obj.width*ZOOM),round(obj.height*ZOOM)))
-                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_bamboo',"The deadman's letter"]:
-                                    self.obj_pos_list.append([name,pos,surf])
-                                if name in ['Table_up']:
-                                    self.obj_pos_list.append([name,pos,pygame.transform.scale(surf,(surf.get_width()*2.5,surf.get_height()))])
+                                if name in ['Librarian','Calsifer','King_squid','King_raccoon','King_skeleton','King_bamboo',"The deadman's letter"]: #if object has one of these names..
+                                    self.obj_pos_list.append([name,pos,surf]) #.. place it on the list
+                                if name in ['Table_up']: #if the name is "table_up"
+                                    self.obj_pos_list.append([name,pos,pygame.transform.scale(surf,(surf.get_width()*2.5,surf.get_height()))]) #add it to the list but scaling the surface (we did that to get a bigger rect for the interaction area)
           
+    ##Function to get the object position based on the offset of the player in the map      
     def get_objects_offset_pos(self,player):
+        #center the player position in the screen
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
         self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
-        self.correct_obj_pos_list = []
-        for name,pos,surf in self.obj_pos_list:
+        self.correct_obj_pos_list = [] #empty list to get the offset position of the objects of interest
+        for name,pos,surf in self.obj_pos_list: #from the list that we got with the "get_object_pos" function
             offset_pos = pos - self.offset # in his position - the offset given by the position of the player
-            if self.offset.x >= self.map.get_width() - self.width:
-                offset_pos.x = pos[0] - (self.map.get_width() - self.width)
+            if self.offset.x >= self.map.get_width() - self.width: #if the player is getting closer to the right/left borders (he's not in the center of the screen anymore)
+                offset_pos.x = pos[0] - (self.map.get_width() - self.width) #the offset position of [x] is updated by subtracting from the actual position, the difference between the map's Width and the Width of the display surface
             if self.offset.y >= self.map.get_height() - self.height:
                 offset_pos.y = pos[1] - (self.map.get_height() - self.height)
             if self.offset.x <= 0:
                 offset_pos.x = pos[0] 
             if self.offset.y <= 0:
                 offset_pos.y = pos[1]
-            self.correct_obj_pos_list.append([name,offset_pos,surf])
-        return self.correct_obj_pos_list ## so it gives in output the list, and we can use it in text.position.get_the_pos
+            self.correct_obj_pos_list.append([name,offset_pos,surf]) #append the updated position calculated by the offset
+        return self.correct_obj_pos_list
 
 ### Functions to get the dialogues
     def player_coord(self):
         
-        ### PLAYER COORDINATES FOR INTERACTION (so it's in the center of the screen)
-        self.offset.x = self.player.rect.x+PLAYERSIZE_W - self.half_width # get the player rectangle center position on x and subtract half of the dislay w
-        self.offset.y = self.player.rect.y+PLAYERSIZE_H - self.half_height # get the player rectangle center position on y and subtract half of the display h
+        ## Player coordinates(x,y) for interaction (so it's in the center of the screen)
+        self.offset.x = self.player.rect.x+PLAYERSIZE_W - self.half_width # get the player rectangle center position on x, multiply it for the player Width size and subtract half of the dislay Width
+        self.offset.y = self.player.rect.y+PLAYERSIZE_H - self.half_height # get the player rectangle center position on y, multiply it for the player Height size and subtract half of the display Height
     
         offset_pos = self.player.rect.center - self.offset # in his position - the offset given by the position of the player
         if self.offset.x >= self.map.get_width() - self.width:
