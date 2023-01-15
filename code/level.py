@@ -299,8 +299,8 @@ class Level:
         self.offset.y = self.player.rect.y+PLAYERSIZE_H - self.half_height # get the player rectangle center position on y, multiply it for the player Height size and subtract half of the display Height
     
         offset_pos = self.player.rect.center - self.offset # in his position minus the offset given by the position of the player
-        if self.offset.x >= self.map.get_width() - self.width:
-            offset_pos.x = self.player.rect.x - (self.map.get_width() - self.width)
+        if self.offset.x >= self.map.get_width() - self.width:  #if the player is getting closer to the right/left borders (he's not in the center of the screen anymore)
+            offset_pos.x = self.player.rect.x - (self.map.get_width() - self.width) #the offset position of [x] is updated by subtracting from the actual position, the difference between the map's Width and the Width of the display surface
         if self.offset.y >= self.map.get_height() - self.height:
             offset_pos.y = self.player.rect.y - (self.map.get_height() - self.height)
         if self.offset.x <= 0:
@@ -308,7 +308,7 @@ class Level:
         if self.offset.y <= 0:
             offset_pos.y = self.player.rect.y
        
-        our_personal_player_rect = pygame.Rect(offset_pos,(PLAYERSIZE_W,PLAYERSIZE_H))
+        our_personal_player_rect = pygame.Rect(offset_pos,(PLAYERSIZE_W,PLAYERSIZE_H)) #give in output the player's rect but with the offset calculation
        
         return our_personal_player_rect
 
