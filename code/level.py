@@ -328,20 +328,20 @@ class Level:
         
         ##Now instead let's check for the interaction event
         for event in pygame.event.get(): # Get the vector with all the events (input from the user) 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
+            if event.type == pygame.KEYDOWN: #if a key is pressed..
+                if event.key == pygame.K_ESCAPE: #.. and the key is [ESCAPE]
                     pygame.quit() # quit pygame
                     sys.exit() # quit the while loop
-                if event.key == pygame.K_SPACE:
-                    for name,pos,surf in objects_offset_pos: #check in which rect the player is in by the collision betw
-                        width = surf.get_width()+20
-                        height = surf.get_height()+80
-                        position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5)
-                        area_rect = pygame.Rect(position, (width, height))
-                        if pygame.Rect.colliderect(player_area, area_rect):
-                            self.dialoguebox.toggle_dialoguebox() #change from False to True or viceversa the attribute show_dialoguebox
-                            self.who_is_talking = name
-                            self.dialogue_block = False
+                if event.key == pygame.K_SPACE: #.. and the key is [SPACEBAR]
+                    for name,pos,surf in objects_offset_pos: #check in which rect the player is colliding with
+                        width = surf.get_width()+20 #rescale the width to encrease the interaction area 
+                        height = surf.get_height()+80 #rescale the height to encrease the interaction area
+                        position = (pos[0]-surf.get_width()/5, pos[1]-surf.get_height()/5) #???
+                        area_rect = pygame.Rect(position, (width, height)) #assign to a var the rect of the npc
+                        if pygame.Rect.colliderect(player_area, area_rect): #if player is colliding with the rect (and the SPACEBAR IS PRESSED)
+                            self.dialoguebox.toggle_dialoguebox() #change from False to True or viceversa the attribute show_dialoguebox (basically if the dialogue box has to be shown or not)
+                            self.who_is_talking = name #get the name of the npc the player is interacting with
+                            self.dialogue_block = False #nothing has been printed 
 
 ### Run method called in main loop                                                 
     def run(self):
