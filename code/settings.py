@@ -13,6 +13,4 @@ TILESIZE = 16*ZOOM # size of tiles
 PLAYERSIZE_W = TILESIZE*1.2 # set the player Width in size
 PLAYERSIZE_H = TILESIZE*1.7# set the player Height size
 SPEED = 10 #set the speed of the player (in movement)
-
-# Font
 FONT_SIZE = 17 #set the general font
