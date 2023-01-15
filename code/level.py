@@ -115,7 +115,7 @@ class Level:
                 offset_pos.x = tile_pos[0] - (self.map.get_width() - self.width)
             if self.offset.y >= self.map.get_height() - self.height:
                 offset_pos.y = tile_pos[1] - (self.map.get_height() - self.height)
-            if self.offset.x <= 0: # or the upper left corner of the map 
+            if self.offset.x <= 0: # or in his original position
                 offset_pos.x = tile_pos[0] 
             if self.offset.y <= 0:
                 offset_pos.y = tile_pos[1]
@@ -125,38 +125,39 @@ class Level:
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
         self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
         offset_pos = (0,0) - self.offset # his position - the offset given by the position of the player
-
+        # to dont make the "camera" (motion of the map) follow the player even after the map boundaries, when the player offset crosses the distance of half the screen thoward the map boundaries the offset becomes the size of the map - half of the gamescreen..
         if self.offset.x >= self.map.get_width() - self.width:
             offset_pos.x = 0 - (self.map.get_width() - self.width)
         if self.offset.y >= self.map.get_height() - self.height:
             offset_pos.y = 0 - (self.map.get_height() - self.height)
-        if self.offset.x <= 0:
+        if self.offset.x <= 0: # or the upper left corner of the map 
             offset_pos.x = 0 
         if self.offset.y <= 0:
             offset_pos.y = 0
         self.display_surface.blit(self.map,offset_pos) # blit/draw the map on the main surface
 
+    ## HANDLE ANIMATED TILES
     def get_animated_tiles(self): 
         animations_list = []   
         for layer in self.tmx_data.visible_layers:
             if layer.name in ['Vegetation', 'Library'] and hasattr(layer,'data'):
-                for x,y,image in layer.tiles():                
-                    for gid, props in self.tmx_data.tile_properties.items():
-                        if props['frames'] != [] and image == self.tmx_data.get_tile_image_by_gid(props['frames'][0].gid):
-                            animated_img_dict = {
+                for x,y,image in layer.tiles(): # get tiles position and image from the layers
+                    for gid, props in self.tmx_data.tile_properties.items(): # get the props dictionary from self.tmx_data.tile_properties.items()
+                        if props['frames'] != [] and image == self.tmx_data.get_tile_image_by_gid(props['frames'][0].gid): # if the image from the layer has an animation: only images that have a 'frames' list in props dict have animations
+                            animated_img_dict = { # fill animated_img_dict with all the info of the animated images
                                 'id' : props['id'],
                                 'gid': gid,
-                                'frames': props['frames'],
-                                'pos' : (x*TILESIZE,y*TILESIZE),                              
-                                'duration': props['frames'][0].duration,
-                                'current_frame': 0,
-                                'last_update': 0
+                                'frames': props['frames'], # image frames
+                                'pos' : (x*TILESIZE,y*TILESIZE),                          
+                                'duration': props['frames'][0].duration, # duration of each frame
+                                'current_frame': 0, # set a current frame index
+                                'last_update': 0 # set a last update index
                             }
-                            animations_list.append(animated_img_dict)
+                            animations_list.append(animated_img_dict) # append the dict object to the animations_list (a list of dictionaries of animated images)
                 
         return animations_list
 
-    def get_animated_objects(self):
+    def get_animated_objects(self): # same process but for objects instead of tiles
         animations_list = []   
         for layer in self.tmx_data.objectgroups:
             for obj in layer:
@@ -182,26 +183,24 @@ class Level:
 
         return animations_list
 
-    def update_animated_tiles(self, animations_list, player):
+    def update_animated_tiles(self, animations_list, player): # it gets as input the list of dicts for animated images
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
         self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
         
-        for animation in animations_list:
+        for animation in animations_list: # iterate over the list of dicts containing the info for animated tiles
 
-            # Get the current time
-            current_time = pygame.time.get_ticks()
+            # Get the current time (in frames)
+            current_time = pygame.time.get_ticks() 
             # Check if it's time to update the frame
-            if current_time - animation['last_update'] > animation['duration']:
+            if current_time - animation['last_update'] > animation['duration']: # if the point in the animation sequence (total time - last update) is bigger than the single animation duration
                 # Increment the frame index
-                animation['current_frame'] = (animation['current_frame'] + 1) % len(animation['frames'])
-                # Set the last update time to the current time
-                if animation['current_frame'] > len(animation['frames']):
-                    animation['current_frame'] = 0
-                animation['last_update'] = current_time
+                animation['current_frame'] = (animation['current_frame'] + 1) % len(animation['frames']) # if a < b, a % b = a, if a > b, a % b = rest, so 1 % 7 = 1, 7 % 7 = 0 and 8 % 7 = 1
+                animation['last_update'] = current_time # keep track of the time in every images
 
+            # Compute the position of the tiles relatively to the player's position
             for animation in animations_list:  
                 # Get the current frame for the tile
-                current_frame = animation['frames'][animation['current_frame']]
+                current_frame = animation['frames'][animation['current_frame']] # Get the current image frame 
                 # Calculate the position of the tile
                 tile_pos = animation['pos']
                 offset_pos = tile_pos - self.offset # in his position - the offset given by the position of the player
@@ -214,16 +213,17 @@ class Level:
                 if self.offset.y <= 0:
                     offset_pos.y = tile_pos[1]
                 # Get the image for the current frame
-                tile_image = self.tmx_data.get_tile_image_by_gid(current_frame.gid)
-                tile_image = pygame.transform.scale(tile_image,(tile_image.get_width()*ZOOM,tile_image.get_height()*ZOOM))
-                # Blit the image to the screen
+                tile_image = self.tmx_data.get_tile_image_by_gid(current_frame.gid) # Get the image of the current frame 
+                tile_image = pygame.transform.scale(tile_image,(tile_image.get_width()*ZOOM,tile_image.get_height()*ZOOM)) # scale image
+                # Blit the image on the game surface
                 self.display_surface.blit(tile_image, offset_pos)
 
+    # same as before but for objects
     def update_animated_objects(self, animations_list_objects, player):
         self.offset.x = player.rect.centerx - self.half_width # get the player rectangle position on x and subtract half of the dislay w
         self.offset.y = player.rect.centery - self.half_height # get the player rectangle position on y and subtract half of the dislay h
     
-        # Update the animation for each tile
+        # Update the animation for each object
         for animation in animations_list_objects:
 
             # Get the current time
@@ -231,11 +231,8 @@ class Level:
             # Check if it's time to update the frame
             if current_time - animation['last_update'] > animation['duration']:
                 # Increment the frame index
-                animation['current_frame'] = (animation['current_frame'] + 1) % len(animation['frames'])
-                # Set the last update time to the current time
-                if animation['current_frame'] > len(animation['frames']):
-                    animation['current_frame'] = 0
-                animation['last_update'] = current_time
+                animation['current_frame'] = (animation['current_frame'] + 1) % len(animation['frames']) # if a < b, a % b = a, if a > b, a % b = rest, so 1 % 7 = 1, 7 % 7 = 0 and 8 % 7 = 1
+                animation['last_update'] = current_time # keep track of the time in every images
 
             for animation in animations_list_objects:  
                 # Get the current frame for the tile
@@ -253,11 +250,11 @@ class Level:
                     offset_pos.y = tile_pos[1]
                 # Get the image for the current frame
                 tile_image = self.tmx_data.get_tile_image_by_gid(current_frame.gid)
-                tile_image = pygame.transform.scale(tile_image, (round(animation['width']*ZOOM),round(animation['height']*ZOOM)))
+                tile_image = pygame.transform.scale(tile_image, (round(animation['width']*ZOOM),round(animation['height']*ZOOM))) # Scale the immage
                 # Blit the image to the screen
                 self.display_surface.blit(tile_image, offset_pos)
 
-### Functions to get object of interest offsetted position
+### Functions to get only object of interest (to use in dialogues) offsetted position
     def get_objects_pos(self):
         self.obj_pos_list = []
         for layer in self.tmx_data.objectgroups:
