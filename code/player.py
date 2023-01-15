@@ -118,7 +118,7 @@ class Player(pygame.sprite.Sprite): # Inherit Sprite method of sprite class (bui
         ### WHY THERE IS NOT ANY PRINT/DRAW/BLIT FUNCTION?
         # The player class is istantiated in the level file with:
         # self.player = Player((1600,2300),[self.visible_sprites], self.obstacle_sprites), where the first argument is the starting position in the map
-        # it is then drew on the main game screen in leve.run with 
+        # it is then drew on the main game screen in level.run with 
         # self.visible_sprites.custom_draw(self.player)
         # and updated with:
         # self.visible_sprites.update()
