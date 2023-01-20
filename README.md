@@ -11,7 +11,7 @@ LIBRARIES NEEDED
     pip install pytmx
 
 3) Screeinfo:
-    pip install screeninfo
+    pip install screeinfo
 
 4) Pathlib:
     pip install pathlib
