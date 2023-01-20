@@ -22,7 +22,7 @@ Conda
 
 HOW TO RUN IT:
 
-Run the file "main.py". Then the game will be open in fullscreen modde and to close it you have to use [ESCAPE KEY].
+Run the file "main.py" in the master. Then the game will be open in fullscreen modde and to close it you have to use [ESCAPE KEY].
 
 HOW TO PLAY IT:
 
