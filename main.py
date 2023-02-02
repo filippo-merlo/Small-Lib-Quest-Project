@@ -62,9 +62,6 @@ class Game:
                     self.level.run() #run the level method (the if statement is out of the other one, because we wanted to change music)
                 if pygame.mixer.music.get_pos() >= 0.415*60000: #if the music is over a certain amount of time played
                     self.menu.end_screen() #run the end screen
-
-            #if self.level.testi.endgame: #if the var that check for the endgame (from dialogues in testi class) is True then
-            #    self.menu.end_screen() #show the end screen
             
             self.clock.tick(FPS) # set the maximum frame rate (from settings.py)
             pygame.display.update() # this method will update the screen at each iteration of the while loop
