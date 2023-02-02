@@ -1,6 +1,7 @@
 ### Import all the usefull libraries 
 import pygame, sys
 from pathlib import Path
+sys.path.insert(1,'code/')
 from settings import *
 from level import Level
 from start_and_end_menu import Menu
