@@ -16,6 +16,8 @@ LIBRARIES NEEDED
 4) Pathlib:
     pip install pathlib
  
+PYTHON VERSION:
+python 3.8.8
 
 ENVIROMENT:
 Conda
